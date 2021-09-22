@@ -1,26 +1,44 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: zpliu
+ * @Date: 2021-02-26 22:57:02
+ * @LastEditors: zpliu
+ * @LastEditTime: 2021-09-19 19:26:06
+ * @@param: 
+-->
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+  <router-view></router-view>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+};
 </script>
 
-<style>
+<style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  // background: url("../../assets/images/ewr-min.jpg");
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  //主页覆盖到整个浏览器高度
+  height: 91%;
+  width: 100%;
 }
 </style>
