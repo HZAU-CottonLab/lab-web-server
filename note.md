@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 18:53:05
  * @LastEditors: zpliu
- * @LastEditTime: 2021-09-21 20:04:14
+ * @LastEditTime: 2021-09-22 15:14:11
  * @@param: 
 -->
 
@@ -84,6 +84,8 @@ export default {
           },5000)   //5秒没有调用回调函数则自动隐藏
     );
 }
-
-
 ```
+
+
+## 1.4 资源整合
+    1. 波浪效果 ：https://getwaves.io/
