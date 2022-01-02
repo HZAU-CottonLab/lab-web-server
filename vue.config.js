@@ -4,14 +4,30 @@
  * @Author: zpliu
  * @Date: 2021-09-19 19:06:43
  * @LastEditors: zpliu
- * @LastEditTime: 2021-09-19 19:20:25
+ * @LastEditTime: 2022-01-02 13:04:54
  * @@param: 
  */
 const CompressionPlugin = require("compression-webpack-plugin")
-
+const port = process.env.port || process.env.npm_config_port || 9528
 module.exports = {
     outputDir: '../',
     assetsDir: 'static',
+    //配置mock服务
+    lintOnSave: process.env.NODE_ENV === 'development',
+    productionSourceMap: false,
+    devServer: {
+      // disableHostCheck:true,
+      // inline: false,
+      // hot:false,
+      // ignored: /node_modules/ ,  //不监视node_modules文件夹
+      port: port,
+      open: true,
+      overlay: {
+        warnings: false,
+        errors: true
+      },
+      before: require('./mock/mock-server.js')
+    },
     pages: {
         index: {
             entry: './src/main.js',
@@ -30,5 +46,5 @@ module.exports = {
             deleteOriginalAssets: false//压缩后保留原文件
           })
         ]
-      }
+      },
 }
