@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-20 11:15:02
  * @LastEditors: zpliu
- * @LastEditTime: 2021-09-20 11:21:23
+ * @LastEditTime: 2022-01-02 15:07:18
  * @@param: 
  */
 import axios from 'axios'
@@ -14,7 +14,7 @@ import 'nprogress/nprogress.css'
 import { ElMessage } from 'element-plus'
 Nprogress.configure({ showSpinner: false })
 const request = axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL,
+  baseURL: process.env.VUE_APP_BASE_API,
   timeout: 12000,
   headers: {
     'content-Type': 'application/json',
@@ -35,6 +35,7 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   response => {
     Nprogress.done()
+    console.log(response)
     return response
   },
   error => {

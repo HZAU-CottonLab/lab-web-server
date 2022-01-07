@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-04-26 14:19:28
  * @LastEditors: zpliu
- * @LastEditTime: 2021-10-14 09:42:33
+ * @LastEditTime: 2022-01-03 19:43:24
  * @@param: 
 -->
 <template>
@@ -117,6 +117,7 @@ import "vue3-loading-overlay/dist/vue3-loading-overlay.css";
 import headerComponent from "../../components/header.vue";
 import news_cards from "../../components/news_card.vue";
 import footer_main from "../../components/footer.vue";
+
 export default {
   name: "home_layout",
   components: { headerComponent, news_cards, footer_main },
@@ -158,7 +159,8 @@ export default {
       );
     },
   },
-  created() {},
+  created() {
+  },
 };
 </script>
 

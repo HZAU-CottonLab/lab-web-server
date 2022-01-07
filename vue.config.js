@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 19:06:43
  * @LastEditors: zpliu
- * @LastEditTime: 2022-01-02 13:04:54
+ * @LastEditTime: 2022-01-03 19:28:25
  * @@param: 
  */
 const CompressionPlugin = require("compression-webpack-plugin")
@@ -18,10 +18,12 @@ module.exports = {
     devServer: {
       // disableHostCheck:true,
       // inline: false,
-      // hot:false,
-      // ignored: /node_modules/ ,  //不监视node_modules文件夹
+      // hot:false,  
+      watchOptions:{
+        ignored: /node_modules/ //不监视node_modules文件夹\
+      },
       port: port,
-      open: true,
+      open: false,
       overlay: {
         warnings: false,
         errors: true

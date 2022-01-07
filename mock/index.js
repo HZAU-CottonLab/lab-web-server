@@ -1,9 +1,18 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: zpliu
+ * @Date: 2022-01-02 13:38:34
+ * @LastEditors: zpliu
+ * @LastEditTime: 2022-01-02 14:15:21
+ * @@param: 
+ */
 const Mock = require('mockjs')
 const { param2Obj } = require('./utils')
 
 
-
-const mocks = []
+const table = require('./table')
+const mocks = [...table]
 // for front mock
 // please use it cautiously, it will redefine XMLHttpRequest,
 // which will cause many of your third-party libraries to be invalidated(like progress event).
@@ -48,5 +57,5 @@ function mockXHR() {
   module.exports = {
     mocks,
     mockXHR
-  }
+}
   
