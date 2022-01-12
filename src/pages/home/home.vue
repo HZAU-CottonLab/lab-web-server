@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-04-26 14:19:28
  * @LastEditors: zpliu
- * @LastEditTime: 2022-01-03 19:43:24
+ * @LastEditTime: 2022-01-12 13:09:16
  * @@param: 
 -->
 <template>
@@ -112,7 +112,7 @@
 // import request from "@/utils/axios.js";
 import { useLoading } from "vue3-loading-overlay";
 // Import stylesheet
-import { mapState } from "vuex";
+import { mapState,mapActions } from "vuex";
 import "vue3-loading-overlay/dist/vue3-loading-overlay.css";
 import headerComponent from "../../components/header.vue";
 import news_cards from "../../components/news_card.vue";
@@ -127,7 +127,7 @@ export default {
       label: "loading",
       overlay: true,
       fullPage: true,
-      Data_value: new Date(),
+      Data_value: new Date()
     };
   },
   setup() {},
@@ -158,9 +158,16 @@ export default {
         }, 5000)
       );
     },
+    ...mapActions({
+        getnewData: 'news/get_newsData'
+    })
   },
   created() {
+    
   },
+  mounted(){
+    //this.$store.dispatch("news/get_newsData")
+  }
 };
 </script>
 

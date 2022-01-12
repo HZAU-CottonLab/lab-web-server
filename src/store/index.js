@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 20:14:36
  * @LastEditors: zpliu
- * @LastEditTime: 2021-09-20 09:09:04
+ * @LastEditTime: 2022-01-12 12:51:44
  * @@param:
  */
 //-------------------------------
@@ -27,12 +27,14 @@ import Vuex from "vuex";
 //     }
 // })
 import main from "./modules/main";
+import news from "./modules/news"
 
 const store = new Vuex.Store({
   namespaced: true,
   modules: {
     //模块化的store 对象
-    main
+    main,
+    news
   },
   state:{
       web:'lab-web-server'
