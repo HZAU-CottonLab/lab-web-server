@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-20 11:15:02
  * @LastEditors: zpliu
- * @LastEditTime: 2022-01-02 15:07:18
+ * @LastEditTime: 2022-03-29 20:22:57
  * @@param: 
  */
 import axios from 'axios'
@@ -35,7 +35,7 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   response => {
     Nprogress.done()
-    console.log(response)
+    // console.log(response)
     return response
   },
   error => {

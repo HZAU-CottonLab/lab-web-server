@@ -4,15 +4,15 @@
  * @Author: zpliu
  * @Date: 2021-09-22 14:25:15
  * @LastEditors: zpliu
- * @LastEditTime: 2021-09-22 18:04:28
+ * @LastEditTime: 2022-03-30 11:10:00
  * @@param: 
 -->
 <template>
   <el-container class="login-page">
-    <el-header> </el-header>
+    <headCom></headCom>
     <el-main class="login-main">
       <el-row>
-        <el-col :span="12" style="margin-top:5%">
+        <el-col :md="12" :sm="24" :xs="24" style="margin-top: 5%">
           <div class="login-wrap">
             <div class="login-html">
               <input
@@ -29,73 +29,62 @@
               >
               <div class="login-form">
                 <div class="sign-in-htm">
-                  <div class="group">
-                    <label for="user" class="label">Username</label>
-                    <input id="user" type="text" class="input" />
-                  </div>
-                  <div class="group">
-                    <label for="pass" class="label">Password</label>
-                    <input
-                      id="pass"
-                      type="password"
-                      class="input"
-                      data-type="password"
-                    />
-                  </div>
-                  <div class="group">
-                    <input id="check" type="checkbox" class="check" checked />
-                    <label for="check"
-                      ><span class="icon"></span> Keep me Signed in</label
-                    >
-                  </div>
-                  <div class="group">
-                    <input type="submit" class="button" value="Sign In" />
-                  </div>
-                  <div class="hr"></div>
-                  <div class="foot-lnk">
-                    <a href="#forgot">Forgot Password?</a>
-                  </div>
+                  <el-form
+                    label-width="100px"
+                    :model="loginForm"
+                    style="max-width: 460px"
+                    :rules="login_rule"
+                    ref="loginForm"
+                  >
+                    <el-form-item label="Account" prop="account">
+                      <el-input v-model="loginForm.account" />
+                    </el-form-item>
+                    <el-form-item label="Password" prop="password">
+                      <el-input v-model="loginForm.password" />
+                    </el-form-item>
+                    <el-form-item>
+                      <el-button
+                        type="primary"
+                        @click="submitLogin('loginForm')"
+                        >Login</el-button
+                      >
+                    </el-form-item>
+                  </el-form>
                 </div>
                 <div class="sign-up-htm">
-                  <div class="group">
-                    <label for="user" class="label">Username</label>
-                    <input id="user" type="text" class="input" />
-                  </div>
-                  <div class="group">
-                    <label for="pass" class="label">Password</label>
-                    <input
-                      id="pass"
-                      type="password"
-                      class="input"
-                      data-type="password"
-                    />
-                  </div>
-                  <div class="group">
-                    <label for="pass" class="label">Repeat Password</label>
-                    <input
-                      id="pass"
-                      type="password"
-                      class="input"
-                      data-type="password"
-                    />
-                  </div>
-                  <div class="group">
-                    <label for="pass" class="label">Email Address</label>
-                    <input id="pass" type="text" class="input" />
-                  </div>
-                  <div class="group">
-                    <input type="submit" class="button" value="Sign Up" />
-                  </div>
-                  <div class="hr"></div>
-                  <div class="foot-lnk">
-                    <label for="tab-1">Already Member</label>
-                  </div>
+                  <el-form
+                    label-width="100px"
+                    :model="singupForm"
+                    style="max-width: 460px"
+                    :rules="siginup_rule"
+                    ref="singupForm"
+                  >
+                    <el-form-item label="name" prop="username">
+                      <el-input v-model="singupForm.username" />
+                    </el-form-item>
+                    <el-form-item label="email" prop="email">
+                      <el-input v-model="singupForm.email" />
+                    </el-form-item>
+                    <el-form-item label="Password" prop="password">
+                      <el-input v-model="singupForm.password" />
+                    </el-form-item>
+                    <el-form-item label="repeat" prop="repeatPassword">
+                      <el-input v-model="singupForm.repeatPassword" />
+                    </el-form-item>
+                    <el-form-item>
+                      <el-button
+                        type="primary"
+                        @click="submitSignup('singupForm')"
+                        >Submit</el-button
+                      >
+                    </el-form-item>
+                  </el-form>
                 </div>
               </div>
             </div>
           </div>
         </el-col>
-        <el-col :span="12">
+        <el-col :md="12" :sm="0" :xs="0">
           <svg
             id="a27b99c7-e964-4c47-a10a-750eac27831c"
             data-name="Layer 1"
@@ -228,30 +217,155 @@
         </el-col>
       </el-row>
     </el-main>
-    <footerCom> </footerCom>   
+    <footerCom> </footerCom>
   </el-container>
 </template>
 <script>
-import footerCom from '@/components/footer'
+import footerCom from "@/components/footer";
+import headCom from "@/components/header";
+import { mapActions, mapState } from "vuex";
+import { ElMessage } from "element-plus";
 export default {
   name: "loginPage",
-  components:{
-      footerCom
-  }
+  data() {
+    //表单验证规则
+    var checkValue = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("值不能为空"));
+      } else {
+        callback();
+      }
+    };
+    var validatePass_login = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        if (this.loginForm.password !== "") {
+          this.$refs.loginForm.validateField("password");
+        }
+        callback();
+      }
+    };
+    var validatePass_singup = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        if (this.singupForm.password !== "") {
+          this.$refs.singupForm.validateField("password");
+        }
+        callback();
+      }
+    };
+    var validatePass2 = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请再次输入密码"));
+      } else if (value !== this.singupForm.password) {
+        callback(new Error("两次输入密码不一致!"));
+      } else {
+        callback();
+      }
+    };
+    const siginup_rule = {
+      username: [{ validator: checkValue, trigger: "blur" }],
+      account: [{ validator: checkValue, trigger: "blur" }],
+      password: [{ validator: validatePass_singup, trigger: "blur" }],
+      email: [{ validator: checkValue, trigger: "blur" }],
+      repeatPassword: [{ validator: validatePass2, trigger: "blur" }],
+    };
+    const login_rule = {
+      account: [{ validator: checkValue, trigger: "blur" }],
+      password: [{ validator: validatePass_login, trigger: "blur" }],
+    };
+    return {
+      loginForm: {
+        account: "",
+        password: "",
+      },
+      singupForm: {
+        username: "",
+        account: "",
+        password: "",
+        email: "",
+        repeatPassword: "",
+      },
+      login_rule,
+      siginup_rule,
+    };
+  },
+  components: {
+    footerCom,
+    headCom,
+  },
+  computed: {
+    ...mapState({
+      //获取登录状态
+      // loginStatus: (store) => store.user.loginStatus,
+    }),
+  },
+  methods: {
+    ...mapActions({
+      // 进行登录请求的API
+      login: "user/authenticate",
+    }),
+    //请求对应的API
+    submitLogin(formname) {
+      this.$refs[formname].validate((valid) => {
+        if (valid) {
+          //发起登录请求，请求参数为form表单；
+          // 返回结果为promise对象，并携带请求结果
+          //* API接口在store.user.action中
+          this.login(this.loginForm).then((res) => {
+            if (res) {
+              console.log(res);
+              /**
+               * 登录成功后，进行路由重定向
+               */
+              this.$router.push({path:"/dashboard"})
+            } else {
+              ElMessage.error({
+                message: "账号或密码错误",
+              });
+              //  重置表单项
+              this.$refs[formname].resetFields();
+            }
+          });
+        } else {
+          //检测表单
+          return;
+        }
+      });
+    },
+    submitSignup(formname) {
+      this.$refs[formname].validate((valid) => {
+        if (valid) {
+          //发起注册请求
+          return;
+        } else {
+          //检测表单
+          return;
+        }
+      });
+    },
+  },
+  created() {
+    // this.login()
+  },
 };
 </script>
 <style lang='scss' scoped>
-.login-page{
+.login-page {
   background: url("../../assets/images/background.png");
   background-size: contain;
-  background-repeat: repeat-y
+  background-repeat: repeat-y;
+  display: flex;
+  flex-direction: column;
 }
 .login-main {
   background: url("../../assets/images/wave.svg");
   margin: 0;
   color: #6a6f8c;
   font: 600 16px/18px "Open Sans", sans-serif;
-  height: 800px;
+  // max-height: 800px;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -327,7 +441,7 @@ a {
   border-color: #1161ee;
 }
 .login-form {
-  min-height: 345px;
+  min-height: 75%;
   position: relative;
   perspective: 1000px;
   transform-style: preserve-3d;
@@ -335,6 +449,18 @@ a {
 .login-form .group {
   margin-bottom: 15px;
 }
+
+.login-form {
+  .sign-in-htm {
+    display: flex;
+    align-items: center;
+  }
+  .sign-up-htm {
+    display: flex;
+    align-items: center;
+  }
+}
+
 .login-form .group .label,
 .login-form .group .input,
 .login-form .group .button {

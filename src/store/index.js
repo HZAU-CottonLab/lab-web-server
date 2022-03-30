@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 20:14:36
  * @LastEditors: zpliu
- * @LastEditTime: 2022-01-12 12:51:44
+ * @LastEditTime: 2022-03-29 16:31:52
  * @@param:
  */
 //-------------------------------
@@ -28,13 +28,15 @@ import Vuex from "vuex";
 // })
 import main from "./modules/main";
 import news from "./modules/news"
+import user from "./modules/user"
 
 const store = new Vuex.Store({
   namespaced: true,
   modules: {
     //模块化的store 对象
     main,
-    news
+    news,
+    user
   },
   state:{
       web:'lab-web-server'

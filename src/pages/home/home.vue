@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-04-26 14:19:28
  * @LastEditors: zpliu
- * @LastEditTime: 2022-01-12 13:09:16
+ * @LastEditTime: 2022-03-29 16:43:08
  * @@param: 
 -->
 <template>
@@ -163,7 +163,9 @@ export default {
     })
   },
   created() {
-    
+    // console.log(getnewData)
+    // 对数据发起请求
+      // console.log(this.getnewData())
   },
   mounted(){
     //this.$store.dispatch("news/get_newsData")

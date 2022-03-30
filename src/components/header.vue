@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-10-12 15:35:09
  * @LastEditors: zpliu
- * @LastEditTime: 2021-10-12 20:28:31
+ * @LastEditTime: 2022-03-29 16:00:09
  * @@param: 
 -->
 <template>
@@ -24,7 +24,7 @@
         @select="handleSelect"
         class="el-menu-header"
       >
-        <el-menu-item index="1" >Explore</el-menu-item>
+        <el-menu-item index="1" ><router-link to="/">Explore</router-link></el-menu-item>
         <el-sub-menu index="2">
           <template #title>Our Research</template>
           <el-menu-item index="2-1">item one</el-menu-item>
@@ -33,6 +33,7 @@
         </el-sub-menu>
         <el-menu-item index="3">Publications</el-menu-item>
         <el-menu-item index="4">Our lab</el-menu-item>
+        <el-menu-item index="5"><router-link to="/login">login</router-link></el-menu-item>
       </el-menu>
       </el-col>
     </el-row>
