@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-22 14:25:15
  * @LastEditors: zpliu
- * @LastEditTime: 2022-03-30 11:10:00
+ * @LastEditTime: 2022-03-30 19:36:49
  * @@param: 
 -->
 <template>
@@ -306,6 +306,7 @@ export default {
     ...mapActions({
       // 进行登录请求的API
       login: "user/authenticate",
+      register: 'user/siginup'
     }),
     //请求对应的API
     submitLogin(formname) {
@@ -339,6 +340,13 @@ export default {
       this.$refs[formname].validate((valid) => {
         if (valid) {
           //发起注册请求
+          this.register(this.singupForm).then(
+            (res)=>{
+              ElMessage.info({
+                message: res.info.message,
+              });
+            }
+          )
           return;
         } else {
           //检测表单

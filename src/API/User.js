@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 14:37:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-03-29 20:15:14
+ * @LastEditTime: 2022-03-30 19:25:51
  * @@param:
  */
 import request from "@/utils/axios";
@@ -18,3 +18,14 @@ export function login(param) {
     data: param,
   });
 }
+export function register(param) {
+  // console.log(param);
+  // #* axios传参时候，对应的参数放在data项中
+  return request({
+    url: "/register",
+    method: "post",
+    data: param,
+  });
+}
+
+
