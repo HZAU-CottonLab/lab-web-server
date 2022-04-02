@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 16:22:49
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-02 10:27:20
+ * @LastEditTime: 2022-04-02 15:18:24
  * @@param:
  */
 
@@ -148,7 +148,7 @@ const people_brif_info = [
       description: ``,
     }
   ] },
-  { id: 4, title: "Graduate Student", 'peopleInfos|1-10': [
+  { id: 4, title: "Graduate Student", 'peopleInfos|1-2': [
     {
       email: "Test",
       position: "Graduate Student",
@@ -157,7 +157,7 @@ const people_brif_info = [
       description: ``,
     }
   ] },
-  { id: 5, title: "Visiting Scholar", 'peopleInfos|1-2': [
+  { id: 5, title: "Visiting Scholar", 'peopleInfos|1-4': [
     {
       email: "Test",
       position: "Graduate Student",

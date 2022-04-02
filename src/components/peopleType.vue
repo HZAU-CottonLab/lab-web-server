@@ -4,11 +4,11 @@
  * @Author: zpliu
  * @Date: 2022-03-31 18:53:09
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-02 11:21:47
+ * @LastEditTime: 2022-04-02 15:09:03
  * @@param: 
 -->
 <template>
-  <div ref="PeopleType" class="pageType" :href='"people"+id'>
+  <div ref="PeopleType" class="pageType" :id='"people"+id'>
     <el-row justify="start" display="flex">
       <!-- 使用具名插槽区分不同类型数据 -->
       <el-col class="PeopleHeader" :span="24">

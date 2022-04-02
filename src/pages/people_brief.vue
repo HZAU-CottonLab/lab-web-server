@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-31 13:20:33
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-02 11:36:18
+ * @LastEditTime: 2022-04-02 15:20:02
  * @@param: 
 -->
 <template>
@@ -29,29 +29,27 @@
     </el-col>
     <el-col class="people-item" :md="16" :sm="18" :xs="24">
       <!-- #* lead的描述 -->
-      <div ref="people_lead"  v-if="leader_info" href="peopeItem0">
+      <div ref="people_lead" v-if="leader_info" id="people0">
         <el-row justify="start" align="center" style="align-items: center">
           <el-col :md="16" :sm="24" class="people-lead">
             <!-- //团队lead 类别 -->
-            <span class="people-lead-title">{{leader_info.title}}</span>
+            <span class="people-lead-title">{{ leader_info.title }}</span>
             <div class="people-lead-description">
               <span></span>
               <p>
-               {{leader_info.description}}
+                {{ leader_info.description }}
               </p>
             </div>
           </el-col>
           <el-col :md="8" :sm="24"
-            ><avatar_card
-              :imageURL="leader_info.imageURL"
-            ></avatar_card>
+            ><avatar_card :imageURL="leader_info.imageURL"></avatar_card>
           </el-col>
         </el-row>
       </div>
       <!-- #* 其他团队成员，批量选择的 -->
       <!-- <el-col  :md="16" :sm="18" :xs="24"> -->
       <peopleType
-        v-for="(item, index) in people_Cat_infs.slice(1, -1)"
+        v-for="(item, index) in people_Cat_infs.slice(1,)"
         :key="index"
         :id="item.id"
         :CategoryTitle="item.title"
@@ -91,25 +89,23 @@ export default {
     footerCom,
   },
   computed: {
-    leader_info(){
+    leader_info() {
       /**
        * 存在异步请求带来的问题，对请求结果进行判断
-       * 
+       *
        */
-      let tmpData=this.people_Cat_infs[0];
-      if(tmpData){
+      let tmpData = this.people_Cat_infs[0];
+      if (tmpData) {
         return {
           title: tmpData.title,
-          email:tmpData.peopleInfos[0].email,
-          imageURL:tmpData.peopleInfos[0].imageURL,
-          name:tmpData.peopleInfos[0].name,
-          description:tmpData.peopleInfos[0].description,
-        }
-
-      }else{
-        return null
+          email: tmpData.peopleInfos[0].email,
+          imageURL: tmpData.peopleInfos[0].imageURL,
+          name: tmpData.peopleInfos[0].name,
+          description: tmpData.peopleInfos[0].description,
+        };
+      } else {
+        return null;
       }
-
     },
     ...mapState({
       //获取当前处于活跃状态的PeopleType
@@ -135,16 +131,17 @@ export default {
   },
   methods: {
     handleNavClick(peopleIndex) {
-      console.log("/people?#peopeItem"+peopleIndex);
-      //点击后进行ID跳转
-      this.$router.push({path:"/people?#peopeItem"+peopleIndex})
+      //获取页面内元素进行跳转
+      const scrollDom = document.getElementById("people" + peopleIndex);
+      //点击后进行页面内锚点跳转
+      scrollDom.scrollIntoView();
     },
     handleScrollx() {
       // 由于people_Cat_infs中第一个元素没有单独拎出来了
       //计算其距离视窗的高度，改变对应的导航栏
       const disant_to_top = this.$refs.people_lead.getBoundingClientRect().top;
       this.$store.commit("main/setActivatePeopleType", {
-        id: 0,   //lead 栏目，默认赋值为0
+        id: 0, //lead 栏目，默认赋值为0
         distance: disant_to_top,
       });
     },
