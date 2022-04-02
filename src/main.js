@@ -4,13 +4,14 @@
  * @Author: zpliu
  * @Date: 2021-09-19 18:56:05
  * @LastEditors: zpliu
- * @LastEditTime: 2022-01-02 14:10:49
+ * @LastEditTime: 2022-04-01 20:49:24
  * @@param: 
  */
 import { createApp } from 'vue'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/display.css'
 import router from './routers/'
 import store from './store/'
 

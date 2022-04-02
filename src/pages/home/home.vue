@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-04-26 14:19:28
  * @LastEditors: zpliu
- * @LastEditTime: 2022-03-29 16:43:08
+ * @LastEditTime: 2022-04-02 08:40:57
  * @@param: 
 -->
 <template>
@@ -110,10 +110,8 @@
 
 <script>
 // import request from "@/utils/axios.js";
-import { useLoading } from "vue3-loading-overlay";
 // Import stylesheet
 import { mapState,mapActions } from "vuex";
-import "vue3-loading-overlay/dist/vue3-loading-overlay.css";
 import headerComponent from "../../components/header.vue";
 import news_cards from "../../components/news_card.vue";
 import footer_main from "../../components/footer.vue";
@@ -137,27 +135,6 @@ export default {
     }),
   },
   methods: {
-    increment() {
-      let loader = useLoading();
-      loader.show(
-        {
-          // Pass props by their camelCased names
-          container: null,
-          canCancel: null, // default false
-          onCancel: false,
-          color: "green",
-          loader: "bars",
-          width: 64,
-          height: 64,
-          backgroundColor: "#ffffff",
-          opacity: 0.5,
-          zIndex: 999,
-        },
-        setTimeout(() => {
-          loader.hide();
-        }, 5000)
-      );
-    },
     ...mapActions({
         getnewData: 'news/get_newsData'
     })
@@ -169,6 +146,7 @@ export default {
   },
   mounted(){
     //this.$store.dispatch("news/get_newsData")
+    // this.increment()
   }
 };
 </script>

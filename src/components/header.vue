@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-10-12 15:35:09
  * @LastEditors: zpliu
- * @LastEditTime: 2022-03-29 16:00:09
+ * @LastEditTime: 2022-04-01 23:01:40
  * @@param: 
 -->
 <template>
@@ -32,7 +32,7 @@
           <el-menu-item index="2-3">item three</el-menu-item>
         </el-sub-menu>
         <el-menu-item index="3">Publications</el-menu-item>
-        <el-menu-item index="4">Our lab</el-menu-item>
+        <el-menu-item index="4"><router-link to="/people">Our lab</router-link></el-menu-item>
         <el-menu-item index="5"><router-link to="/login">login</router-link></el-menu-item>
       </el-menu>
       </el-col>

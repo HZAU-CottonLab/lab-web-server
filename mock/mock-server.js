@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-01-02 12:41:23
  * @LastEditors: zpliu
- * @LastEditTime: 2022-03-29 17:48:42
+ * @LastEditTime: 2022-04-02 09:31:28
  * @@param:
  */
 const chokidar = require("chokidar");
@@ -46,7 +46,7 @@ const responseFake = (url, type, respond) => {
     url: new RegExp(`${process.env.VUE_APP_BASE_API}${url}`),
     type: type || "get",
     response(req, res) {
-      console.log("request invoke111:" + req.path);
+      console.log("request invoke:" + req.path);
       res.json(
         Mock.mock(respond instanceof Function ? respond(req, res) : respond)
       );
