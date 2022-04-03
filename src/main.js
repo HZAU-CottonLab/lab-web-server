@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 18:56:05
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-01 20:49:24
+ * @LastEditTime: 2022-04-03 08:50:40
  * @@param: 
  */
 import { createApp } from 'vue'
@@ -14,6 +14,11 @@ import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/display.css'
 import router from './routers/'
 import store from './store/'
+
+//loading状态
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css'
+
 
 if (process.env.NODE_ENV === 'production') {
     //启用前端mock
@@ -26,4 +31,5 @@ app.use(App)
     .use(store)
     .use(ElementPlus)
     .use(router)
+    .use(VueLoading)
     .mount('#app')

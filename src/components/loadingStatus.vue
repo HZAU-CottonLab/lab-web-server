@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-02 08:39:44
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-02 08:43:09
+ * @LastEditTime: 2022-04-03 08:43:24
  * @@param: 
 -->
 <template>
@@ -41,5 +41,5 @@ export default {
   },
 };
 </script>
-<style lang='' scoped>
+<style lang='scss' scoped>
 </style>

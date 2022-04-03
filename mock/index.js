@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-01-02 13:38:34
  * @LastEditors: zpliu
- * @LastEditTime: 2022-03-29 17:44:33
+ * @LastEditTime: 2022-04-03 09:07:32
  * @@param:
  */
 const Mock = require("mockjs");
@@ -12,7 +12,8 @@ const { param2Obj } = require("./utils");
 
 const table = require("./table");
 const user = require("./user");
-const mocks = [...table, ...user];
+const publication = require("./publication");
+const mocks = [...table, ...user,...publication];
 // for front mock
 // please use it cautiously, it will redefine XMLHttpRequest,
 // which will cause many of your third-party libraries to be invalidated(like progress event).
