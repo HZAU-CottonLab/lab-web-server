@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 19:06:43
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-03 09:35:28
+ * @LastEditTime: 2022-04-03 09:49:09
  * @@param: 
  */
 const CompressionPlugin = require("compression-webpack-plugin")

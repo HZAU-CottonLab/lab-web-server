@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-02 20:18:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-03 09:34:57
+ * @LastEditTime: 2022-04-03 09:48:51
  * @@param: 
 -->
 <template>
@@ -104,9 +104,6 @@ export default {
     };
   },
   name: "publication",
-  components: {
-    backup,
-  },
   methods: {
     handleClickNevgation(itemIndex) {
       this.activateIndex = itemIndex;
@@ -131,6 +128,7 @@ export default {
     });
   },
   components:{
+    backup,
     footerCom,
     headCom
   }
