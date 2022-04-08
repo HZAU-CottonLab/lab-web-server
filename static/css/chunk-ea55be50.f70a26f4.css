@@ -1,0 +1,1 @@
+.carousel__next--in-active,.carousel__prev--in-active{display:none}.carousel__slide{padding:0 5px}.carousel__item .carousel__img{position:relative;z-index:-1}.carousel__item .carousel__label{display:none;position:absolute;z-index:1;top:50%;right:50%;color:red}.carousel__item:hover .carousel__label{display:inline}
