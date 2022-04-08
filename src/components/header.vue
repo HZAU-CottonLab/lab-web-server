@@ -4,19 +4,19 @@
  * @Author: zpliu
  * @Date: 2021-10-12 15:35:09
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-02 20:22:55
+ * @LastEditTime: 2022-04-08 23:34:24
  * @@param: 
 -->
 <template>
   <el-header class="el-header">
     <el-row justify="start" align="middle">
       <el-col :span="8" >
-           <el-image class="el-header-log" src="https://www.hainanu.edu.cn/home2018/imgs/logo.png"
+           <el-image class="el-header-log" src="http://www.hzau.edu.cn/dfiles/14527/public/doc/images/logo2018.png"
            fit="cover" ></el-image>  
       </el-col>
       <el-col :span="10" :offset="6">
       <el-menu
-        background-color="#004098"
+        background-color="#7fb899"
         active-text-color="#ffd04b"
         text-color="#fff"
         :default-active="activeIndex"
@@ -59,7 +59,7 @@ export default {
 <style lang='scss' scoped>
 .el-header{
     height: 100px;
-    background: #004098;
+    background: #7fb899;
     padding-bottom: 3px;
 
 .el-menu-header{

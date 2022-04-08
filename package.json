@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^1.1.4",
+    "@wangeditor/editor": "^0.15.18",
+    "@wangeditor/editor-for-vue": "^5.1.8",
     "axios": "^0.21.4",
     "core-js": "^3.6.5",
     "element-plus": "^1.1.0-beta.12",
@@ -18,6 +20,7 @@
     "vue-loader-v16": "^16.0.0-beta.5.4",
     "vue-loading-overlay": "^5.0.3",
     "vue-router": "^4.0.11",
+    "vue3-carousel": "^0.1.38",
     "vue3-loading-overlay": "0.0.0",
     "vuex": "^4.0.0"
   },

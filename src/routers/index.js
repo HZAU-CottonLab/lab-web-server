@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 19:34:35
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-02 20:21:39
+ * @LastEditTime: 2022-04-06 19:20:08
  * @@param: 
  */
 import { createRouter, createWebHashHistory } from "vue-router"
@@ -15,6 +15,8 @@ const DemoPage = () => import("@/components/demo.vue")
 const DashboardPage = () => import("@/pages/home/dashboard.vue")
 const peopleBrief =()=> import("@/pages/people_brief")
 const publication =()=> import("@/pages/publication")
+const test= ()=> import("@/components/test")
+const editor= ()=> import("@/components/wangEditor")
 const routes = [
   {
     path: "/",
@@ -47,6 +49,14 @@ const routes = [
     path:"/publication",
     name:'publication',
     component:publication
+  },{
+    path:"/test",
+    name:'test',
+    component:test
+  },{
+    path:"/editor",
+    name:'editor',
+    component:editor
   }
 ]
 const router = createRouter({

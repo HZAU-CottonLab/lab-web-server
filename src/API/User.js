@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 14:37:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-02 09:30:34
+ * @LastEditTime: 2022-04-08 13:45:54
  * @@param:
  */
 import request from "@/utils/axios";
@@ -31,6 +31,12 @@ export function PeopleItem(){
   //返回所有用户的信息
   return request({
     url: "/people-show",
+    method: "get",
+  });
+}
+export function TeamItem(){
+  return request({
+    url: "/team-show",
     method: "get",
   });
 }

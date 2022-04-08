@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-04-26 14:19:28
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-02 08:40:57
+ * @LastEditTime: 2022-04-08 23:19:21
  * @@param: 
 -->
 <template>
@@ -96,10 +96,17 @@
         >
           <div style="width: 80%; margin-left: 40px; text-align: start">
             <el-button type="info" class="info-button-header" plain>
-              <strong>Our Faculty</strong></el-button
+              <strong>Our Team</strong></el-button
             >
           </div>
         </el-col>
+        <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
+          <!-- //team people 展示组件 -->
+          <facult_list 
+          style="margin: 20px 40px"
+          :carouselList="teamList"
+          ></facult_list
+        ></el-col>
       </el-row>
     </el-main>
     <el-footer style="padding: 0px; height: 400px">
@@ -111,21 +118,23 @@
 <script>
 // import request from "@/utils/axios.js";
 // Import stylesheet
-import { mapState,mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 import headerComponent from "../../components/header.vue";
 import news_cards from "../../components/news_card.vue";
 import footer_main from "../../components/footer.vue";
-
+import facult_list from "../../components/team_carousel.vue";
+import { TeamItem } from "@/API/User";
 export default {
   name: "home_layout",
-  components: { headerComponent, news_cards, footer_main },
+  components: { headerComponent, news_cards, footer_main, facult_list },
   data() {
     return {
       show: true,
       label: "loading",
       overlay: true,
       fullPage: true,
-      Data_value: new Date()
+      Data_value: new Date(),
+      teamList: [],
     };
   },
   setup() {},
@@ -136,18 +145,19 @@ export default {
   },
   methods: {
     ...mapActions({
-        getnewData: 'news/get_newsData'
-    })
+      getnewData: "news/get_newsData",
+    }),
   },
   created() {
     // console.log(getnewData)
     // 对数据发起请求
-      // console.log(this.getnewData())
+    // console.log(this.getnewData())
   },
-  mounted(){
-    //this.$store.dispatch("news/get_newsData")
-    // this.increment()
-  }
+  mounted() {
+    TeamItem().then((res) => {
+      this.teamList = res.data['info'];
+    });
+  },
 };
 </script>
 
