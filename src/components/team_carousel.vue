@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-04 11:22:09
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-08 23:31:03
+ * @LastEditTime: 2022-04-09 09:17:47
  * @@param: 
 -->
 <template>
@@ -15,17 +15,17 @@
       class="carousel__slide"
     >
       <div class="carousel__item">
-        <el-image
-          class="carousel__img"
-          :src="slide.imageURL"
-          fit="cover"
-        ></el-image>
+        <el-image class="carousel__img" :src="slide.imageURL" fit="cover">
+        </el-image>
         <div class="carousel__label">
-          <el-link type="primary" :href="slide.clickURL" :underline="false" target="_blank"
-            style="font-size:20px;color: #d4d4d4"
-            
+          <el-link
+            type="primary"
+            :href="slide.clickURL"
+            :underline="false"
+            target="_blank"
+            style="font-size: 20px; color: #d4d4d4"
           >
-          <el-icon :size="20"><search /></el-icon>
+            <el-icon :size="20"><search /></el-icon>
             <div>{{ slide.title }}</div>
           </el-link>
         </div>
@@ -108,7 +108,7 @@ export default {
             "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
           title: "10",
           clickURL: "",
-        }
+        },
       ],
     },
   },
@@ -176,7 +176,11 @@ export default {
 }
 
 //父节点获得焦点时，设置其显示
-.carousel__item:hover .carousel__label {
-  display: inline;
+.carousel__item:hover {
+  max-height: 160px; //遮罩和图片一样高，将会有一个动画效果
+  background: rgba(0, 0, 0, 0.4);
+  .carousel__label {
+    display: inline;
+  }
 }
 </style>
