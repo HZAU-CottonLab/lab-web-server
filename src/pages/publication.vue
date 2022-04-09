@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-02 20:18:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-08 23:25:42
+ * @LastEditTime: 2022-04-09 09:49:38
  * @@param: 
 -->
 <template>
@@ -28,7 +28,7 @@
       <el-col :span="16">
         <!-- //遍历每年的数据 -->
         <el-timeline
-          v-for="({publicationItem, index}) in publicationList"
+          v-for="(publicationItem, index) in publicationList"
           :key="index"
           v-show="index == activateIndex"
           style="text-align: start"
@@ -124,6 +124,7 @@ export default {
     get_publication().then((res) => {
       this.publicationList = res.data.info;
       //请求到数据，关闭loading
+      // console.log(this.publicationList)
       loader.hide();
     });
   },

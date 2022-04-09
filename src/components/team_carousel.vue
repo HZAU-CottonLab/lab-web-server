@@ -4,11 +4,11 @@
  * @Author: zpliu
  * @Date: 2022-04-04 11:22:09
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-09 09:17:47
+ * @LastEditTime: 2022-04-09 10:24:30
  * @@param: 
 -->
 <template>
-  <Carousel :settings="settings" :breakpoints="breakpoints" class="carousel1">
+  <Carousel v-if="carouselList.length!==0" :settings="settings" :breakpoints="breakpoints" class="carousel1">
     <Slide
       v-for="(slide, index) in carouselList"
       :key="index"
@@ -44,7 +44,7 @@ import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
 import { Search } from "@element-plus/icons-vue";
 import "vue3-carousel/dist/carousel.css";
 export default {
-  name: "Breakpoints",
+  name: "team_carousel",
   props: {
     carouselList: {
       type: Array,

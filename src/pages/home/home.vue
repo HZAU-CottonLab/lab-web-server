@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-04-26 14:19:28
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-08 23:19:21
+ * @LastEditTime: 2022-04-09 10:00:53
  * @@param: 
 -->
 <template>
@@ -102,16 +102,19 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
           <!-- //team people 展示组件 -->
+          <!--  -->
           <facult_list 
-          style="margin: 20px 40px"
           :carouselList="teamList"
+          style="margin: 20px 40px"
           ></facult_list
-        ></el-col>
+          ></el-col
+        >
       </el-row>
     </el-main>
     <el-footer style="padding: 0px; height: 400px">
       <footer_main></footer_main>
     </el-footer>
+    <backup></backup>
   </el-container>
 </template>
 
@@ -124,9 +127,16 @@ import news_cards from "../../components/news_card.vue";
 import footer_main from "../../components/footer.vue";
 import facult_list from "../../components/team_carousel.vue";
 import { TeamItem } from "@/API/User";
+import backup from "@/components/backup";
 export default {
   name: "home_layout",
-  components: { headerComponent, news_cards, footer_main, facult_list },
+  components: {
+    headerComponent,
+    news_cards,
+    footer_main,
+    facult_list,
+    backup
+  },
   data() {
     return {
       show: true,
@@ -137,7 +147,6 @@ export default {
       teamList: [],
     };
   },
-  setup() {},
   computed: {
     ...mapState({
       carousels_list: (state) => state.main.carousels_list,
@@ -155,7 +164,7 @@ export default {
   },
   mounted() {
     TeamItem().then((res) => {
-      this.teamList = res.data['info'];
+      this.teamList = res.data["info"];
     });
   },
 };
