@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 20:14:36
  * @LastEditors: zpliu
- * @LastEditTime: 2022-03-29 16:31:52
+ * @LastEditTime: 2022-04-12 17:05:52
  * @@param:
  */
 //-------------------------------
@@ -13,22 +13,10 @@
 
 import Vuex from "vuex";
 
-// const context=require.context('./modules',false,/\.js$/)
-// const moduleStores={}
-// context.keys().forEach(key => {
-//     // 获取读取到的文件名字并且截取
-//     const fileName = key.slice(2, -3);
-
-//     //通过 context(key)导出文件内容
-//     const fileModule = context(key).default
-
-//     moduleStores[fileName] = {
-//         ...fileModule
-//     }
-// })
 import main from "./modules/main";
 import news from "./modules/news"
 import user from "./modules/user"
+import permission from "./modules/permission";
 
 const store = new Vuex.Store({
   namespaced: true,
@@ -36,7 +24,8 @@ const store = new Vuex.Store({
     //模块化的store 对象
     main,
     news,
-    user
+    user,
+    permission
   },
   state:{
       web:'lab-web-server'

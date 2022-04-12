@@ -4,19 +4,12 @@
  * @Author: zpliu
  * @Date: 2022-03-29 16:20:12
  * @LastEditors: zpliu
- * @LastEditTime: 2022-03-30 19:34:23
+ * @LastEditTime: 2022-04-12 16:05:43
  * @@param:
  */
-/*
- * @Descripttion:
- * @version:
- * @Author: zpliu
- * @Date: 2022-01-12 12:43:22
- * @LastEditors: zpliu
- * @LastEditTime: 2022-01-12 13:04:49
- * @@param:
- */
-import { login, register } from "@/API/User.js";
+import { login, register, userInfoRequest } from "@/API/User.js";
+import { getToken, removeToken, setToken } from "@/utils/cookies";
+
 export default {
   namespaced: true,
   state: {
@@ -24,6 +17,8 @@ export default {
     account: "",
     password: "",
     loginStatus: false, //用于判断用户是否处于登录状态
+    token: getToken() || "", //用于判断用户是否登录的token
+    roles: [],
   },
   getters: {
     username: (state) => state.username,
@@ -36,10 +31,17 @@ export default {
     set_password(state, password) {
       state.password = password;
     },
+    /** 登出 */
+    logout(state) {
+      removeToken();
+      state.token = "";
+      state.roles = [];
+    },
   },
   actions: {
     authenticate(context, payload) {
       //payload 为form表单参数
+      // console.log(getToken(),'111')
       return new Promise((resolve) => {
         login(payload).then(
           // context为state拷贝
@@ -47,6 +49,10 @@ export default {
             //修改state中的内容
             context.state.username = res.data.info.username;
             context.state.loginStatus = res.data.info.loginStatus;
+            /* 登录请求完成后设置token*/
+            context.state.token = res.data.accessToken;
+            context.state.roles = res.data.roles;
+            setToken(res.data.accessToken);
             //异步完成请求后，返回登录状态
             resolve(res.data.info.loginStatus);
           }
@@ -59,6 +65,17 @@ export default {
        */
       return new Promise((resolve) => {
         register(payload).then((res) => {
+          resolve(res.data);
+        });
+      });
+    },
+    getInfo(context) {
+      /**
+       * 使用当前token获取用户信息
+       */
+      return new Promise((resolve) => {
+        userInfoRequest().then((res) => {
+          context.state.roles = res.data.roles;
           resolve(res.data);
         });
       });

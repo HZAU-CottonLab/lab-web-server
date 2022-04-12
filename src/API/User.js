@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 14:37:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-08 13:45:54
+ * @LastEditTime: 2022-04-12 16:02:22
  * @@param:
  */
 import request from "@/utils/axios";
@@ -27,6 +27,19 @@ export function register(param) {
     data: param,
   });
 }
+
+/**
+ * 使用当前自带的token信息请求后端
+ */
+export function userInfoRequest(param){
+  return request({
+    url: "/user/info",
+    method: "post",
+    data: param,
+  });
+
+}
+
 export function PeopleItem(){
   //返回所有用户的信息
   return request({

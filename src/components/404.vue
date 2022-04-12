@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-04-26 14:04:11
  * @LastEditors: zpliu
- * @LastEditTime: 2021-04-27 12:41:34
+ * @LastEditTime: 2022-04-11 20:13:11
  * @@param: 
 -->
 /*
@@ -38,7 +38,7 @@ export default {
   name: "page404",
   methods: {
     handlegoHome() {
-      window.location.replace("/web/");
+      this.$router.push({ path: "/" });
     },
   },
 };

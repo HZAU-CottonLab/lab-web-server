@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 16:22:49
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-08 13:44:30
+ * @LastEditTime: 2022-04-12 16:00:52
  * @@param:
  */
 
@@ -255,6 +255,8 @@ module.exports = [
         return {
           code: 0,
           status: 200,
+          accessToken:"1111321321321",
+          roles:["admin",],
           info: {
             username: "zpliu",
             loginStatus: true,
@@ -266,9 +268,11 @@ module.exports = [
         return {
           code: 1,
           status: 200,
+          accessToken:"2223333331",
+          roles:["editor",],
           info: {
             username: "",
-            loginStatus: false,
+            loginStatus: true,
             message: "authenticated failed",
             // config
           },
@@ -288,6 +292,41 @@ module.exports = [
           message: "注册成功",
         },
       };
+    },
+  },
+  {
+    url: "/user/info",
+    type: "post",
+    response: (config) => {
+      // 判断传进的post数据是否验证成功
+      const { account, password, loginStatus } = config.body;
+      if (account === "zpliu" && password === "111") {
+        return {
+          code: 0,
+          status: 200,
+          accessToken:"1111321321321",
+          roles:["admin",],
+          info: {
+            username: "zpliu",
+            loginStatus: true,
+            message: "authenticated",
+            // config
+          },
+        };
+      } else {
+        return {
+          code: 1,
+          status: 200,
+          accessToken:"2223333331",
+          roles:["editor",],
+          info: {
+            username: "",
+            loginStatus: true,
+            message: "authenticated failed",
+            // config
+          },
+        };
+      }
     },
   },
   {
@@ -312,4 +351,5 @@ module.exports = [
       };
     },
   },
+
 ];

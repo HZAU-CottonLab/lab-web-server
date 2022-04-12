@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-22 14:25:15
  * @LastEditors: zpliu
- * @LastEditTime: 2022-03-30 19:36:49
+ * @LastEditTime: 2022-04-11 20:18:12
  * @@param: 
 -->
 <template>
@@ -362,14 +362,14 @@ export default {
 </script>
 <style lang='scss' scoped>
 .login-page {
-  background: url("../../assets/images/background.png");
+  background: url("../assets/images/background.png");
   background-size: contain;
   background-repeat: repeat-y;
   display: flex;
   flex-direction: column;
 }
 .login-main {
-  background: url("../../assets/images/wave.svg");
+  background: url("../assets/images/wave.svg");
   margin: 0;
   color: #6a6f8c;
   font: 600 16px/18px "Open Sans", sans-serif;
