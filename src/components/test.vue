@@ -4,15 +4,17 @@
  * @Author: zpliu
  * @Date: 2022-04-09 10:33:33
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-11 21:57:35
+ * @LastEditTime: 2022-04-22 15:36:15
  * @@param: 
 -->
 <template>
-  <div></div>
+  <h5>
+    文章信息修改
+  </h5>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 export default {
   name: "",
   computed: {
@@ -21,14 +23,6 @@ export default {
       token: (store) => store.user.token,
     }),
   },
-  methods: {
-    ...mapActions({
-      login: "user/authenticate",
-    }),
-  },
-  beforeMount(){
-    this.login()
-  }
 };
 </script>
 <style lang='' scoped>

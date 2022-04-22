@@ -1,49 +1,57 @@
 /*
- * @Descripttion: 
- * @version: 
+ * @Descripttion:
+ * @version:
  * @Author: zpliu
  * @Date: 2022-04-11 22:29:49
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-12 18:56:21
- * @@param: 
+ * @LastEditTime: 2022-04-22 20:22:29
+ * @@param:
  */
-const test= ()=> import("@/components/test")
-const asyncRouter= [
-    {
-      path: '/permission',
-      component: test,
-      redirect: '/permission/page',
-      name: 'Permission',
-      meta: {
-        title: '权限管理',
-        icon: 'lock',
-        roles: ['admin', 'editor'], // 可以在根路由中设置角色
-        alwaysShow: true // 将始终显示根菜单
-      },
+
+const asyncRouter = [
+  /**
+   * 不同权限的动态路由
+   */
+  {
+    path: "/dashboard/article/",
+    redirect: "/dashboard/article/index/",
+    component: () => import("@/pages/dashboard/layout/index.vue"),
+    name:'article',
+    meta: {
+      title: '权限管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'], // 可以在根路由中设置角色
+      alwaysShow: true // 将始终显示根菜单
     },
-    {
-      path: '/permission2',
-      component: test,
-      redirect: '/permission/page',
-      name: 'Permission',
-      meta: {
-        title: '权限管理',
-        icon: 'lock',
-        roles: ['editor'], // 可以在根路由中设置角色
-        alwaysShow: true // 将始终显示根菜单
+    children: [
+      {
+        path: "index",
+        component: () => import("@/components/test"),
+        name: "article-show",
+        meta: {
+          title: "文章条目显示",
+          roles: ["admin", "editor"], // 或者在子导航中设置角色
+        },
       },
-    },
-    {
-      path: '/permission3',
-      component: test,
-      redirect: '/permission/page',
-      name: 'Permission',
-      meta: {
-        title: '权限管理',
-        icon: 'lock',
-        roles: ['admin'], // 可以在根路由中设置角色
-        alwaysShow: true // 将始终显示根菜单
+      {
+        path: "editor",
+        component: () => import("@/components/test"),
+        name: "article-editro",
+        meta: {
+          title: "管理员权限",
+          roles: ["admin"], // 或者在子导航中设置角色
+        },
       },
-    }
-]
-export {asyncRouter}
+      {
+        path: "add",
+        component: () => import("@/components/test"),
+        name: "article-add",
+        meta: {
+          title: "添加",
+          roles: ["admin"], // 或者在子导航中设置角色
+        },
+      },
+    ],
+  },
+];
+export { asyncRouter };

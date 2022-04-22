@@ -4,11 +4,13 @@
  * @Author: zpliu
  * @Date: 2022-04-12 16:26:39
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-12 17:29:39
+ * @LastEditTime: 2022-04-22 16:33:46
  * @@param:
  */
 /**
  * 根据用户权限动态的添加路由
+ * ? 第一类时不分权限的路由
+ * ? 第二类是需要区分权限的路由
  */
 import { constantRouter } from "@/routers/constantRouter";
 import { asyncRouter } from "@/routers/asyncRouter";
@@ -34,7 +36,7 @@ const hasPermission = (roles, router) => {
 
 const filterAsyncRouter = (routers, roles) => {
   /**
-   * 根据用户身份过滤动态路由
+   * 根据用户身份过滤路由
    */
   const resRouter = []; //过滤后剩下的路由
   routers.forEach((router) => {
@@ -49,11 +51,13 @@ const filterAsyncRouter = (routers, roles) => {
   return resRouter;
 };
 
+
 export default {
   namespaced: true,
   state: {
     routes: [],
     dynamicRouter: [],
+    cms_routers:[] //后台管理系统需要的页面
   },
   mutations: {
     setRouter(state, roles) {

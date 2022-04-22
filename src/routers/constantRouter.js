@@ -1,62 +1,34 @@
 /*
- * @Descripttion: 
- * @version: 
+ * @Descripttion:
+ * @version:
  * @Author: zpliu
  * @Date: 2022-04-11 22:17:02
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-11 22:20:44
- * @@param: 
+ * @LastEditTime: 2022-04-22 20:16:40
+ * @@param:
  */
-const page404 = () => import("@/components/404.vue")
-const HomePage = () => import("@/pages/home/home.vue")
-const LoginPage = () => import("@/pages/login.vue")
-const DemoPage = () => import("@/components/demo.vue")
-const DashboardPage = () => import("@/pages/dashboard.vue")
-const peopleBrief =()=> import("@/pages/people_brief")
-const publication =()=> import("@/pages/publication")
-const test= ()=> import("@/components/test")
-const editor= ()=> import("@/components/wangEditor")
-const constantRouter = [
-  {
-    path: "/",
-    name: "home",
-    component: HomePage
-  },
-  {
-    path: "/404",
-    name: "404",
-    component: page404
-  },
-  {
-    path: "/demo",
-    name: "demo",
-    component: DemoPage
-  },
-  {
-    path:"/login",
-    name:'login',
-    component:LoginPage
-  },{
-    path:'/dashboard',
-    name:'dashboard',
-    component:DashboardPage
-  },{
-    path:"/people",
-    name:'peopleBrief',
-    component:peopleBrief
-  },{
-    path:"/publication",
-    name:'publication',
-    component:publication
-  },{
-    path:"/test",
-    name:'test',
-    component:test
-  },{
-    path:"/editor",
-    name:'editor',
-    component:editor
-  }
-]
 
-export {constantRouter}
+const constantRouter = [
+  /**
+   * 需要登录验证的路由,但是没有权限要求
+   */
+  {
+    path: "/dashboard", //需要放进常驻路由内
+    redirect: "/dashboard/index/",
+    component: () => import("@/pages/dashboard/layout/index.vue"),
+    children: [
+      {
+        path: "index",
+        name: "Dashboard",
+        meta: {
+          title: "首页",
+          roles: ["admin", "editor"],
+          CMS: true, //是否是后台管理页面
+        },
+        component: () => import("@/pages/dashboard/dashboard.vue"),
+      },
+    ],
+  },
+];
+
+export { constantRouter };

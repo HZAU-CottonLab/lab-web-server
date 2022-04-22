@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-12 10:13:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-12 19:11:09
+ * @LastEditTime: 2022-04-22 16:15:28
  * @@param:
  */
 // 前端路由权限验证
@@ -13,7 +13,7 @@ import "nprogress/nprogress.css";
 import router from "@/routers"; //定义的路由对象
 import store from "@/store"; //获取用户身份和token信息
 import { getToken } from "@/utils/cookies";
-import { whiteList } from "@/confi/whiteList";
+import { whiteList } from "@/config/whiteList";
 import { ElMessage } from 'element-plus'
 // 获取用户以及权限信息
 // const userStore = store.state.user;
@@ -23,11 +23,8 @@ NProgress.configure({ showSpinner: false });
 router.beforeEach((to, from, next) => {
   NProgress.start();
   if (getToken()) {
-    console.log(getToken());
-    console.log(to.path);
     if (to.path === "/login") {
       // 如果登录，并准备进入 login 页面，则重定向到主页
-      console.log(store.state.user);
       next({ path: "/dashboard" });
       NProgress.done();
     } else {
@@ -35,20 +32,21 @@ router.beforeEach((to, from, next) => {
         // 如果cookie中存在token，验证用户身份，动态的添加路由
         try {
           //获取用户的roles,在token存在的情况下;
-          // 调用store中定义好的API
+          // 调用store中定义好的API,使用token进行认证
           /**
            * state.*
            * commit('user/logout','')
            * dispatch('user/getInfo') 获取用户信息
            */
             store.dispatch("user/getInfo").then((res) => {
-            const roles = res.roles;
-            //根据用户身份，设置当前可以访问的路由
-            store.commit("permission/setRouter", roles);
-            //动态添加可访问路由
-            store.state.permission.dynamicRouter.forEach((route) => {
-              router.addRoute(route);
-            });
+              const roles = res.roles;
+              //根据用户身份，设置当前可以访问的路由
+              store.commit("permission/setRouter", roles);
+              //动态添加可访问路由
+              store.state.permission.dynamicRouter.forEach((route) => {
+                router.addRoute(route);
+              });
+              // console.log("路由添加完成，开始next",store.state.permission.routes)
             // 确保添加路由已完成
           // 设置 replace: true, 因此导航将不会留下历史记录
             next({ ...to, replace: true })
@@ -61,7 +59,9 @@ router.beforeEach((to, from, next) => {
           NProgress.done();
         }
       } else {
-        // 存在token和role数据，直接进行路由跳转
+        // 存在token和role数据，直接进行路由跳转；
+        // console.log("sdasdasd",router.getRoutes())
+        //! 初始登录时，不能设置roles，否则无法获取动态路由
         next();
       }
     }

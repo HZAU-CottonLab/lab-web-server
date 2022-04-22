@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 16:22:49
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-12 16:00:52
+ * @LastEditTime: 2022-04-22 10:59:58
  * @@param:
  */
 
@@ -255,8 +255,8 @@ module.exports = [
         return {
           code: 0,
           status: 200,
-          accessToken:"1111321321321",
-          roles:["admin",],
+          accessToken: "1111321321321",
+          roles: ["admin"],
           info: {
             username: "zpliu",
             loginStatus: true,
@@ -268,8 +268,8 @@ module.exports = [
         return {
           code: 1,
           status: 200,
-          accessToken:"2223333331",
-          roles:["editor",],
+          accessToken: "2223333331",
+          roles: ["editor"],
           info: {
             username: "",
             loginStatus: true,
@@ -299,13 +299,14 @@ module.exports = [
     type: "post",
     response: (config) => {
       // 判断传进的post数据是否验证成功
-      const { account, password, loginStatus } = config.body;
-      if (account === "zpliu" && password === "111") {
+      const { token } = config.body;
+      // console.log(account, password)
+      if (token == "1111321321321") {
         return {
           code: 0,
           status: 200,
-          accessToken:"1111321321321",
-          roles:["admin",],
+          accessToken: "1111321321321",
+          roles: ["admin"],
           info: {
             username: "zpliu",
             loginStatus: true,
@@ -317,8 +318,8 @@ module.exports = [
         return {
           code: 1,
           status: 200,
-          accessToken:"2223333331",
-          roles:["editor",],
+          accessToken: "2223333331",
+          roles: ["editor"],
           info: {
             username: "",
             loginStatus: true,
@@ -351,5 +352,4 @@ module.exports = [
       };
     },
   },
-
 ];

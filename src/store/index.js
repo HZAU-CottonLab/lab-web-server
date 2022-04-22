@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 20:14:36
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-12 17:05:52
+ * @LastEditTime: 2022-04-20 22:48:26
  * @@param:
  */
 //-------------------------------
@@ -14,9 +14,10 @@
 import Vuex from "vuex";
 
 import main from "./modules/main";
-import news from "./modules/news"
-import user from "./modules/user"
+import news from "./modules/news";
+import user from "./modules/user";
 import permission from "./modules/permission";
+import setting from "./modules/seting";
 
 const store = new Vuex.Store({
   namespaced: true,
@@ -25,16 +26,17 @@ const store = new Vuex.Store({
     main,
     news,
     user,
-    permission
+    permission,
+    setting,
   },
-  state:{
-      web:'lab-web-server'
+  state: {
+    web: "lab-web-server",
   },
-  mutations:{
-      chagen_web(state){
-          state.web='dddd'
-      }
-  }
+  mutations: {
+    chagen_web(state) {
+      state.web = "dddd";
+    },
+  },
 });
 
 export default store;

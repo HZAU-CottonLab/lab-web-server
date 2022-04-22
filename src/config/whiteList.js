@@ -4,10 +4,12 @@
  * @Author: zpliu
  * @Date: 2022-04-12 17:44:58
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-12 17:46:38
+ * @LastEditTime: 2022-04-22 16:35:20
  * @@param: 
  */
-/** 免登录白名单 */
+/** 免登录白名单 
+ * 具体参考 @/routers/whiteRouter.js
+*/
 const whiteList = [
     '/',
     '/demo',

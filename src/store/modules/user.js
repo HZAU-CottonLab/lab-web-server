@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 16:20:12
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-12 16:05:43
+ * @LastEditTime: 2022-04-22 16:11:31
  * @@param:
  */
 import { login, register, userInfoRequest } from "@/API/User.js";
@@ -42,6 +42,7 @@ export default {
     authenticate(context, payload) {
       //payload 为form表单参数
       // console.log(getToken(),'111')
+      // console.log(payload)
       return new Promise((resolve) => {
         login(payload).then(
           // context为state拷贝
@@ -51,7 +52,7 @@ export default {
             context.state.loginStatus = res.data.info.loginStatus;
             /* 登录请求完成后设置token*/
             context.state.token = res.data.accessToken;
-            context.state.roles = res.data.roles;
+            // context.state.roles = res.data.roles;
             setToken(res.data.accessToken);
             //异步完成请求后，返回登录状态
             resolve(res.data.info.loginStatus);
@@ -73,8 +74,11 @@ export default {
       /**
        * 使用当前token获取用户信息
        */
+      const parament={
+        token:context.state.token
+      }
       return new Promise((resolve) => {
-        userInfoRequest().then((res) => {
+        userInfoRequest(parament).then((res) => {
           context.state.roles = res.data.roles;
           resolve(res.data);
         });

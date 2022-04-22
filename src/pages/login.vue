@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-22 14:25:15
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-11 20:18:12
+ * @LastEditTime: 2022-04-22 11:05:19
  * @@param: 
 -->
 <template>
@@ -321,7 +321,7 @@ export default {
               /**
                * 登录成功后，进行路由重定向
                */
-              this.$router.push({path:"/dashboard"})
+              this.$router.push({path:"/dashboard/"})
             } else {
               ElMessage.error({
                 message: "账号或密码错误",
