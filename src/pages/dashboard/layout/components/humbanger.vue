@@ -1,3 +1,12 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: zpliu
+ * @Date: 2022-04-30 11:02:02
+ * @LastEditors: zpliu
+ * @LastEditTime: 2022-05-07 17:12:33
+ * @@param: 
+-->
 <!-- 折叠边栏按钮 -->
 <template>
   <div @click="toggleClick">
@@ -9,17 +18,20 @@
 </template>
 
 <script setup>
-import { Expand, Fold } from '@element-plus/icons-vue'
+import { Expand, Fold } from "@element-plus/icons-vue";
+import { defineProps, defineEmits } from "vue";
 defineProps({
   isActive: {
     type: Boolean,
-    default: false
-  }
-})
-const emit = defineEmits(['toggle-click'])
+    default: false,
+  },
+});
+//定义父组件传来的方法
+const emit = defineEmits(["toggle-click"]);
 const toggleClick = () => {
-  emit('toggle-click')
-}
+  //执行父组件方法 
+  emit("toggle-click");
+};
 </script>
 
 <style lang="scss" scoped>

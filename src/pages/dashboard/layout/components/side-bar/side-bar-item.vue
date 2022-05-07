@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-12 22:31:12
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-22 21:15:04
+ * @LastEditTime: 2022-05-07 17:35:27
  * @@param: 
 -->
 <template>
@@ -30,6 +30,7 @@
     </template>
     <el-sub-menu v-else :index="resolvePath(item.path)" popper-append-to-body>
       <template #title>
+        <svg-icon :name="'bug'" />
         <span v-if="item.meta && item.meta.title">{{ item.meta.title }}</span>
       </template>
       <template v-if="item.children">

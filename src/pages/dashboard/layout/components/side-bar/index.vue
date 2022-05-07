@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-12 22:30:59
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-22 21:13:37
+ * @LastEditTime: 2022-05-07 17:57:43
  * @@param: 
 -->
 <template>
@@ -20,6 +20,7 @@
         mode="vertical"
       >
         <!-- #* 菜单栏组件 -->
+        
         <SiderbarItem
           v-for="routerItem in routes"
           :key="routerItem.key"
@@ -37,7 +38,7 @@
 import { mapState } from "vuex";
 import SiderbarItem from "./side-bar-item.vue";
 export default {
-  name: "",
+  name: "sider-bar",
   data() {
     return {
       isCollapse: false,
@@ -49,7 +50,7 @@ export default {
   },
   computed: {
     showLogo() {
-      return true;
+      return false; //logo图片占据了一定的高度
     },
     ...mapState({
       //获取当前所包含的路由，以及用户的身份

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-15 00:54:25
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-16 15:05:31
+ * @LastEditTime: 2022-04-30 11:23:10
  * @@param: 
 -->
 <template>
@@ -21,7 +21,6 @@
 import { isExternal } from "@/utils/validate";
 import { useRouter } from "vue-router";
 export default {
-  name: "",
   props: {
     to: {
       type: String,

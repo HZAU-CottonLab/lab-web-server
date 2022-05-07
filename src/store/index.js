@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 20:14:36
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-20 22:48:26
+ * @LastEditTime: 2022-05-05 22:28:05
  * @@param:
  */
 //-------------------------------
@@ -17,7 +17,8 @@ import main from "./modules/main";
 import news from "./modules/news";
 import user from "./modules/user";
 import permission from "./modules/permission";
-import setting from "./modules/seting";
+import setting from "./modules/setting";
+import { app } from "./modules/app";
 
 const store = new Vuex.Store({
   namespaced: true,
@@ -28,6 +29,7 @@ const store = new Vuex.Store({
     user,
     permission,
     setting,
+    app,
   },
   state: {
     web: "lab-web-server",

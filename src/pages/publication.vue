@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-02 20:18:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-09 09:49:38
+ * @LastEditTime: 2022-04-30 11:21:28
  * @@param: 
 -->
 <template>
@@ -103,7 +103,7 @@ export default {
       activateIndex: 0,
     };
   },
-  name: "publication",
+  name: "publication-show",
   methods: {
     handleClickNevgation(itemIndex) {
       this.activateIndex = itemIndex;
