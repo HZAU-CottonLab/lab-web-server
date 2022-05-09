@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-12 16:26:39
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-22 16:33:46
+ * @LastEditTime: 2022-05-08 19:17:51
  * @@param:
  */
 /**
@@ -57,7 +57,6 @@ export default {
   state: {
     routes: [],
     dynamicRouter: [],
-    cms_routers:[] //后台管理系统需要的页面
   },
   mutations: {
     setRouter(state, roles) {

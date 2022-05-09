@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-11 22:17:02
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-22 20:16:40
+ * @LastEditTime: 2022-05-08 11:31:09
  * @@param:
  */
 
@@ -24,6 +24,7 @@ const constantRouter = [
           title: "首页",
           roles: ["admin", "editor"],
           CMS: true, //是否是后台管理页面
+          icon:"promotion",
         },
         component: () => import("@/pages/dashboard/dashboard.vue"),
       },

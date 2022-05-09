@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-12 22:31:12
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-07 17:35:27
+ * @LastEditTime: 2022-05-08 11:30:41
  * @@param: 
 -->
 <template>
@@ -21,7 +21,7 @@
         :to="resolvePath(theOnlyOneChild.path)"
       >
         <el-menu-item :index="resolvePath(theOnlyOneChild.path)">
-          <svg-icon :name="'bug'" />
+          <svg-icon  v-if="theOnlyOneChild.meta.icon" :name="theOnlyOneChild.meta.icon" />
           <template v-if="theOnlyOneChild.meta.title" #title>
             {{ theOnlyOneChild.meta.title }}
           </template>
@@ -30,7 +30,7 @@
     </template>
     <el-sub-menu v-else :index="resolvePath(item.path)" popper-append-to-body>
       <template #title>
-        <svg-icon :name="'bug'" />
+        <svg-icon v-if="item.meta && item.meta.icon" :name="item.meta.icon" />
         <span v-if="item.meta && item.meta.title">{{ item.meta.title }}</span>
       </template>
       <template v-if="item.children">

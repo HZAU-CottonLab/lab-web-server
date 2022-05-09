@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-11 22:29:49
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-22 20:22:29
+ * @LastEditTime: 2022-05-08 11:39:26
  * @@param:
  */
 
@@ -18,8 +18,8 @@ const asyncRouter = [
     component: () => import("@/pages/dashboard/layout/index.vue"),
     name:'article',
     meta: {
-      title: '权限管理',
-      icon: 'lock',
+      title: '文章',
+      icon: 'article',
       roles: ['admin', 'editor'], // 可以在根路由中设置角色
       alwaysShow: true // 将始终显示根菜单
     },

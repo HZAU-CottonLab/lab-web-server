@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 20:14:36
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-05 22:28:05
+ * @LastEditTime: 2022-05-08 19:15:22
  * @@param:
  */
 //-------------------------------
@@ -19,6 +19,7 @@ import user from "./modules/user";
 import permission from "./modules/permission";
 import setting from "./modules/setting";
 import { app } from "./modules/app";
+import { tagsView } from "./modules/tags-view";
 
 const store = new Vuex.Store({
   namespaced: true,
@@ -30,6 +31,7 @@ const store = new Vuex.Store({
     permission,
     setting,
     app,
+    tagsView
   },
   state: {
     web: "lab-web-server",

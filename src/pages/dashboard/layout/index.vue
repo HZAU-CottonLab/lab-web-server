@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 15:45:42
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-07 17:51:56
+ * @LastEditTime: 2022-05-08 11:25:04
  * @@param: 
 -->
 <template>
@@ -13,13 +13,13 @@
     <div
       v-if="classObj.mobile && sidebar.opened"
       class="drawer-bg"
-      @click="state.handleClickOutside"
-    />
+      @click="state.handleClickOutSide"
+    ></div>
     <Siderbar class="sidebar-container"></Siderbar>
     <div :class="{ hasTagsView: showTagsView }" class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
         <NavigationBar />
-        <!-- <TagsView v-if="showTagsView" /> -->
+        <TagsView v-if="showTagsView" />
         <router-view v-slot="{ Component }">
           <transition name="fade-transform" mode="out-in">
             <component :is="Component" :key="key" />
@@ -36,6 +36,7 @@ import { useRoute } from "vue-router";
 // import EditorDashboard from "../editor/editor.vue";
 import Siderbar from "./components/side-bar/";
 import NavigationBar from "./components/navgation-bar";
+import TagsView from "./components/tag-view"
 import {
   computed,
   onBeforeMount,
@@ -66,9 +67,10 @@ const { fixedHeader, showSettings, showTagsView } = useState("setting", [
   "showTagsView",
 ]);
 //获取app 中定义的actions
-const closeSidebar = useActions("app", ["closeSidebar"]);
+const { closeSidebar } = useActions("app", ["closeSidebar"]);
 const state = reactive({
   handleClickOutSide: () => {
+    // console.log("关闭sidedbar");
     closeSidebar(false);
   },
 });
@@ -100,6 +102,7 @@ $sideBarWidth: 220px;
   @include clearfix;
   position: relative;
   width: 100%;
+  height: 100%;
 }
 .drawer-bg {
   background: #000;

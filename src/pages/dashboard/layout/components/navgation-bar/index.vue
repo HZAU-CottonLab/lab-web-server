@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-30 10:55:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-07 17:29:29
+ * @LastEditTime: 2022-05-09 08:40:41
  * @@param: 
 -->
 <template>
@@ -42,7 +42,7 @@
             <a target="_blank" href="https://gitee.com/un-pany/v3-admin">
               <el-dropdown-item>Gitee</el-dropdown-item>
             </a>
-            <el-dropdown-item divided @click="state.logout">
+            <el-dropdown-item divided @click="state.user_logout">
               <span style="display: block">退出登录</span>
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -57,21 +57,26 @@ import { onBeforeMount, reactive, ref } from "vue";
 import Hamburger from "../humbanger.vue";
 import Screenfull from "@/components/screenfull.vue";
 import BreadCrumb from "../bread-crumb/index.vue";
-import { useState, useActions } from "@/utils/storehook.js";
+import { useState, useActions, useMutations } from "@/utils/storehook.js";
+import {useRouter} from 'vue-router'
 const sidebar = useState("app", ["sidebar"]);
-const {toggleSidebar} = useActions("app", ["toggleSidebar"]);
-
+const { toggleSidebar } = useActions("app", ["toggleSidebar"]);
+const { logout } = useMutations("user", ["logout"]);
 const showScreenfull = ref(true);
+const router = useRouter()
 const state = reactive({
-  logout: () => {
-    console.log("out");
+  user_logout: () => {
+    // console.log("登出")
+    logout();
+     router.push('/login').catch((err) => {
+      console.warn(err)
+    })
   },
-  app_toggleSidebar:()=>{
-    toggleSidebar(false)
-  }
+  app_toggleSidebar: () => {
+    toggleSidebar(false);
+  },
 });
-onBeforeMount(()=>{
-})
+onBeforeMount(() => {});
 </script>
 <style lang='scss' scoped>
 .navbar {
