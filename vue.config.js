@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 19:06:43
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-12 11:51:51
+ * @LastEditTime: 2022-05-12 22:55:11
  * @@param:
  */
 const path = require("path");
@@ -13,7 +13,7 @@ const port = process.env.port || process.env.npm_config_port || 9528;
 module.exports = {
   outputDir: "../build/",
   assetsDir: "static",
-  publicPath: "https://hzau-cottonlab.github.io/lab-web-server/",
+  // publicPath: "https://hzau-cottonlab.github.io/lab-web-server/",
   // publicPath:'D:/实验室/李中华/build',
   //配置mock服务
   lintOnSave: process.env.NODE_ENV === "development",

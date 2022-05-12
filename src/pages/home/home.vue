@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-04-26 14:19:28
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-12 11:47:30
+ * @LastEditTime: 2022-05-12 22:51:37
  * @@param: 
 -->
 <template>
@@ -149,8 +149,6 @@ export default {
 
 <style lang='scss' scoped>
 .main-box {
-  background-image: url("https://btiscience.org/wp-content/uploads/polygonal2-2.jpg");
-
   .el-main-content {
     margin-top: 20px;
     text-align: center;

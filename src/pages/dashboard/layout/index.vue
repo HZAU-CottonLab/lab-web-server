@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 15:45:42
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-08 11:25:04
+ * @LastEditTime: 2022-05-12 22:39:04
  * @@param: 
 -->
 <template>
@@ -36,7 +36,7 @@ import { useRoute } from "vue-router";
 // import EditorDashboard from "../editor/editor.vue";
 import Siderbar from "./components/side-bar/";
 import NavigationBar from "./components/navgation-bar";
-import TagsView from "./components/tag-view"
+import TagsView from "./components/tag-view";
 import {
   computed,
   onBeforeMount,
@@ -61,9 +61,8 @@ const key = computed(() => {
   return route.path;
 });
 //使用store中数据自动注册为computed属性
-const { fixedHeader, showSettings, showTagsView } = useState("setting", [
+const { fixedHeader, showTagsView } = useState("setting", [
   "fixedHeader",
-  "showSettings",
   "showTagsView",
 ]);
 //获取app 中定义的actions

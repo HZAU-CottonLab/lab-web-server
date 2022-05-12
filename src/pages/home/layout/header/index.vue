@@ -4,16 +4,18 @@
  * @Author: zpliu
  * @Date: 2022-05-11 21:04:50
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-12 09:17:31
+ * @LastEditTime: 2022-05-12 20:12:04
  * @@param: 
 -->
 <template>
   <div class="header-wrap">
-    <headerMenu
-      v-if="!classObj.isMobile"
-      :mobile="classObj.isMobile"
-      key="desktop"
-    ></headerMenu>
+    <div v-if="!classObj.isMobile">
+      <headerMenu :mobile="classObj.isMobile" key="desktop"></headerMenu>
+      <BreadCrumb
+        v-show="breadCrumbShow.show"
+        :breadCrumObject="breadCrumbShow"
+      ></BreadCrumb>
+    </div>
     <div v-else class="toggle-menu">
       <el-icon :size="30" @click="handleDrawer"><expand /></el-icon>
     </div>
@@ -35,54 +37,43 @@
 <script setup>
 import headerMenu from "./header-menu.vue";
 import { DeviceType } from "@/store/modules/app.js";
-import { useState, useActions } from "@/utils/storehook.js";
-import useResize from "@/pages/dashboard/layout/useResize.js";
 import { Expand } from "@element-plus/icons-vue";
-import {
-  reactive,
-  onBeforeMount,
-  onMounted,
-  onBeforeUnmount,
-  computed,
-} from "vue";
+import BreadCrumb from "../breadCrumb/index.vue";
+import { useRoute } from "vue-router";
+import { useState } from "@/utils/storehook.js";
+import { reactive, computed } from "vue";
 
-const {
-  sidebar, //侧边栏是否需要打开
-  device, //获取当前的device
-  addEventListenerOnResize,
-  resizeMounted,
-  removeEventListenerResize,
-  watchRouter,
-} = useResize();
+
+const { device } = useState("app", ["device"]);
 const state = reactive({
   drawer: false,
 });
 const classObj = computed(() => {
-  return {
-    hideSidebar: !sidebar.value.opened,
-    openSidebar: sidebar.value.opened,
-    withoutAnimation: sidebar.value.withoutAnimation,
-    isMobile: device.value === DeviceType.Mobile,
-  };
+  //device属于计算属性，需要使用value获取其值
+  if (device.value === DeviceType.Desktop) {
+    return { isMobile: false };
+  }
+  return { isMobile: true };
 });
 const handleDrawer = () => {
   //点击按钮，将抽屉打开
   state.drawer = true;
 };
-
-/**
- * 监听页面变化
- */
-watchRouter();
-onBeforeMount(() => {
-  addEventListenerOnResize();
-  // console.log(fixedHeader);
-});
-onMounted(() => {
-  resizeMounted();
-});
-onBeforeUnmount(() => {
-  removeEventListenerResize();
+//* 控制面包屑显示
+const route = useRoute();
+const breadCrumbShow = computed(() => {
+  if (route.meta && route.meta.ShowBreadCrumn) {
+    return {
+      show: true,
+      breadcrumbURL: route.meta.breadcrumbURL,
+      title: route.meta.title,
+    };
+  }
+  return {
+    show: false,
+    breadcrumbURL: false,
+    title: "",
+  };
 });
 </script>
 <style lang='scss' scoped>

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-11 20:32:25
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-12 11:04:05
+ * @LastEditTime: 2022-05-12 16:54:10
  * @@param: 
 -->
 <template>
@@ -50,7 +50,7 @@ const props = defineProps({
   },
   activeIndex: {
     type: String,
-    default: "1",
+    default: "0",
   },
 });
 onBeforeMount(() => {

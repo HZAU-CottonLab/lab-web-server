@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-12 09:18:48
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-12 11:39:11
+ * @LastEditTime: 2022-05-12 20:00:48
  * @@param: 
 -->
 <template>
@@ -27,7 +27,8 @@
     <!-- //如果存在多个子路由的情况 -->
     <el-sub-menu v-else :index="resolvePath(item.path)" popper-append-to-body>
       <template #title>
-        <span v-if="item.meta && item.meta.title">{{ item.meta.title }}</span>
+        <!-- //这里文字会挤压箭头空间使用css调整 -->
+        <span v-if="item.meta && item.meta.title" style="margin-right:20px">{{ item.meta.title }}</span>
       </template>
       <template v-if="item.children">
         <menu-item
@@ -101,4 +102,10 @@ const resolvePath = (routerPath) => {
 };
 </script>
 <style lang='scss' scoped>
+// ::v-deep(.el-sub-menu) {
+//   .el-sub-menu__icon-arrow {
+//     //挤占title空间
+//     // display: none;
+//   }
+// }
 </style>
