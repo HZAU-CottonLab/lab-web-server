@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-04-26 14:19:28
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-09 10:00:53
+ * @LastEditTime: 2022-05-12 11:47:30
  * @@param: 
 -->
 <template>
@@ -13,7 +13,7 @@
     <el-main style="padding: 0px" class="main">
       <el-carousel :interval="5000" arrow="always" height="500px">
         <el-carousel-item v-for="item in carousels_list" :key="item.url">
-          <el-image :src="item.url" fit="containe">
+          <el-image :src="item.url" fit="contain">
             <template v-slot:placeholder
               ><el-icon class="is-loading"> </el-icon>
             </template>
@@ -21,7 +21,7 @@
         </el-carousel-item>
       </el-carousel>
       <!-- news and events -->
-      <el-row justify="center" align="start" class="main-box">
+      <el-row justify="center" class="main-box">
         <el-col
           :xs="24"
           :sm="24"
@@ -42,29 +42,6 @@
                 <news_cards></news_cards>
               </div>
             </el-col>
-            <!-- <el-col :span="24">
-              <div style="width: 80%; margin-left: 40px">
-                <el-button
-                  type="info"
-                  class="info-button-header"
-                  plain
-                  style="
-                     {
-                      boxshadow: --el-box-shadow-base;
-                    }
-                  "
-                  ><strong>Get In Touch</strong></el-button
-                >
-                <div class="contact_info">
-                  <div class="contact_localtion">
-                    Norman Borlaug Center for Southern Crop Improvement 2123
-                    TAMU, Rm 112. College Station, TX 77840
-                  </div>
-                  <div class="contact_email">e-mail: xiuren.zhang@tamu.edu</div>
-                  <div class="contact_tel">Tel: 979-458-0596</div>
-                </div>
-              </div>
-            </el-col> -->
           </el-row>
         </el-col>
         <el-col
@@ -103,12 +80,11 @@
         <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
           <!-- //team people 展示组件 -->
           <!--  -->
-          <facult_list 
-          :carouselList="teamList"
-          style="margin: 20px 40px"
+          <facult_list
+            :carouselList="teamList"
+            style="margin: 20px 40px"
           ></facult_list
-          ></el-col
-        >
+        ></el-col>
       </el-row>
     </el-main>
     <el-footer style="padding: 0px; height: 400px">
@@ -122,12 +98,12 @@
 // import request from "@/utils/axios.js";
 // Import stylesheet
 import { mapState, mapActions } from "vuex";
-import headerComponent from "../../components/header.vue";
 import news_cards from "../../components/news_card.vue";
 import footer_main from "../../components/footer.vue";
 import facult_list from "../../components/team_carousel.vue";
 import { TeamItem } from "@/API/User";
 import backup from "@/components/backup";
+import headerComponent from "./layout/header/index.vue";
 export default {
   name: "home_layout",
   components: {
@@ -135,7 +111,7 @@ export default {
     news_cards,
     footer_main,
     facult_list,
-    backup
+    backup,
   },
   data() {
     return {

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-31 13:20:33
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-02 15:20:02
+ * @LastEditTime: 2022-05-12 11:50:33
  * @@param: 
 -->
 <template>
@@ -49,7 +49,7 @@
       <!-- #* 其他团队成员，批量选择的 -->
       <!-- <el-col  :md="16" :sm="18" :xs="24"> -->
       <peopleType
-        v-for="(item, index) in people_Cat_infs.slice(1,)"
+        v-for="(item, index) in people_Cat_infs.slice(1)"
         :key="index"
         :id="item.id"
         :CategoryTitle="item.title"
@@ -68,7 +68,7 @@ import peopleType from "@/components/peopleType";
 import backup from "@/components/backup";
 import avatar_card from "@/components/avatar";
 import footerCom from "@/components/footer";
-import headCom from "@/components/header";
+import headCom from "./home/layout/header/index.vue";
 import { mapState } from "vuex";
 // 请求后端的API
 import { PeopleItem } from "@/API/User";

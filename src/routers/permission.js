@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-12 10:13:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-22 16:15:28
+ * @LastEditTime: 2022-05-12 11:36:39
  * @@param:
  */
 // 前端路由权限验证
@@ -67,7 +67,7 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     //没有token的情况下,需要判断当前进入的路由是否需要登录；
-    //查看to路由是否在白名单内，如果在则不需要登录就能访问
+    //查看to路由是否在白名单内，如果在则不需要登录就能访问；
     if (whiteList.indexOf(to.path) !== -1) {
       next();
     } else {

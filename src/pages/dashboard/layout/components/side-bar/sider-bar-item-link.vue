@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-15 00:54:25
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-30 11:23:10
+ * @LastEditTime: 2022-05-12 10:17:04
  * @@param: 
 -->
 <template>
@@ -21,6 +21,7 @@
 import { isExternal } from "@/utils/validate";
 import { useRouter } from "vue-router";
 export default {
+  name:'SidebarItemLink',
   props: {
     to: {
       type: String,

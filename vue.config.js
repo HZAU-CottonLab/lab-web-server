@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 19:06:43
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-09 08:42:37
+ * @LastEditTime: 2022-05-12 11:51:51
  * @@param:
  */
 const path = require("path");
@@ -13,7 +13,7 @@ const port = process.env.port || process.env.npm_config_port || 9528;
 module.exports = {
   outputDir: "../build/",
   assetsDir: "static",
-  // publicPath: "https://hzau-cottonlab.github.io/lab-web-server/",
+  publicPath: "https://hzau-cottonlab.github.io/lab-web-server/",
   // publicPath:'D:/实验室/李中华/build',
   //配置mock服务
   lintOnSave: process.env.NODE_ENV === "development",
@@ -51,6 +51,15 @@ module.exports = {
         deleteOriginalAssets: false, //压缩后保留原文件
       }),
     ],
+    module: {
+      rules: [
+        {
+          test: /\.mjs$/,
+          include: /node_modules/,
+          type: "javascript/auto",
+        },
+      ],
+    },
   },
   chainWebpack: (config) => {
     const dir = path.resolve(__dirname, "src/icons/svg");
@@ -68,5 +77,5 @@ module.exports = {
     config.module.rule("svg").exclude.add(dir);
   },
   //*  https://github.com/sindresorhus/screenfull/issues/195
-  transpileDependencies:['screenfull']
+  transpileDependencies: ["screenfull"],
 };

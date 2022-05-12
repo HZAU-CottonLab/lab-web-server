@@ -4,26 +4,16 @@
  * @Author: zpliu
  * @Date: 2022-04-09 10:33:33
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-22 15:36:15
+ * @LastEditTime: 2022-05-11 22:00:33
  * @@param: 
 -->
 <template>
-  <h5>
-    文章信息修改
-  </h5>
+  <h5>测试,跨设备性</h5>
+  <headerCollapse></headerCollapse>
 </template>
 
-<script>
-import { mapState } from "vuex";
-export default {
-  name: "",
-  computed: {
-    ...mapState({
-      //获取登录状态
-      token: (store) => store.user.token,
-    }),
-  },
-};
+<script setup>
+import headerCollapse from "@/pages/home/layout/header/index.vue";
 </script>
-<style lang='' scoped>
+<style lang='scss' scoped>
 </style>

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-12 22:30:59
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-08 11:19:22
+ * @LastEditTime: 2022-05-09 22:19:40
  * @@param: 
 -->
 <template>
@@ -20,7 +20,7 @@
         mode="vertical"
       >
         <!-- #* 菜单栏组件 -->
-        
+
         <SiderbarItem
           v-for="routerItem in routes"
           :key="routerItem.key"
@@ -41,7 +41,6 @@ export default {
   name: "sider-bar",
   data() {
     return {
-      isCollapse: false,
       activeMenu: "0",
     };
   },
@@ -56,10 +55,11 @@ export default {
       //获取当前所包含的路由，以及用户的身份
       routes: (store) => store.permission.routes,
       roles: (store) => store.user,
+      sidebar: (store) => store.app.sidebar,
     }),
-  },
-  beforeMount() {
-    // console.log("11", this.roles, this.routes);
+    isCollapse() {
+      return !this.sidebar.opened;
+    },
   },
 };
 </script>

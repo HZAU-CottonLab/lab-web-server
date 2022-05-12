@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-02 20:18:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-30 11:21:28
+ * @LastEditTime: 2022-05-12 11:49:29
  * @@param: 
 -->
 <template>
@@ -95,7 +95,7 @@
 import backup from "@/components/backup";
 import { get_publication } from "@/API/publication";
 import footerCom from "@/components/footer";
-import headCom from "@/components/header";
+import headCom from "./home/layout/header/index.vue";
 export default {
   data() {
     return {
@@ -103,7 +103,7 @@ export default {
       activateIndex: 0,
     };
   },
-  name: "publication-show",
+  name: "",
   methods: {
     handleClickNevgation(itemIndex) {
       this.activateIndex = itemIndex;

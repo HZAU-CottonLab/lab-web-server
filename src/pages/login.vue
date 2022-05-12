@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-22 14:25:15
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-08 11:49:02
+ * @LastEditTime: 2022-05-12 11:50:04
  * @@param: 
 -->
 <template>
@@ -95,7 +95,7 @@
 </template>
 <script>
 import footerCom from "@/components/footer";
-import headCom from "@/components/header";
+import headCom from "./home/layout/header/index.vue";
 import { mapActions, mapState } from "vuex";
 import { ElMessage } from "element-plus";
 export default {
