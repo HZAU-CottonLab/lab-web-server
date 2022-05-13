@@ -4,21 +4,26 @@
  * @Author: zpliu
  * @Date: 2022-04-22 16:29:56
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-12 20:10:34
+ * @LastEditTime: 2022-05-13 10:48:47
  * @@param: 不需要进行登录的路由
  */
-const page404 = () => import("@/components/404.vue");
-// const HomePage = () => import("@/pages/home/home.vue");
-const LoginPage = () => import("@/pages/login.vue");
-const DemoPage = () => import("@/components/demo.vue");
-const peopleBrief = () => import("@/pages/people_brief");
-const publication = () => import("@/pages/publication");
-const test = () => import("@/components/test");
-const editor = () => import("@/components/wangEditor");
-const whiteRouter = [
-  /**
-   * 不需要登录验证的路由
-   */
+/**
+ * todo meta 参数说明:
+ * *isLogin: 该路由是否需要进行登录验证@Boolean
+ * *title: 页面中显示的标题 @string
+ * *roles: 路由所属权限@Array
+ * *icon: 图标@String
+ * *alwaysShow: 是否显示根路由 @Boolean
+ * *hidden 导航栏中是否显示该路由，即使有权限 @Boolean
+ * *header 是否在home页面的menu中放置该路由 @Boolean
+ * *ShowBreadCrumn home页面中，跳转到该路由时是否展示面包屑组件@Boolean
+ * *breadcrumbURL 面包屑组件中，背景图片地址@String
+ */
+
+import { publicationRoute } from "./home/publication.js";
+import { peopleRoute } from "./home/people.js";
+import { testRoute } from "./home/test.js";
+let whiteRouter = [
   {
     path: "/",
     name: "home",
@@ -32,8 +37,7 @@ const whiteRouter = [
     children: [
       {
         path: "index",
-        name: "home",
-        component: ()=> import('@/pages/home/homePage/index.vue'),
+        component: () => import("@/pages/home/homePage/index.vue"),
         meta: {
           title: "Expand",
           hidden: false, //控制导航栏是否显示该link
@@ -43,110 +47,45 @@ const whiteRouter = [
     ],
   },
   {
-    path: "/404",
-    name: "404",
-    component: page404,
-    meta: {
-      title: "404",
-      header: false, //是否是导航链接
-    },
-  },
-  {
-    path: "/demo",
-    name: "demo",
-    component: DemoPage,
-    meta: {
-      title: "demo",
-    },
-  },
-  {
     path: "/login",
     name: "login",
-    component: LoginPage,
+    redirect: "/login/index",
+    component: () => import("@/pages/home/layout/index.vue"),
     meta: {
       title: "Login",
       hidden: false, //控制是否显示该link
       header: true, //是否是导航链接
     },
-  },
-  {
-    path: "/people",
-    name: "peopleBrief",
-    redirect: "index",
-    component: () => import("@/pages/home/layout/index.vue"),
-    meta: {
-      title: "People",
-      hidden: false, //控制是否显示该link
-      header: true, //是否是导航链接
-      // breadcrumbURL: false, //当访问该页面时，如果没有配置使用默认图片
-      ShowBreadCrumn: true,
-    },
     children: [
       {
         path: "index",
-        name: "people",
-        component: peopleBrief,
+        component: () => import("@/pages/home/login/index.vue"),
         meta: {
-          title: "People",
-          hidden: false, //控制是否显示该link
-          header: true, //是否是导航链接
-        },
-      },
-      {
-        path: "index2",
-        name: "people2",
-        component: page404,
-        meta: {
-          title: "people404",
-          hidden: false, //控制是否显示该link
+          title: "Login",
+          hidden: false, //控制导航栏是否显示该link
           header: true, //是否是导航链接
         },
       },
     ],
-  },
-  {
-    path: "/publication",
-    name: "publication",
-    redirect: "/publication/index",
-    component: () => import("@/pages/home/layout/index.vue"),
-    meta: {
-      title: "Publication",
-      hidden: false, //控制是否显示该link
-      header: true, //是否是导航链接, 导航栏遍历路由时会使用到该属性
-      ShowBreadCrumn: true,
-      breadcrumbURL:
-        "https://btiscience.org/wp-content/uploads/IsmailCassavaAction.jpg", //当访问该页面时，及其子页面时，是否显示面包屑
-    },
-    children: [
-      {
-        path: "index",
-        component: publication,
-        meta: {
-          title: "Publication",
-          hidden: false,
-          header: true,
-        },
-      },
-      {
-        path: "index2",
-        component: page404,
-        meta: {
-          title: "Publication4",
-          hidden: false,
-          header: true,
-        },
-      },
-    ],
-  },
-  {
-    path: "/test",
-    name: "test",
-    component: test,
-  },
-  {
-    path: "/editor",
-    name: "editor",
-    component: editor,
   },
 ];
+
+whiteRouter = whiteRouter.concat(peopleRoute);
+whiteRouter = whiteRouter.concat(publicationRoute);
+whiteRouter = whiteRouter.concat(testRoute);
+/**
+ *! 404守卫路由
+ */
+whiteRouter = whiteRouter.concat([
+  {
+    path: "/:catchAll(.*)",
+    name: "404",
+    component: () => import("@/components/404.vue"),
+    meta: {
+      title: "404",
+      header: false, //是否是导航链接
+    },
+  },
+]);
+
 export { whiteRouter };

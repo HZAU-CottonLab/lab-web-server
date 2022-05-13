@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-12 19:17:57
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-22 21:42:24
+ * @LastEditTime: 2022-05-13 10:04:42
  * @@param: 
 -->
 <template>
@@ -13,10 +13,7 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "",
-};
+<script setup>
 </script>
 <style lang='scss' scoped>
 .svg-icon {

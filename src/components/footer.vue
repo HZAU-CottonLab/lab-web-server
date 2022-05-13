@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-22 15:09:50
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-09 22:47:39
+ * @LastEditTime: 2022-05-13 16:41:13
  * @@param: 
 -->
 <template>
@@ -12,7 +12,7 @@
     <el-row justify="center" align="middle">
       <el-col :span="8"> </el-col>
       <el-col :span="8">
-        <div class="contact_info" >
+        <div class="contact_info">
           <h4>Concact:</h4>
           <div class="contact_localtion">
             Norman Borlaug Center for Southern Crop Improvement 2123 TAMU, Rm
@@ -43,6 +43,7 @@ export default {
   .el-row {
     width: 100%;
   }
+  margin-top: 50px;
 }
 .contact_info {
   line-height: 2;

@@ -4,12 +4,11 @@
  * @Author: zpliu
  * @Date: 2021-09-22 14:25:15
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-12 11:50:04
+ * @LastEditTime: 2022-05-13 10:46:45
  * @@param: 
 -->
 <template>
   <el-container class="login-page">
-    <headCom></headCom>
     <el-main class="login-main">
       <el-row>
         <el-col :md="12" :sm="24" :xs="24" style="margin-top: 5%">
@@ -86,16 +85,13 @@
         </el-col>
         <el-col :md="12" :sm="0" :xs="0">
           <!-- //wave 自定义图标 -->
-          <svg-icon :name="'cloudManage'" style="height:100%; width:100%;" />
+          <svg-icon :name="'cloudManage'" style="height: 100%; width: 100%" />
         </el-col>
       </el-row>
     </el-main>
-    <footerCom> </footerCom>
   </el-container>
 </template>
 <script>
-import footerCom from "@/components/footer";
-import headCom from "./home/layout/header/index.vue";
 import { mapActions, mapState } from "vuex";
 import { ElMessage } from "element-plus";
 export default {
@@ -165,10 +161,6 @@ export default {
       siginup_rule,
     };
   },
-  components: {
-    footerCom,
-    headCom,
-  },
   computed: {
     ...mapState({
       //获取登录状态
@@ -233,14 +225,14 @@ export default {
 </script>
 <style lang='scss' scoped>
 .login-page {
-  background: url("../assets/images/background.png");
+  background: url("../../../assets/images/background.png");
   background-size: contain;
   background-repeat: repeat-y;
   display: flex;
   flex-direction: column;
 }
 .login-main {
-  background: url("../assets/images/wave.svg");
+  background: url("../../../assets/images/wave.svg");
   margin: 0;
   color: #6a6f8c;
   font: 600 16px/18px "Open Sans", sans-serif;

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-04-26 14:04:11
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-11 20:13:11
+ * @LastEditTime: 2022-05-13 10:02:40
  * @@param: 
 -->
 /*
@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: "page404",
+  name: "Page-404",
   methods: {
     handlegoHome() {
       this.$router.push({ path: "/" });
