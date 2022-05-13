@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-12 20:58:22
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-12 22:52:28
+ * @LastEditTime: 2022-05-13 21:26:09
  * @@param: 
 -->
 <template>
@@ -45,7 +45,7 @@ import { onBeforeMount, reactive } from "vue-demi";
 import cardTitle from "./cardTitle.vue";
 const state = reactive({
   title: "RESEARCH AREAS",
-  url: "/research",
+  url: "/research/index",
   newsList: [],
 });
 onBeforeMount(() => {

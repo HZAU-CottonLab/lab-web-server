@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-12 10:13:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 09:36:28
+ * @LastEditTime: 2022-05-13 20:22:15
  * @@param:
  */
 // 前端路由权限验证
@@ -83,7 +83,7 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     //不需要登录的路由
-    next()
+    next();
   }
 });
 

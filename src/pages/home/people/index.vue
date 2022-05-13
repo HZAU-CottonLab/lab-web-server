@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 10:40:04
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 16:40:26
+ * @LastEditTime: 2022-05-13 20:53:28
  * @@param: 
 -->
 <template>
@@ -41,14 +41,17 @@ import peopleLead from "./lead.vue";
 import peopleItem from "./peopleItem.vue";
 import backup from "@/components/backup";
 import { DeviceType } from "@/store/modules/app.js";
-import { onBeforeMount, reactive, computed } from "vue-demi";
+import { onBeforeMount, reactive, computed, onMounted } from "vue-demi";
 import { useState } from "@/utils/storehook.js";
 //后端请求API
 import { PeopleItem } from "@/API/User";
+import { useRoute } from "vue-router";
 
 const state = reactive({
   people_Cat_infs: [],
 });
+//判断当前路由是否携带锚点参数
+const route = useRoute();
 
 const { device } = useState("app", ["device"]);
 const { activatePeopleType } = useState("main", ["activatePeopleType"]);
@@ -99,14 +102,24 @@ const scroolActivities = computed(() => {
 });
 onBeforeMount(() => {
   PeopleItem().then((res) => {
+    //获取到数据后，判断当前路由是否携带anrcho
     state.people_Cat_infs = res.data.info;
   });
 });
-// onMounted(() => {
-//   window.addEventListener("scroll", scroolActivities, true);
-// });
+onMounted(() => {
+  if (route.meta && route.meta.anchro) {
+    //子组件比父组件，晚渲染；设置时间响应
+    setTimeout(() => {
+      const scrollDom = document.getElementById("people" + route.meta.anchro);
+      scrollDom.scrollIntoView();
+    }, 500);
+  }
+});
 </script>
 <style lang='scss' scoped>
+.people-show {
+  padding: 0px 15px;
+}
 .people-nvgation {
   width: 240px;
   margin-top: 20px;

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-12 20:58:22
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-12 22:50:29
+ * @LastEditTime: 2022-05-13 21:39:36
  * @@param: 
 -->
 <template>
@@ -44,8 +44,8 @@
 import { onBeforeMount, reactive } from "vue-demi";
 import cardTitle from "./cardTitle.vue";
 const state = reactive({
-  title: "PRESS RELEASES",
-  url: "/news-show",
+  title: "New&Event",
+  url: "/news/index",
   newsList: [],
 });
 onBeforeMount(() => {

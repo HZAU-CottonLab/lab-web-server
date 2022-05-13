@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 11:31:03
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 16:36:24
+ * @LastEditTime: 2022-05-13 19:57:51
  * @@param: 
 -->
 <template>
@@ -36,7 +36,6 @@ defineProps({
   },
 });
 const handleNavClick = (peopleIndex) => {
-  console.log(peopleIndex);
   const scrollDom = document.getElementById("people" + peopleIndex);
   //点击后进行页面内锚点跳转
   scrollDom.scrollIntoView();

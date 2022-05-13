@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-12 19:35:30
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-12 22:54:31
+ * @LastEditTime: 2022-05-13 21:23:36
  * @@param: 
 -->
 <template>
@@ -34,7 +34,7 @@
           <!-- //标签项目 -->
           <el-row>
             <el-col>
-              <cardTitle :title="'Our Team'" :to="''"></cardTitle>
+              <cardTitle :title="'Our Team'" :to="'/people/index'"></cardTitle>
             </el-col>
             <el-col :offset="1">
               <facultList

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-22 16:29:56
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 10:48:47
+ * @LastEditTime: 2022-05-13 17:55:39
  * @@param: 不需要进行登录的路由
  */
 /**
@@ -23,29 +23,10 @@
 import { publicationRoute } from "./home/publication.js";
 import { peopleRoute } from "./home/people.js";
 import { testRoute } from "./home/test.js";
-let whiteRouter = [
-  {
-    path: "/",
-    name: "home",
-    component: () => import("@/pages/home/layout/index.vue"),
-    redirect: "/index",
-    meta: {
-      // title: "Expand",
-      hidden: false, //控制导航栏是否显示该link
-      header: true, //是否是导航链接
-    },
-    children: [
-      {
-        path: "index",
-        component: () => import("@/pages/home/homePage/index.vue"),
-        meta: {
-          title: "Expand",
-          hidden: false, //控制导航栏是否显示该link
-          header: true, //是否是导航链接
-        },
-      },
-    ],
-  },
+import { researchRoute } from "./home/research.js";
+import { newsRoute } from "./home/news.js";
+
+const loginRoute = [
   {
     path: "/login",
     name: "login",
@@ -69,10 +50,42 @@ let whiteRouter = [
     ],
   },
 ];
+let whiteRouter = [
+  {
+    path: "/",
+    name: "home",
+    component: () => import("@/pages/home/layout/index.vue"),
+    redirect: "/index",
+    meta: {
+      // title: "Expand",
+      hidden: false, //控制导航栏是否显示该link
+      header: true, //是否是导航链接
+    },
+    children: [
+      {
+        path: "index",
+        component: () => import("@/pages/home/homePage/index.vue"),
+        meta: {
+          title: "Expand",
+          hidden: false, //控制导航栏是否显示该link
+          header: true, //是否是导航链接
+        },
+      },
+    ],
+  },
+];
 
-whiteRouter = whiteRouter.concat(peopleRoute);
+/*
+ * 第二个路由就会出错
+ */
+
 whiteRouter = whiteRouter.concat(publicationRoute);
+whiteRouter = whiteRouter.concat(peopleRoute);
+whiteRouter = whiteRouter.concat(researchRoute);
+whiteRouter = whiteRouter.concat(newsRoute);
+whiteRouter = whiteRouter.concat(loginRoute);
 whiteRouter = whiteRouter.concat(testRoute);
+
 /**
  *! 404守卫路由
  */
