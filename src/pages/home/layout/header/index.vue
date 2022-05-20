@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-11 21:04:50
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 22:28:59
+ * @LastEditTime: 2022-05-14 16:16:44
  * @@param: 
 -->
 <template>
@@ -45,8 +45,6 @@
 import headerMenu from "./header-menu.vue";
 import { DeviceType } from "@/store/modules/app.js";
 import { Expand } from "@element-plus/icons-vue";
-import BreadCrumb from "../breadCrumb/index.vue";
-import { useRoute } from "vue-router";
 import { useState } from "@/utils/storehook.js";
 import { reactive, computed } from "vue";
 
@@ -77,7 +75,7 @@ const handleDrawer = () => {
 .desktop-show {
   position: fixed;
   width: 100%;
-  z-index: 9999;
+  z-index: 999;
   height: 60px;
   top: 0px;
   background-color: white;

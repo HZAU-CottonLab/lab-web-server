@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-12 21:31:02
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 21:27:55
+ * @LastEditTime: 2022-05-14 16:09:45
  * @@param: 
 -->
 <template>
@@ -30,7 +30,6 @@ defineProps({
 });
 const router = useRouter();
 const handleClick = (to) => {
-  console.log(to);
   router.push({
     // path: "/people/index",
     path: to,

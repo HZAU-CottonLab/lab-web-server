@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-30 10:55:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-09 08:40:41
+ * @LastEditTime: 2022-05-14 16:53:41
  * @@param: 
 -->
 <template>
@@ -24,24 +24,15 @@
         />
         <template #dropdown>
           <el-dropdown-menu>
-            <a
-              target="_blank"
-              href="https://juejin.cn/post/6963876125428678693"
+            <router-link to="/" target="_blank" class="menu-link"
+              ><el-dropdown-item>网站首页</el-dropdown-item></router-link
             >
-              <el-dropdown-item>中文文档</el-dropdown-item>
-            </a>
-            <a
-              target="_blank"
-              href="https://github.com/un-pany/v3-admin/blob/master/README.en.md"
+            <router-link to="#" target="_blank" class="menu-link"
+              ><el-dropdown-item>个人信息</el-dropdown-item></router-link
             >
-              <el-dropdown-item>English Docs</el-dropdown-item>
-            </a>
-            <a target="_blank" href="https://github.com/un-pany/v3-admin">
-              <el-dropdown-item>GitHub</el-dropdown-item>
-            </a>
-            <a target="_blank" href="https://gitee.com/un-pany/v3-admin">
-              <el-dropdown-item>Gitee</el-dropdown-item>
-            </a>
+            <router-link to="#" target="_blank" class="menu-link"
+              ><el-dropdown-item>修改密码</el-dropdown-item></router-link
+            >
             <el-dropdown-item divided @click="state.user_logout">
               <span style="display: block">退出登录</span>
             </el-dropdown-item>
@@ -58,19 +49,19 @@ import Hamburger from "../humbanger.vue";
 import Screenfull from "@/components/screenfull.vue";
 import BreadCrumb from "../bread-crumb/index.vue";
 import { useState, useActions, useMutations } from "@/utils/storehook.js";
-import {useRouter} from 'vue-router'
+import { useRouter } from "vue-router";
 const sidebar = useState("app", ["sidebar"]);
 const { toggleSidebar } = useActions("app", ["toggleSidebar"]);
 const { logout } = useMutations("user", ["logout"]);
 const showScreenfull = ref(true);
-const router = useRouter()
+const router = useRouter();
 const state = reactive({
   user_logout: () => {
     // console.log("登出")
     logout();
-     router.push('/login').catch((err) => {
-      console.warn(err)
-    })
+    router.push("/login").catch((err) => {
+      console.warn(err);
+    });
   },
   app_toggleSidebar: () => {
     toggleSidebar(false);
@@ -106,5 +97,8 @@ onBeforeMount(() => {});
       cursor: pointer;
     }
   }
+}
+.menu-link {
+  text-decoration: none;
 }
 </style>

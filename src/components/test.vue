@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-09 10:33:33
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 17:52:47
+ * @LastEditTime: 2022-05-14 21:27:24
  * @@param: 
 -->
 <template>
@@ -12,6 +12,12 @@
 </template>
 
 <script setup>
+import { onBeforeMount } from "vue-demi";
+import { useRouter } from "vue-router";
+const router = useRouter();
+onBeforeMount(() => {
+  // console.log(router.options);
+});
 </script>
 <style lang='scss' scoped>
 </style>

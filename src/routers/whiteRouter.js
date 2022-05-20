@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-22 16:29:56
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 17:55:39
+ * @LastEditTime: 2022-05-14 21:44:44
  * @@param: 不需要进行登录的路由
  */
 /**
@@ -87,11 +87,11 @@ whiteRouter = whiteRouter.concat(loginRoute);
 whiteRouter = whiteRouter.concat(testRoute);
 
 /**
- *! 404守卫路由
+ *! 404守卫路由，由于有动态路由，所以得在动态路由后面添加
  */
 whiteRouter = whiteRouter.concat([
   {
-    path: "/:catchAll(.*)",
+    path: "/404",
     name: "404",
     component: () => import("@/components/404.vue"),
     meta: {
@@ -100,5 +100,14 @@ whiteRouter = whiteRouter.concat([
     },
   },
 ]);
+const router_404 = {
+  path: "/:catchAll(.*)",
+  name: "404",
+  component: () => import("@/components/404.vue"),
+  meta: {
+    title: "404",
+    header: false, //是否是导航链接
+  },
+};
 
-export { whiteRouter };
+export { whiteRouter, router_404 };

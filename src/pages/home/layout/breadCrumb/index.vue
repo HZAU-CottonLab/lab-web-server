@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-05 20:36:40
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-12 17:50:43
+ * @LastEditTime: 2022-05-14 16:02:46
  * @@param: 
 -->
 <template>
@@ -14,17 +14,18 @@
         'background-image': 'url(' + backgroundURL + ')',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
+        height: breadCrumObject.height,
       }"
       class="bread-crumb-bg"
     >
-      <el-row>
-        <el-col :span="6" :offset="9">
+      <el-row justify="center">
+        <el-col :span="24">
           <h1>{{ breadTile }}</h1>
         </el-col>
       </el-row>
     </div>
     <el-row justify="start" class="bread-crumb-url">
-      <el-col :span="6" :offset="2">
+      <el-col :md="6" :offset="2" :xs="24" :sm="24">
         <span>
           <el-icon :size="20"><location-filled /></el-icon
         ></span>

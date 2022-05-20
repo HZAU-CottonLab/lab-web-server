@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-02-26 22:57:02
  * @LastEditors: zpliu
- * @LastEditTime: 2021-09-19 19:26:06
+ * @LastEditTime: 2022-05-19 17:30:20
  * @@param: 
 -->
 <template>
@@ -27,6 +27,8 @@ html,
 body {
   width: 100%;
   height: 100%;
+  // margin: 0, 0, 0, 0;
+  // overflow: hidden hidden;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -38,7 +40,7 @@ body {
   // background-repeat: no-repeat;
   // background-size: cover;
   //主页覆盖到整个浏览器高度
-  height: 91%;
+  height: 100%;
   width: 100%;
 }
 </style>

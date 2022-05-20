@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-12 14:32:22
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 22:21:47
+ * @LastEditTime: 2022-05-14 16:05:07
  * @@param: 
 -->
 <template>
@@ -69,18 +69,29 @@ const APPStyle = computed(() => {
     };
   }
 });
+const breadCrumbHeight = computed(() => {
+  //移动端的高度小一些
+  if (device.value === DeviceType.Desktop) {
+    return "350px";
+  } else {
+    return "250px";
+  }
+});
+
 const breadCrumbShow = computed(() => {
   if (route.meta && route.meta.ShowBreadCrumn) {
     return {
       show: true,
       breadcrumbURL: route.meta.breadcrumbURL,
       title: route.meta.title,
+      height: breadCrumbHeight.value,
     };
   }
   return {
     show: false,
     breadcrumbURL: false,
     title: "",
+    height: breadCrumbHeight.value,
   };
 });
 

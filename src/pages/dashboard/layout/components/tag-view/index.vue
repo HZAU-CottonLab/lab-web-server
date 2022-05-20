@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-08 11:23:43
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-09 08:34:43
+ * @LastEditTime: 2022-05-14 21:11:56
  * @@param: 
 -->
 <template>
@@ -115,8 +115,9 @@ const state = reactive({
   },
   refreshSelectedTag: (view) => {
     const { fullPath } = view;
+    // console.log("/redirect" + fullPath);
     nextTick(() => {
-      router.replace({ path: "/redirect" + fullPath }).catch((err) => {
+      router.replace({ path: fullPath }).catch((err) => {
         console.warn(err);
       });
     });

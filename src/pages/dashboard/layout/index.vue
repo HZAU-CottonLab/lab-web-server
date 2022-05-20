@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 15:45:42
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-12 22:39:04
+ * @LastEditTime: 2022-05-19 20:30:43
  * @@param: 
 -->
 <template>
@@ -20,6 +20,8 @@
       <div :class="{ 'fixed-header': fixedHeader }">
         <NavigationBar />
         <TagsView v-if="showTagsView" />
+      </div>
+      <div class="app-main">
         <router-view v-slot="{ Component }">
           <transition name="fade-transform" mode="out-in">
             <component :is="Component" :key="key" />
@@ -178,6 +180,28 @@ $sideBarWidth: 220px;
   .main-container,
   .sidebar-container {
     transition: none;
+  }
+}
+
+.app-main {
+  /* 50 = navbar height  */
+  min-height: calc(100vh - 50px);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.fixed-header + .app-main {
+  padding-top: 50px;
+  // height: 100vh;
+  overflow: auto;
+}
+.hasTagsView {
+  .app-main {
+    /* 84 = navbar + tags-view = 50 + 34 */
+    min-height: calc(100vh - 84px);
+  }
+  .fixed-header + .app-main {
+    padding-top: 84px;
   }
 }
 </style>
