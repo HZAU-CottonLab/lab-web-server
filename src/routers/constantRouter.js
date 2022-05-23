@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-11 22:17:02
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 09:33:27
+ * @LastEditTime: 2022-05-22 15:34:16
  * @@param:
  */
 
@@ -30,6 +30,21 @@ const constantRouter = [
           icon: "promotion",
         },
         component: () => import("@/pages/dashboard/dashboard.vue"),
+      },
+    ],
+  },
+  //重定向路由
+  {
+    path: "/redirect",
+    component: () => import("@/pages/dashboard/layout/index.vue"),
+    name: "redirct",
+    meta: {
+      hidden: true,
+    },
+    children: [
+      {
+        path: "/redirect/:path(.*)",
+        component: () => import("@/pages/dashboard/redirect/index.vue"),
       },
     ],
   },

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-12 10:13:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-14 21:44:04
+ * @LastEditTime: 2022-05-23 09:21:42
  * @@param:
  */
 // 前端路由权限验证
@@ -18,13 +18,20 @@ import { ElMessage } from "element-plus";
 import { router_404 } from "@/routers/whiteRouter.js";
 // 获取用户以及权限信息
 // const userStore = store.state.user;
-
 NProgress.configure({ showSpinner: false });
 
 router.beforeEach((to, from, next) => {
   NProgress.start();
   // if (to.meta && to.meta.isLogin) {
   if (getToken()) {
+    //在进入重定向路由前负责清空路由缓存
+    if (to.path.match(/^\/redirect\/.*/)) {
+      //只刷新指定组件
+      store.commit("tagsView/del_keepAlive", from.name);
+      next();
+      return
+    }
+    //登录判断
     if (to.path === "/login/index") {
       // 如果登录，并准备进入 login 页面，则重定向到主页
       next({ path: "/dashboard" });
@@ -90,6 +97,14 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-router.afterEach(() => {
+//如果，在路由是由重定向进入的
+//? 在完成导航后，需要将keepAlive的缓存重新加上
+router.afterEach((to, from) => {
+  if (from.path.match(/^\/redirect\/.*/)) {
+    store.commit("tagsView/set_keepAlive", [
+      "dashboard-article-show",
+      "dashboard-news-add",
+    ]);
+  }
   NProgress.done();
 });

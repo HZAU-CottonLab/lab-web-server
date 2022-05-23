@@ -4,13 +4,33 @@
  * @Author: zpliu
  * @Date: 2022-05-08 19:03:22
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-08 19:39:55
+ * @LastEditTime: 2022-05-23 09:19:56
  * @@param:
  */
 export const tagsView = {
   namespaced: true,
   state: {
     visitedViews: [], //访问过的route
+    keepAliveArray: ["dashboard-article-show", "dashboard-news-add"],
+  },
+  mutations: {
+    cleared_keepAlive(state) {
+      //清空 缓存路由
+      state.keepAliveArray = [];
+    },
+    del_keepAlive(state, componentName) {
+      state.keepAliveArray.forEach(
+        (item, index, arr) => {
+          if (item == componentName) {
+            arr.splice(index, 1);
+          }
+        }
+      );
+    },
+    set_keepAlive(state, componentNameArray) {
+      //设置缓存路由
+      state.keepAliveArray = componentNameArray;
+    },
   },
   actions: {
     addVisitedView(context, view) {

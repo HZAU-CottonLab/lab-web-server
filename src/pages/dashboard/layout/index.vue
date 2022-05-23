@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 15:45:42
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-19 20:30:43
+ * @LastEditTime: 2022-05-22 22:29:32
  * @@param: 
 -->
 <template>
@@ -24,7 +24,11 @@
       <div class="app-main">
         <router-view v-slot="{ Component }">
           <transition name="fade-transform" mode="out-in">
-            <component :is="Component" :key="key" />
+            <!-- tag-view需要手动刷新 -->
+            <!-- 如果不加判断的话，重定向组件在第一次重定向后成功后，将不会进行重定向 -->
+            <keep-alive :include="keepAliveArray">
+              <component :is="Component" :key="key" />
+            </keep-alive>
           </transition>
         </router-view>
       </div>
@@ -67,6 +71,8 @@ const { fixedHeader, showTagsView } = useState("setting", [
   "fixedHeader",
   "showTagsView",
 ]);
+
+const { keepAliveArray } = useState("tagsView", ["keepAliveArray"]);
 //获取app 中定义的actions
 const { closeSidebar } = useActions("app", ["closeSidebar"]);
 const state = reactive({

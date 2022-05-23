@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 21:47:08
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-20 11:12:41
+ * @LastEditTime: 2022-05-23 08:55:35
  * @@param: 
 -->
 <template>
@@ -69,6 +69,9 @@
     ></EditorDialog>
   </div>
 </template>
+<script>
+export default {name:"dashboard-article-show"}
+</script>
 
 <script setup>
 import { get_publication } from "@/API/publication";

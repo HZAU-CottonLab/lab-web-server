@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-20 14:38:06
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-20 15:43:02
+ * @LastEditTime: 2022-05-23 08:56:47
  * @@param: 
 -->
 <template>
@@ -37,7 +37,9 @@
     </el-collapse>
   </div>
 </template>
-
+<script>
+export default { name: "dashboard-news-add" };
+</script>
 <script setup>
 import Editor from "../layout/components/wangEditor.vue";
 </script>

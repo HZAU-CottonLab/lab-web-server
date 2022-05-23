@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-08 11:23:43
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-14 21:11:56
+ * @LastEditTime: 2022-05-22 23:02:53
  * @@param: 
 -->
 <template>
@@ -52,7 +52,7 @@
 import path from "path";
 import ScrollPane from "./scroll-pane.vue";
 import { Close } from "@element-plus/icons-vue";
-import { useState, useActions } from "@/utils/storehook.js";
+import { useState, useActions, useMutations } from "@/utils/storehook.js";
 import { useRouter, useRoute } from "vue-router";
 import {
   getCurrentInstance,
@@ -82,7 +82,8 @@ const instance = getCurrentInstance();
 const { proxy } = instance;
 
 const toLastView = (visitedViews, view) => {
-  const latestView = visitedViews.slice(-1)[0];
+  //计算属性需要使用value属性来进行访问
+  const latestView = visitedViews.value.slice(-1)[0];
   if (latestView !== undefined && latestView.fullPath !== undefined) {
     router.push(latestView.fullPath).catch((err) => {
       console.warn(err);
@@ -90,7 +91,7 @@ const toLastView = (visitedViews, view) => {
   } else {
     // 如果没有 tags-view，请默认重定向到主页，如果你需要，可以自行调整它
     if (view.name === "Dashboard") {
-      // 重新加载主页
+      // 重新加载主页, 进行重定向
       router.push({ path: "/redirect" + view.fullPath }).catch((err) => {
         console.warn(err);
       });
@@ -101,6 +102,7 @@ const toLastView = (visitedViews, view) => {
     }
   }
 };
+
 const state = reactive({
   visible: false,
   top: 0,
@@ -117,7 +119,8 @@ const state = reactive({
     const { fullPath } = view;
     // console.log("/redirect" + fullPath);
     nextTick(() => {
-      router.replace({ path: fullPath }).catch((err) => {
+      //使用重定向进行刷新
+      router.replace({ path: "/redirect" + fullPath }).catch((err) => {
         console.warn(err);
       });
     });

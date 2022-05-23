@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 16:55:20
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-20 11:30:03
+ * @LastEditTime: 2022-05-22 16:41:48
  * @@param:
  */
 const publicationRoute = [
@@ -19,6 +19,7 @@ const publicationRoute = [
       roles: ["admin", "editor"], // 可以在根路由中设置角色
       alwaysShow: true, // 将始终显示根菜单
       isLogin: true,
+      keepAlive: true,
     },
     children: [
       //子路由依赖于父路由布局
@@ -45,7 +46,7 @@ const publicationRoute = [
       {
         path: "add",
         component: () =>
-        import("@/pages/dashboard/publication/publication-editor.vue"),
+          import("@/pages/dashboard/publication/publication-editor.vue"),
         name: "dashboard-article-add",
         meta: {
           title: "文章添加",
