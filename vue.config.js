@@ -4,12 +4,12 @@
  * @Author: zpliu
  * @Date: 2021-09-19 19:06:43
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-27 17:30:24
+ * @LastEditTime: 2022-05-28 20:34:26
  * @@param:
  */
 const path = require("path");
 const CompressionPlugin = require("compression-webpack-plugin");
-const port = process.env.port || process.env.npm_config_port || 9528;
+const port = process.env.port || process.env.npm_config_port || 9529;
 module.exports = {
   outputDir: "../build/",
   assetsDir: "static",

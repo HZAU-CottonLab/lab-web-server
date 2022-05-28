@@ -4,21 +4,27 @@
  * @Author: zpliu
  * @Date: 2022-05-27 15:38:32
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-27 17:24:26
+ * @LastEditTime: 2022-05-27 21:57:20
  * @@param: 
 -->
 <template>
   <div class="info">
     <el-row justify="center" align="middle">
       <el-col :md="6" :lg="3" :xl="4" :sm="6">
+        <!-- action="/dev-api/login" -->
+        <!--//todo 跨域请求需要解决 -->
+        <!-- https://juejin.cn/post/7067463716119248903 -->
         <el-upload
           class="avatar-uploader"
-          action="/dev-api/login"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          list-type="picture"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handleRemove"
         >
-          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+          <img class="avatar" v-if="imageUrl" :src="imageUrl" fit="cover" />
           <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
         </el-upload>
       </el-col>
@@ -65,15 +71,15 @@
           <div v-if="formInline.peopleType.length != 0 && !teacher_form">
             <el-form-item label="导师">
               <el-select v-model="formInline.teacher">
-                <el-option label="张献龙" value="shanghai" />
-                <el-option label="朱龙付" value="beijing" />
-                <el-option label="林忠旭" value="beijing" />
-                <el-option label="涂礼莉" value="beijing" />
-                <el-option label="杨细燕" value="beijing" />
-                <el-option label="金双侠" value="beijing" />
-                <el-option label="王茂军" value="beijing" />
-                <el-option label="袁道军" value="beijing" />
-                <el-option label="闵林" value="beijing" />
+                <el-option label="张献龙" value="0" />
+                <el-option label="朱龙付" value="1" />
+                <el-option label="林忠旭" value="2" />
+                <el-option label="涂礼莉" value="3" />
+                <el-option label="杨细燕" value="4" />
+                <el-option label="金双侠" value="5" />
+                <el-option label="王茂军" value="6" />
+                <el-option label="袁道军" value="7" />
+                <el-option label="闵林" value="8" />
               </el-select>
             </el-form-item>
           </div>
@@ -111,6 +117,7 @@ const teacher_form = computed(() => {
  */
 const handleAvatarSuccess = (response, uploadFile) => {
   imageUrl.value = URL.createObjectURL(uploadFile.raw);
+  //阻止原有的点击事件
 };
 const beforeAvatarUpload = (rawFile) => {
   if (rawFile.type !== "image/jpeg") {
@@ -121,6 +128,12 @@ const beforeAvatarUpload = (rawFile) => {
     return false;
   }
   return true;
+};
+const handlePictureCardPreview = () => {
+  console.log("111");
+};
+const handleRemove = () => {
+  console.log("22");
 };
 </script>
 <style lang='scss' scoped>
