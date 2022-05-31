@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 10:59:43
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 16:32:08
+ * @LastEditTime: 2022-05-31 22:36:50
  * @@param: 
 -->
 <template>
@@ -28,7 +28,7 @@
             fit="cover"
             :lazy="true"
             class="avatar-img"
-            @click="handAvatrClick"
+            @click="handAvatrClick(User.id)"
             @mouseover="handleHover(index)"
             @mouseout="handleHover(index)"
           >
@@ -62,6 +62,7 @@
 import { defineProps, getCurrentInstance, onMounted, reactive } from "vue";
 import { useMutations } from "@/utils/storehook.js";
 import { Search } from "@element-plus/icons-vue";
+import { useRouter } from "vue-router";
 const state = reactive({
   //初始化hover列表
   hoverList: Array.from({ length: props.imageList.length }, () => false),
@@ -116,8 +117,16 @@ const handleScrollx = () => {
     distance: disant_to_top,
   });
 };
-const handAvatrClick = () => {
-  console.log(1111);
+const router = useRouter();
+const handAvatrClick = (personId) => {
+  //进行_klack跳转
+  const routeUrl = router.resolve({
+    name: "person",
+    query: {
+      id: personId,
+    },
+  });
+  window.open(routeUrl.href, "_blank");
 };
 //显示图标
 const handleHover = (index) => {

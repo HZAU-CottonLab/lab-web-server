@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 09:41:50
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 20:57:36
+ * @LastEditTime: 2022-05-31 22:20:53
  * @@param:
  */
 const peopleRoute = [
@@ -76,15 +76,14 @@ const peopleRoute = [
           anchro: 3, //路由跳转携带的锚点
         },
       },
-      //动态路由
       {
-        path: "person/:id",
+        path: "person",
         name: "person",
-        component: () => import("@/components/404.vue"),
+        component: () => import("@/pages/home/people/personInfo.vue"),
         meta: {
           title: "Person",
           hidden: true, //控制是否显示该link
-          header: true, //是否是导航链接
+          header: false, //是否是导航链接
         },
       },
     ],

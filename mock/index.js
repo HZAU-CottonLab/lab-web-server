@@ -4,14 +4,14 @@
  * @Author: zpliu
  * @Date: 2022-01-02 13:38:34
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-11 15:47:58
+ * @LastEditTime: 2022-05-31 18:58:09
  * @@param:
  */
 const Mock = require("mockjs");
 const { param2Obj } = require("./utils");
 
 const table = require("./table");
-const user = require("./user");
+const user = require("./user/user.js");
 const publication = require("./publication");
 const upload_image = require("./upload_image");
 

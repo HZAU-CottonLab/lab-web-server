@@ -4,11 +4,16 @@
  * @Author: zpliu
  * @Date: 2022-04-04 11:22:09
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-09 10:24:30
+ * @LastEditTime: 2022-05-31 22:36:08
  * @@param: 
 -->
 <template>
-  <Carousel v-if="carouselList.length!==0" :settings="settings" :breakpoints="breakpoints" class="carousel1">
+  <Carousel
+    v-if="carouselList.length !== 0"
+    :settings="state.settings"
+    :breakpoints="state.breakpoints"
+    class="carousel1"
+  >
     <Slide
       v-for="(slide, index) in carouselList"
       :key="index"
@@ -20,10 +25,10 @@
         <div class="carousel__label">
           <el-link
             type="primary"
-            :href="slide.clickURL"
             :underline="false"
             target="_blank"
             style="font-size: 20px; color: #d4d4d4"
+            @click.prevent="handleClick(slide.id)"
           >
             <el-icon :size="20"><search /></el-icon>
             <div>{{ slide.title }}</div>
@@ -38,109 +43,110 @@
   </Carousel>
 </template>
 
-<script>
+<script setup>
 // import { defineComponent } from "vue";
 import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
+import { useRouter } from "vue-router";
 import { Search } from "@element-plus/icons-vue";
 import "vue3-carousel/dist/carousel.css";
-export default {
-  name: "team_carousel",
-  props: {
-    carouselList: {
-      type: Array,
-      default: () => [
-        {
-          imageURL:
-            "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
-          title: "11",
-          clickURL: "",
-        },
-        {
-          imageURL:
-            "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg",
-          title: "22",
-          clickURL: "",
-        },
-        {
-          imageURL:
-            "https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg",
-          title: "33",
-          clickURL: "",
-        },
-        {
-          imageURL:
-            "https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg",
-          title: "44",
-          clickURL: "",
-        },
-        {
-          imageURL:
-            "https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg",
-          title: "55",
-          clickURL: "",
-        },
-        {
-          imageURL:
-            "https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg",
-          title: "66",
-          clickURL: "",
-        },
-        {
-          imageURL:
-            "https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg",
-          title: "77",
-          clickURL: "",
-        },
-        {
-          imageURL:
-            "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
-          title: "88",
-          clickURL: "",
-        },
-        {
-          imageURL:
-            "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
-          title: "88",
-          clickURL: "",
-        },
-        {
-          imageURL:
-            "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
-          title: "10",
-          clickURL: "",
-        },
-      ],
-    },
+import { reactive } from "vue-demi";
+const props = defineProps({
+  carouselList: {
+    type: Array,
+    default: () => [
+      {
+        imageURL:
+          "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
+        title: "11",
+        id: 0,
+      },
+      {
+        imageURL:
+          "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg",
+        title: "22",
+        id: 0,
+      },
+      {
+        imageURL:
+          "https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg",
+        title: "33",
+        id: 0,
+      },
+      {
+        imageURL:
+          "https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg",
+        title: "44",
+        id: 0,
+      },
+      {
+        imageURL:
+          "https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg",
+        title: "55",
+        id: 0,
+      },
+      {
+        imageURL:
+          "https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg",
+        title: "66",
+        id: 0,
+      },
+      {
+        imageURL:
+          "https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg",
+        title: "77",
+        id: 0,
+      },
+      {
+        imageURL:
+          "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
+        title: "88",
+        id: 0,
+      },
+      {
+        imageURL:
+          "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
+        title: "88",
+        id: 0,
+      },
+      {
+        imageURL:
+          "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
+        title: "10",
+        id: 0,
+      },
+    ],
   },
-  components: {
-    Carousel,
-    Slide,
-    Navigation,
-    Pagination,
-    Search,
+});
+const state = reactive({
+  // carousel settings
+  settings: {
+    itemsToShow: 1,
+    snapAlign: "center",
   },
-  data: () => ({
-    // carousel settings
-    settings: {
-      itemsToShow: 1,
+  breakpoints: {
+    // 700px and up
+    700: {
+      itemsToShow: 3.5, //item数目不足是会有留白
       snapAlign: "center",
     },
-    // breakpoints are mobile first
-    // any settings not specified will fallback to the carousel settings
-    breakpoints: {
-      // 700px and up
-      700: {
-        itemsToShow: 3.5, //item数目不足是会有留白
-        snapAlign: "center",
-      },
-      // 1024 and up
-      1024: {
-        itemsToShow: 5,
-        snapAlign: "start",
-      },
+    // 1024 and up
+    1024: {
+      itemsToShow: 5,
+      snapAlign: "start",
     },
-    //单向数据流，拷贝一份数据
-  }),
+  },
+});
+const router = useRouter();
+const handleClick = (personId) => {
+  //进行_klack跳转
+  const routeUrl = router.resolve({
+    name: "person",
+    query: {
+      id: personId,
+    },
+  });
+  console.log(routeUrl);
+  window.open(routeUrl.href, "_blank");
 };
 </script>
 <style lang="scss" scopped>

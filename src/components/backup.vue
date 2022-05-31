@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-01 09:39:12
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-09 22:34:49
+ * @LastEditTime: 2022-05-31 21:56:07
  * @@param: 
   回到顶部按钮，增加了进度条选项
 -->
@@ -12,7 +12,7 @@
   <el-backtop :bottom="100">
     <el-progress
       type="circle"
-      :percentage="precentage"
+      :percentage="precentage > 100 ? 100 : precentage"
       :width="50"
       :visibility-height="200"
       style="background-color: transparent"

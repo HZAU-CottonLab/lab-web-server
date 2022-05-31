@@ -4,14 +4,14 @@
  * @Author: zpliu
  * @Date: 2022-05-24 23:31:32
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-27 15:39:33
+ * @LastEditTime: 2022-05-31 14:28:18
  * @@param: 
 -->
 <template>
   <div class="dynamic-menu">
     <ul class="menu-tag">
       <li
-        v-for="(tag, index) in dynamcTags_copy"
+        v-for="(tag, index) in personInfo.infoDetail"
         :key="tag.tagName"
         @mouseover="handleClosableHover(tag.tagName)"
         @mouseout="handleClosableHover(tag.tagName)"
@@ -32,7 +32,7 @@
               class="menu-close"
               v-show="
                 state.closeButtonVisible[
-                  dynamcTags_copy.findIndex(
+                  personInfo.infoDetail.findIndex(
                     (value) => value.tagName == tag.tagName
                   )
                 ]
@@ -68,19 +68,18 @@ import {
   watch,
   computed,
 } from "vue";
+import { useState, useMutations } from "@/utils/storehook.js";
 import { Close, InfoFilled } from "@element-plus/icons-vue";
-
+const { personInfo } = useState("user", ["personInfo"]);
+const { del_infoTag, add_infoTag } = useMutations("user", [
+  "del_infoTag",
+  "add_infoTag",
+]);
 const props = defineProps({
   closable: {
     //是否显示关闭按钮
     type: Boolean,
     default: true,
-  },
-  dynamicTags: {
-    //采样v-mode进行双向绑定
-    type: Array,
-    // default: () => [{tagName:"tag1",vHtml:"",},{tagName:"tag2",vHtml:"",}],
-    required: true,
   },
   activedItem: {
     type: Number,
@@ -88,21 +87,20 @@ const props = defineProps({
   },
 });
 //进行双向绑定
-const dynamcTags_copy = reactive(props.dynamicTags);
 const inputValue = ref("");
 const inputVisible = ref(false);
 const InputRef = ref(); //为了获取dom元素设定的响应变量
 const state = reactive({
   //hover时显示关闭按钮
   closeButtonVisible: Array.from(
-    { length: dynamcTags_copy.length },
+    { length: personInfo.value.infoDetail.length },
     () => false
   ),
 });
 
 const activetedBackground = computed(() => {
   const backgroundColor = Array.from(
-    { length: dynamcTags_copy.length },
+    { length: personInfo.value.infoDetail.length },
     () => "#f2f2f2"
   );
   //修改处于活跃状态的li
@@ -113,7 +111,9 @@ const activetedBackground = computed(() => {
 const handleClosableHover = (tag) => {
   //hover时显示删除按钮
   //搜索tag对应的索引,修改state中的属性值
-  const tagIndex = props.dynamicTags.findIndex((value) => value.tagName == tag);
+  const tagIndex = personInfo.value.infoDetail.findIndex(
+    (value) => value.tagName == tag
+  );
   if (props.closable) {
     state.closeButtonVisible[tagIndex] = !state.closeButtonVisible[tagIndex];
   }
@@ -130,28 +130,25 @@ const showInput = () => {
 const handleInputConfirm = () => {
   if (inputValue.value) {
     //子组件对父组件的内容进行修改,并且直接进行update
-    dynamcTags_copy.push({
-      tagName: inputValue.value,
-      vHtml: "",
-    });
-    emits("update:dynamicTags", dynamcTags_copy);
+    add_infoTag(inputValue.value);
   }
   inputVisible.value = false;
   inputValue.value = "";
 };
 const handleClose = (tag) => {
   //关闭Tag后修改父组件值
-  const tagIndex = dynamcTags_copy.findIndex((value) => value.tagName == tag);
-  dynamcTags_copy.splice(tagIndex, 1);
-  emits("update:dynamicTags", dynamcTags_copy);
+  const tagIndex = personInfo.value.infoDetail.findIndex(
+    (value) => value.tagName == tag
+  );
+  del_infoTag(tagIndex);
 };
-const emits = defineEmits(["update:dynamicTags", "click"]);
+const emits = defineEmits(["click"]);
 const handleTagClick = (tag) => {
-  //标签被点击时，向上传递该标签被改变了
+  //标签被点击时，向上传递该标签索引
   emits("click", tag);
 };
 
-watch(dynamcTags_copy, (newValue) => {
+watch(personInfo.value.infoDetail, (newValue) => {
   //关闭按钮随标签数而改变，因此需要监听标签数
   state.closeButtonVisible = Array.from(
     { length: newValue.length },

@@ -54,3 +54,11 @@ export function TeamItem(){
   });
 }
 
+export function get_personInfo(){
+  return request(
+    {
+      url:'/person-show',
+      method:"get"
+    }
+  )
+}

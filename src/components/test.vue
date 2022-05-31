@@ -1,76 +1,103 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: zpliu
- * @Date: 2022-05-27 17:33:21
- * @LastEditors: zpliu
- * @LastEditTime: 2022-05-27 21:05:14
- * @@param: 
--->
 <template>
-  <el-upload
-    action="https://jsonplaceholder.typicode.com/posts/"
-    list-type="picture-card"
-    :on-preview="handlePictureCardPreview"
-    :on-remove="handleRemove"
-    :file-list="fileList"
+  <el-form
+    ref="ruleFormRef"
+    :model="ruleForm"
+    status-icon
+    :rules="rules"
+    label-width="120px"
+    class="demo-ruleForm"
   >
-    <el-icon><Plus /></el-icon>
-  </el-upload>
-
-  <el-dialog v-model="dialogVisible">
-    <img w-full :src="dialogImageUrl" alt="Preview Image" />
-  </el-dialog>
+    <el-form-item label="Password" prop="pass">
+      <el-input v-model="ruleForm.pass" type="password" autocomplete="off" />
+    </el-form-item>
+    <el-form-item label="Confirm" prop="checkPass">
+      <el-input
+        v-model="ruleForm.checkPass"
+        type="password"
+        autocomplete="off"
+      />
+    </el-form-item>
+    <el-form-item label="Age" prop="age">
+      <el-input v-model.number="ruleForm.age" />
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="submitForm(ruleFormRef)"
+        >Submit</el-button
+      >
+      <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
+    </el-form-item>
+  </el-form>
 </template>
 
 <script  setup>
-import { ref } from 'vue'
-import { Plus } from '@element-plus/icons-vue'
+import { reactive, ref } from "vue";
 
-const fileList = ref([
-  {
-    name: 'food.jpeg',
-    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-  },
-  {
-    name: 'plant-1.png',
-    url: '/images/plant-1.png',
-  },
-  {
-    name: 'food.jpeg',
-    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-  },
-  {
-    name: 'plant-2.png',
-    url: '/images/plant-2.png',
-  },
-  {
-    name: 'food.jpeg',
-    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-  },
-  {
-    name: 'figure-1.png',
-    url: '/images/figure-1.png',
-  },
-  {
-    name: 'food.jpeg',
-    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-  },
-  {
-    name: 'figure-2.png',
-    url: '/images/figure-2.png',
-  },
-])
+const ruleFormRef = ref();
 
-const dialogImageUrl = ref('')
-const dialogVisible = ref(false)
+const checkAge = (rule, value, callback) => {
+  if (!value) {
+    return callback(new Error("Please input the age"));
+  }
+  setTimeout(() => {
+    if (!Number.isInteger(value)) {
+      callback(new Error("Please input digits"));
+    } else {
+      if (value < 18) {
+        callback(new Error("Age must be greater than 18"));
+      } else {
+        callback();
+      }
+    }
+  }, 1000);
+};
 
-const handleRemove = (uploadFile, uploadFiles) => {
-  console.log(uploadFile, uploadFiles)
-}
+const validatePass = (rule, value, callback) => {
+  if (value === "") {
+    callback(new Error("Please input the password"));
+  } else {
+    if (ruleForm.checkPass !== "") {
+      if (!ruleFormRef.value) return;
+      ruleFormRef.value.validateField("checkPass", () => null);
+    }
+    callback();
+  }
+};
+const validatePass2 = (rule, value, callback) => {
+  if (value === "") {
+    callback(new Error("Please input the password again"));
+  } else if (value !== ruleForm.pass) {
+    callback(new Error("Two inputs don't match!"));
+  } else {
+    callback();
+  }
+};
 
-const handlePictureCardPreview = (uploadFile) => {
-  dialogImageUrl.value = uploadFile.url
-  dialogVisible.value = true
-}
+const ruleForm = reactive({
+  pass: "",
+  checkPass: "",
+  age: "",
+});
+
+const rules = reactive({
+  pass: [{ validator: validatePass, trigger: "blur" }],
+  checkPass: [{ validator: validatePass2, trigger: "blur" }],
+  age: [{ validator: checkAge, trigger: "blur" }],
+});
+
+const submitForm = (formEl) => {
+  if (!formEl) return;
+  formEl.validate((valid) => {
+    if (valid) {
+      console.log("submit!");
+    } else {
+      console.log("error submit!");
+      return false;
+    }
+  });
+};
+
+const resetForm = (formEl) => {
+  if (!formEl) return;
+  formEl.resetFields();
+};
 </script>

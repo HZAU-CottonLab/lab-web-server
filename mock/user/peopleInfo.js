@@ -2,16 +2,50 @@
  * @Descripttion:
  * @version:
  * @Author: zpliu
- * @Date: 2022-03-29 16:22:49
+ * @Date: 2022-05-31 18:59:49
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-22 10:59:58
+ * @LastEditTime: 2022-05-31 22:30:00
  * @@param:
  */
-
-/**
- * 设置用户的简短信息
- */
 const Random = require("mockjs").Random;
+const testInfo = {
+  basic: {
+    name: "王茂军",
+    imgURL:
+      "https://s.cn.bing.net/th?id=OHR.ParrotDay_ZH-CN0775936218_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&qlt=30", //头像
+    // https://faculty.hzau.edu.cn/_resources/group1/M00/00/0A/00WOfWJf3QKAc56fAAFaf40m_Wk746.png?randomid=1651545348966
+    sex: "0",
+    peopleType: "0",
+    jobTitle: "教授", //职位
+    recruit: "博士生导师", //招生类型
+    contact: "mjwang@mail.hzau.edu.cn", //联系方式
+    officeSite: "作重室C410", //教师办公地点
+    teacher: "", //导师编号
+  },
+  infoDetail: [
+    {
+      tagName: "个人简介",
+      vHtml: "<p>111</p>", //回显内容的标签一定要是正确的
+    },
+    {
+      tagName: "科研项目",
+      vHtml: "<p>222</p>",
+    },
+    {
+      tagName: "工作经历",
+      vHtml: "<p>333</p>",
+    },
+    {
+      tagName: "发明及获奖情况",
+      vHtml: "<p>444</p>",
+    },
+    {
+      tagName: "发表的论文及著作",
+      vHtml: "<p>555</p>",
+    },
+  ],
+};
+
 const people_brif_info = [
   {
     id: 0,
@@ -48,6 +82,7 @@ const people_brif_info = [
         imageURL:
           "https://cpst.hzau.edu.cn/__local/9/B3/3F/B87268DF3891C57A4BE3F24DCE5_CB874EA3_1279C.jpg",
         description: ``,
+        id: 0,
       },
       {
         email: "xlzhang@mail.hzau.edu.cn",
@@ -56,6 +91,7 @@ const people_brif_info = [
         imageURL:
           "https://cpst.hzau.edu.cn/__local/C/78/F7/9B70666725E506FB1378A2C8D67_0BB9C212_3C6B6.png?e=.png",
         description: ``,
+        id: 0,
       },
       {
         email: "linzhongxu@mail.hzau.edu.cn",
@@ -64,6 +100,7 @@ const people_brif_info = [
         imageURL:
           "https://cpst.hzau.edu.cn/__local/3/9B/C2/019E945FB2696495BD025D4F377_2FECE83B_2C045.jpg?e=.jpg",
         description: ``,
+        id: 0,
       },
       {
         email: "jsx@mail.hzau.edu.cn",
@@ -72,6 +109,7 @@ const people_brif_info = [
         imageURL:
           "http://cotton.hzau.edu.cn/uploads/image/20170606/1496727069.jpg",
         description: ``,
+        id: 0,
       },
       {
         email: "xlzhang@mail.hzau.edu.cn",
@@ -80,6 +118,7 @@ const people_brif_info = [
         imageURL:
           "https://cpst.hzau.edu.cn/__local/0/24/8A/9C7A78F77BB6DE8E0D2BCC9A3A3_EEB908CA_3B1D0.png?e=.png",
         description: ``,
+        id: 0,
       },
       {
         email: "xlzhang@mail.hzau.edu.cn",
@@ -88,6 +127,7 @@ const people_brif_info = [
         imageURL:
           "https://cpst.hzau.edu.cn/__local/8/BC/95/34D791E397669DAA21AA37ACB6F_C6D53602_13BE6.jpg",
         description: ``,
+        id: 0,
       },
       {
         email: "mjwang@mail.hzau.edu.cn",
@@ -96,6 +136,7 @@ const people_brif_info = [
         imageURL:
           "https://cpst.hzau.edu.cn/__local/5/E1/A7/0D52DBC2DBF8F490A190C67ED00_49AD8F79_62BA.jpg",
         description: ``,
+        id: 0,
       },
       {
         email: "ydj at mail.hzau.edu.cn",
@@ -104,6 +145,7 @@ const people_brif_info = [
         imageURL:
           "https://cpst.hzau.edu.cn/__local/3/A9/C5/967069CEABFA36283C2DAB0D2FA_1406F651_5DB4.jpg",
         description: ``,
+        id: 0,
       },
       {
         email: "Lingmin@mail.hzau.edu.cn",
@@ -112,6 +154,7 @@ const people_brif_info = [
         imageURL:
           "https://cpst.hzau.edu.cn/__local/C/A5/3B/3E357D51E773897D3CAC9D7F817_74B71DFF_3BA06.png?e=.png",
         description: ``,
+        id: 0,
       },
     ],
   },
@@ -125,6 +168,7 @@ const people_brif_info = [
         name: "Test",
         imageURL: Random.image("400x400"),
         description: ``,
+        id: 0,
       },
       {
         email: "Test",
@@ -132,6 +176,7 @@ const people_brif_info = [
         name: "Test",
         imageURL: Random.image("400x400"),
         description: ``,
+        id: 0,
       },
       {
         email: "Test",
@@ -139,6 +184,7 @@ const people_brif_info = [
         name: "Test",
         imageURL: Random.image("400x400"),
         description: ``,
+        id: 0,
       },
     ],
   },
@@ -152,6 +198,7 @@ const people_brif_info = [
         name: "Test",
         imageURL: Random.image("400x400"),
         description: ``,
+        id: 0,
       },
     ],
   },
@@ -165,6 +212,7 @@ const people_brif_info = [
         name: "Test",
         imageURL: Random.image("400x400"),
         description: ``,
+        id: 0,
       },
     ],
   },
@@ -178,6 +226,7 @@ const people_brif_info = [
         name: "Test",
         imageURL: Random.image("400x400"),
         description: ``,
+        id: 0,
       },
     ],
   },
@@ -188,168 +237,64 @@ const team_teacher_info = [
     imageURL:
       "https://cpst.hzau.edu.cn/__local/5/14/B7/F383BB8FB5C1B1B2ED0A4CEA002_DD80DD44_B3FC.png?e=.png",
     title: "xian long Zhang",
-    clickURL: "https://cpst.hzau.edu.cn/info/1015/1592.htm",
+    id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/9/B3/3F/B87268DF3891C57A4BE3F24DCE5_CB874EA3_1279C.jpg",
     title: "long fu Zhu",
-    clickURL: "https://cpst.hzau.edu.cn/info/1015/1579.htm",
+    id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/C/78/F7/9B70666725E506FB1378A2C8D67_0BB9C212_3C6B6.png?e=.png",
     title: "xiao ping Guo",
-    clickURL: "https://cpst.hzau.edu.cn/info/1015/1655.htm",
+    id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/3/9B/C2/019E945FB2696495BD025D4F377_2FECE83B_2C045.jpg?e=.jpg",
     title: "xuzhong Lin",
-    clickURL: "https://cpst.hzau.edu.cn/info/1015/1634.htm",
+    id: 0,
   },
   {
     imageURL: "http://cotton.hzau.edu.cn/uploads/image/20170606/1496727069.jpg",
     title: "shuanxia Jin",
-    clickURL: "https://cpst.hzau.edu.cn/info/1015/5093.htm",
+    id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/0/24/8A/9C7A78F77BB6DE8E0D2BCC9A3A3_EEB908CA_3B1D0.png?e=.png",
     title: "lili Tu",
-    clickURL: "https://cpst.hzau.edu.cn/info/1015/11716.htm",
+    id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/8/BC/95/34D791E397669DAA21AA37ACB6F_C6D53602_13BE6.jpg",
     title: "xiyan Yang",
-    clickURL: "https://cpst.hzau.edu.cn/info/1015/4621.htm",
+    id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/5/E1/A7/0D52DBC2DBF8F490A190C67ED00_49AD8F79_62BA.jpg",
     title: "maojun Wang",
-    clickURL: "https://cpst.hzau.edu.cn/info/1015/11543.htm",
+    id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/3/A9/C5/967069CEABFA36283C2DAB0D2FA_1406F651_5DB4.jpg",
     title: "daojun Yuan",
-    clickURL: "https://cpst.hzau.edu.cn/info/1016/1739.htm",
+    id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/C/A5/3B/3E357D51E773897D3CAC9D7F817_74B71DFF_3BA06.png?e=.png",
     title: "lin Min",
-    clickURL: "https://cpst.hzau.edu.cn/info/1016/3437.htm",
+    id: 0,
   },
 ];
-module.exports = [
-  {
-    url: "/login",
-    type: "post",
-    response: (config) => {
-      // 判断传进的post数据是否验证成功
-      const { account, password, loginStatus } = config.body;
-      if (account === "zpliu" && password === "111") {
-        return {
-          code: 0,
-          status: 200,
-          accessToken: "1111321321321",
-          roles: ["admin"],
-          info: {
-            username: "zpliu",
-            loginStatus: true,
-            message: "authenticated",
-            // config
-          },
-        };
-      } else {
-        return {
-          code: 1,
-          status: 200,
-          accessToken: "2223333331",
-          roles: ["editor"],
-          info: {
-            username: "",
-            loginStatus: true,
-            message: "authenticated failed",
-            // config
-          },
-        };
-      }
-    },
-  },
-  {
-    url: "/register",
-    type: "post",
-    response: (config) => {
-      const { account, password, loginStatus } = config.body;
-      return {
-        code: 0,
-        status: 200,
-        info: {
-          message: "注册成功",
-        },
-      };
-    },
-  },
-  {
-    url: "/user/info",
-    type: "post",
-    response: (config) => {
-      // 判断传进的post数据是否验证成功
-      const { token } = config.body;
-      // console.log(account, password)
-      if (token == "1111321321321") {
-        return {
-          code: 0,
-          status: 200,
-          accessToken: "1111321321321",
-          roles: ["admin"],
-          info: {
-            username: "zpliu",
-            loginStatus: true,
-            message: "authenticated",
-            // config
-          },
-        };
-      } else {
-        return {
-          code: 1,
-          status: 200,
-          accessToken: "2223333331",
-          roles: ["editor"],
-          info: {
-            username: "",
-            loginStatus: true,
-            message: "authenticated failed",
-            // config
-          },
-        };
-      }
-    },
-  },
-  {
-    url: "/people-show",
-    type: "get",
-    response: (config) => {
-      return {
-        code: 0,
-        status: 200,
-        info: people_brif_info,
-      };
-    },
-  },
-  {
-    url: "/team-show",
-    type: "get",
-    response: (config) => {
-      return {
-        code: 0,
-        status: 200,
-        info: team_teacher_info,
-      };
-    },
-  },
-];
+module.exports = {
+  testInfo,
+  people_brif_info,
+  team_teacher_info,
+};

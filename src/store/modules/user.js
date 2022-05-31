@@ -4,10 +4,10 @@
  * @Author: zpliu
  * @Date: 2022-03-29 16:20:12
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-22 16:11:31
+ * @LastEditTime: 2022-05-31 19:06:47
  * @@param:
  */
-import { login, register, userInfoRequest } from "@/API/User.js";
+import { login, register, userInfoRequest,get_personInfo } from "@/API/User.js";
 import { getToken, removeToken, setToken } from "@/utils/cookies";
 
 export default {
@@ -19,6 +19,7 @@ export default {
     loginStatus: false, //用于判断用户是否处于登录状态
     token: getToken() || "", //用于判断用户是否登录的token
     roles: [],
+    personInfo: {}
   },
   getters: {
     username: (state) => state.username,
@@ -37,6 +38,24 @@ export default {
       state.token = "";
       state.roles = [];
     },
+    del_infoTag(state, index) {
+      //删除对应的标签
+      state.personInfo.infoDetail.splice(index, 1);
+    },
+    add_infoTag(state, TagName) {
+      state.personInfo.infoDetail.push({
+        tagName: TagName,
+        vHtml: "",
+      });
+    },
+    set_vhtml(state, vData) {
+      const { vhtml, index } = vData;
+      state.personInfo.infoDetail[index]["vHtml"] = vhtml;
+    },
+    set_basicInfo(state,info){
+      state.personInfo.basic=info
+      console.log(state.personInfo)
+    }
   },
   actions: {
     authenticate(context, payload) {
@@ -72,11 +91,11 @@ export default {
     },
     getInfo(context) {
       /**
-       * 使用当前token获取用户信息
+       * 使用当前token获取用户的身份信息
        */
-      const parament={
-        token:context.state.token
-      }
+      const parament = {
+        token: context.state.token,
+      };
       return new Promise((resolve) => {
         userInfoRequest(parament).then((res) => {
           context.state.roles = res.data.roles;
@@ -84,5 +103,14 @@ export default {
         });
       });
     },
+    set_personInfo(context){
+      //向后端请求个人信息的数据
+      return new Promise((resolve)=>{
+        get_personInfo().then((res)=>{
+          context.state.personInfo=res.data.info
+          resolve(0)
+        })
+      })
+    }
   },
 };

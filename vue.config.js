@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 19:06:43
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-28 20:34:26
+ * @LastEditTime: 2022-05-28 22:21:36
  * @@param:
  */
 const path = require("path");
@@ -30,6 +30,17 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true,
+    },
+    proxy: {
+      "/api": {
+        // target: "http://106.12.198.214:8882",
+        target: "http://127.0.0.1:8000",
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+          "^/api": "",
+        },
+      },
     },
     before: require("./mock/mock-server.js"),
   },

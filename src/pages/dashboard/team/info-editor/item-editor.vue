@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-20 15:06:57
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-27 15:39:47
+ * @LastEditTime: 2022-05-31 16:36:02
  * @@param: 
 -->
 <template>
@@ -22,7 +22,7 @@
       :mode="mode"
     />
     <Editor
-      style="height: 750px"
+      style="height: 600px"
       v-model="valueHtml"
       :defaultConfig="editorConfig"
       :mode="mode"
