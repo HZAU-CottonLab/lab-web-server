@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-19 18:56:05
  * @LastEditors: zpliu
- * @LastEditTime: 2022-04-22 21:40:21
+ * @LastEditTime: 2022-06-07 11:57:29
  * @@param:
  */
 import { createApp } from "vue";
@@ -28,6 +28,9 @@ if (process.env.NODE_ENV === "production") {
   const { mockXHR } = require("../mock");
   mockXHR();
 }
+
+import 'animate.css/animate.min.css'
+
 
 const app = createApp(App);
 

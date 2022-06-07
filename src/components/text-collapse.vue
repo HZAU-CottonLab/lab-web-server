@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 22:30:06
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-06 22:44:25
+ * @LastEditTime: 2022-06-07 16:33:36
  * @@param: 
 -->
 <template>
@@ -55,7 +55,7 @@ defineProps({
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical; */
   position: relative;
-  line-height: 1.5;
+
   max-height: 4.5em;
   transition: 0.3s max-height;
 }

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-04 11:22:09
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-31 22:36:08
+ * @LastEditTime: 2022-06-07 16:16:47
  * @@param: 
 -->
 <template>
@@ -145,7 +145,6 @@ const handleClick = (personId) => {
       id: personId,
     },
   });
-  console.log(routeUrl);
   window.open(routeUrl.href, "_blank");
 };
 </script>

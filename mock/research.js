@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-07 10:00:39
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 10:19:56
+ * @LastEditTime: 2022-06-07 16:34:42
  * @@param:
  */
 const Random = require("mockjs").Random;
@@ -44,7 +44,24 @@ const ResearchList = {
     },
   ],
 };
-
+const carousels_list = [
+  {
+    title: "@ctitle(20)",
+    imageURL:
+      "https://btiscience.org/wp-content/uploads/BTI_DStern052021_3-scaled.jpg",
+    "id|1-200": 1,
+  },
+  {
+    title: "@ctitle(20)",
+    imageURL: "https://btiscience.org/wp-content/uploads/222222222222.jpg",
+    "id|1-200": 1,
+  },
+  {
+    title: "@ctitle(20)",
+    imageURL: "https://btiscience.org/wp-content/uploads/carousel_benth.jpeg",
+    "id|1-200": 1,
+  },
+];
 module.exports = [
   {
     url: "/research/",
@@ -54,6 +71,17 @@ module.exports = [
         code: 0,
         status: 200,
         info: ResearchList,
+      };
+    },
+  },
+  {
+    url: "/carousel/",
+    type: "get",
+    response: (config) => {
+      return {
+        code: 0,
+        status: 200,
+        info: carousels_list,
       };
     },
   },

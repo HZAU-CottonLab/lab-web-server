@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 17:33:05
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-06 17:10:58
+ * @LastEditTime: 2022-06-07 16:23:02
  * @@param:
  */
 const newsRoute = [
@@ -22,12 +22,22 @@ const newsRoute = [
     children: [
       {
         path: "index",
-        name: "news",
+        name: "allNews",
         component: () => import("@/pages/home/homePage/news/index.vue"),
         meta: {
           title: "News&event",
           hidden: false, //控制是否显示该link
           header: true, //是否是导航链接
+        },
+      },
+      {
+        path: "id", //显示单个新闻页面
+        name: "news",
+        component: () => import("@/components/404.vue"),
+        meta: {
+          title: "News&event",
+          hidden: true, //控制是否显示该link
+          header: false, //是否是导航链接
         },
       },
     ],

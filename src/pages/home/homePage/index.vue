@@ -4,25 +4,14 @@
  * @Author: zpliu
  * @Date: 2022-05-12 19:35:30
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 10:30:42
+ * @LastEditTime: 2022-06-07 17:11:59
  * @@param: 
 -->
 <template>
   <div class="home-wrapper">
     <el-main style="padding: 0px" class="main">
       <!--//todo: 点击按钮还需要完善 -->
-      <el-carousel :interval="5000" arrow="always" :height="carouselHeigh">
-        <el-carousel-item v-for="item in carousels_list" :key="item.url">
-          <div
-            :style="{
-              'background-image': 'url(' + item.url + ')',
-              'background-repeat': 'no-repeat',
-              'background-size': 'cover',
-            }"
-            class="carousel-item-bg"
-          ></div>
-        </el-carousel-item>
-      </el-carousel>
+      <Carousel :carouselHeigh="carouselHeigh"></Carousel>
       <el-row justify="center" class="container-region">
         <el-col :md="20" :lg="20" :xl="20" :xs="22" :sm="22">
           <News></News>
@@ -60,9 +49,8 @@ import backup from "@/components/backup";
 import News from "./news/news-show-home.vue";
 import Research from "./research/research-show-home.vue";
 import cardTitle from "./cardTitle.vue";
+import Carousel from "./carousel/index.vue";
 const { device } = useState("app", ["device"]);
-const { carousels_list } = useState("main", ["carousels_list"]);
-// const { get_newsData } = useActions("news", ["get_newsData"]);
 const state = reactive({
   teamList: [], //响应式存储数据
 });
@@ -80,7 +68,6 @@ const carouselHeigh = computed(() => {
   }
   return "400px";
 });
-
 onBeforeMount(() => {
   TeamItem().then((res) => {
     //获取列表信息
@@ -89,10 +76,6 @@ onBeforeMount(() => {
 });
 </script>
 <style lang='scss' scoped>
-.carousel-item-bg {
-  width: 100%;
-  height: 100%;
-}
 .container-region {
   // background-image: url("https://btiscience.org/wp-content/uploads/polygonal2-2.jpg");
   .el-col {

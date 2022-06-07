@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:35
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 11:51:19
+ * @LastEditTime: 2022-06-07 14:48:37
  * @@param: 
 -->
 <template>
@@ -21,20 +21,20 @@
         </div>
       </div>
       <div v-for="pageIndex in showNews" :key="pageIndex">
-        <!-- <transition
-          enter-active-class="animate__animated animate__bounce"
-          leave-active-class="animate__animated animate__zoomOut"
-        > -->
-        <ShowNews
-          :showNews="
-            newsList.slice(
-              (pageIndex - 1) * state.pageSize,
-              pageIndex * state.pageSize
-            )
-          "
-          v-if="pageIndex == state.page"
-        ></ShowNews>
-        <!-- </transition> -->
+        <transition
+          enter-active-class="animate__animated animate__slideInUp"
+          leave-active-class="animate__animated animate__backOutLeft"
+        >
+          <ShowNews
+            :showNews="
+              newsList.slice(
+                (pageIndex - 1) * state.pageSize,
+                pageIndex * state.pageSize
+              )
+            "
+            v-if="pageIndex == state.page"
+          ></ShowNews>
+        </transition>
       </div>
       <!-- 分页页面 -->
       <div class="pagination">
