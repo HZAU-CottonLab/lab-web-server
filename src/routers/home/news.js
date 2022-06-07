@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 17:33:05
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 17:55:01
+ * @LastEditTime: 2022-06-06 17:10:58
  * @@param:
  */
 const newsRoute = [
@@ -23,7 +23,7 @@ const newsRoute = [
       {
         path: "index",
         name: "news",
-        component: () => import("@/components/404.vue"),
+        component: () => import("@/pages/home/homePage/news/index.vue"),
         meta: {
           title: "News&event",
           hidden: false, //控制是否显示该link

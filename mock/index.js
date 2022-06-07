@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-01-02 13:38:34
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-31 18:58:09
+ * @LastEditTime: 2022-06-07 10:12:52
  * @@param:
  */
 const Mock = require("mockjs");
@@ -14,8 +14,17 @@ const table = require("./table");
 const user = require("./user/user.js");
 const publication = require("./publication");
 const upload_image = require("./upload_image");
+const news = require("./news");
+const research = require("./research.js");
 
-const mocks = [...table, ...user, ...publication, ...upload_image];
+const mocks = [
+  ...table,
+  ...user,
+  ...publication,
+  ...upload_image,
+  ...news,
+  ...research,
+];
 // for front mock
 // please use it cautiously, it will redefine XMLHttpRequest,
 // which will cause many of your third-party libraries to be invalidated(like progress event).

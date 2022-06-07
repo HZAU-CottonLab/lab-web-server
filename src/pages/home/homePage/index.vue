@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-12 19:35:30
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 21:23:36
+ * @LastEditTime: 2022-06-07 10:30:42
  * @@param: 
 -->
 <template>
@@ -24,13 +24,13 @@
         </el-carousel-item>
       </el-carousel>
       <el-row justify="center" class="container-region">
-        <el-col :span="20">
+        <el-col :md="20" :lg="20" :xl="20" :xs="22" :sm="22">
           <News></News>
         </el-col>
-        <el-col :span="20">
+        <el-col :md="20" :lg="20" :xl="20" :xs="22" :sm="22">
           <Research></Research>
         </el-col>
-        <el-col :span="20">
+        <el-col :md="20" :lg="20" :xl="20" :xs="22" :sm="22">
           <!-- //标签项目 -->
           <el-row>
             <el-col>
@@ -57,8 +57,8 @@ import { reactive, onBeforeMount, computed } from "vue";
 import { DeviceType } from "@/store/modules/app.js";
 import facultList from "@/components/team_carousel.vue";
 import backup from "@/components/backup";
-import News from "./news.vue";
-import Research from "./research.vue";
+import News from "./news/news-show-home.vue";
+import Research from "./research/research-show-home.vue";
 import cardTitle from "./cardTitle.vue";
 const { device } = useState("app", ["device"]);
 const { carousels_list } = useState("main", ["carousels_list"]);

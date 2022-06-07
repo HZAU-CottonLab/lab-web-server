@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 17:33:05
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 17:34:25
+ * @LastEditTime: 2022-06-07 10:13:39
  * @@param:
  */
 const researchRoute = [
@@ -23,7 +23,7 @@ const researchRoute = [
       {
         path: "index",
         name: "research",
-        component: () => import("@/components/404.vue"),
+        component: () => import("@/pages/home/homePage/research/index.vue"),
         meta: {
           title: "Research Area",
           hidden: false, //控制是否显示该link

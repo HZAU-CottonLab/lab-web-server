@@ -4,31 +4,36 @@
  * @Author: zpliu
  * @Date: 2022-01-12 12:43:22
  * @LastEditors: zpliu
- * @LastEditTime: 2022-01-12 13:04:49
+ * @LastEditTime: 2022-06-07 09:42:34
  * @@param:
  */
-import { getNewsList } from "@/API/news.js";
+import { getNewsList, getLatestNewsList } from "@/API/news.js";
 export default {
   namespaced: true,
   state: {
-    newsData: {
-      code: "",
-      newsList: [],
-    },
-  },
-  getters: {
-    newsData: (state) => state.newsData,
-  },
-  mutations: {
-    changeNew_Data(state, res) {
-      state.newsData = res;
-    },
+    newsList: [],
   },
   actions: {
-    get_newsData(context) {
-      getNewsList().then((res) => {
-        //console.log(res);
-        context.commit("changeNew_Data", res);
+    get_all_newsData(context) {
+      return new Promise((resolve) => {
+        getNewsList().then((res) => {
+          //console.log(res);
+          if (res.data.code == 0) {
+            context.state.newsList = res.data.info.content;
+            resolve(true); //显示数据，并修改state中内容
+          } else {
+            resolve(false);
+          }
+        });
+      });
+    },
+    get_news_by_id(context, id) {},
+    get_lastest_news() {
+      return new Promise((resolve) => {
+        getLatestNewsList().then((res) => {
+          console.log(res);
+          resolve(res.data);
+        });
       });
     },
   },
