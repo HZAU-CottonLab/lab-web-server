@@ -1,103 +1,67 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: zpliu
+ * @Date: 2022-06-07 17:30:19
+ * @LastEditors: zpliu
+ * @LastEditTime: 2022-06-07 21:26:03
+ * @@param: 
+-->
 <template>
-  <el-form
-    ref="ruleFormRef"
-    :model="ruleForm"
-    status-icon
-    :rules="rules"
-    label-width="120px"
-    class="demo-ruleForm"
-  >
-    <el-form-item label="Password" prop="pass">
-      <el-input v-model="ruleForm.pass" type="password" autocomplete="off" />
-    </el-form-item>
-    <el-form-item label="Confirm" prop="checkPass">
-      <el-input
-        v-model="ruleForm.checkPass"
-        type="password"
-        autocomplete="off"
-      />
-    </el-form-item>
-    <el-form-item label="Age" prop="age">
-      <el-input v-model.number="ruleForm.age" />
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="submitForm(ruleFormRef)"
-        >Submit</el-button
-      >
-      <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
-    </el-form-item>
-  </el-form>
+  <div>
+    <el-carousel
+      :initial-index="0"
+      :arrow="'always'"
+      v-if="state.carousels_list.length != 0"
+    >
+      <el-carousel-item v-for="item in state.carousels_list" :key="item.id">
+        <img :src="item.imageURL" alt="" />
+      </el-carousel-item>
+    </el-carousel>
+  </div>
 </template>
 
-<script  setup>
-import { reactive, ref } from "vue";
+<script setup>
+import { getCarouselsList } from "@/API/research.js";
+import { reactive, onBeforeMount, ref } from "vue";
 
-const ruleFormRef = ref();
-
-const checkAge = (rule, value, callback) => {
-  if (!value) {
-    return callback(new Error("Please input the age"));
-  }
+const state = reactive({
+  carousels_list: [],
+  showTitle: false, //延迟出现点击按钮
+  loadingCount: 0,
+});
+const handleCarouselChange = () => {
+  state.showTitle = false;
   setTimeout(() => {
-    if (!Number.isInteger(value)) {
-      callback(new Error("Please input digits"));
-    } else {
-      if (value < 18) {
-        callback(new Error("Age must be greater than 18"));
-      } else {
-        callback();
-      }
-    }
+    state.showTitle = true;
   }, 1000);
 };
-
-const validatePass = (rule, value, callback) => {
-  if (value === "") {
-    callback(new Error("Please input the password"));
-  } else {
-    if (ruleForm.checkPass !== "") {
-      if (!ruleFormRef.value) return;
-      ruleFormRef.value.validateField("checkPass", () => null);
-    }
-    callback();
-  }
-};
-const validatePass2 = (rule, value, callback) => {
-  if (value === "") {
-    callback(new Error("Please input the password again"));
-  } else if (value !== ruleForm.pass) {
-    callback(new Error("Two inputs don't match!"));
-  } else {
-    callback();
-  }
-};
-
-const ruleForm = reactive({
-  pass: "",
-  checkPass: "",
-  age: "",
-});
-
-const rules = reactive({
-  pass: [{ validator: validatePass, trigger: "blur" }],
-  checkPass: [{ validator: validatePass2, trigger: "blur" }],
-  age: [{ validator: checkAge, trigger: "blur" }],
-});
-
-const submitForm = (formEl) => {
-  if (!formEl) return;
-  formEl.validate((valid) => {
-    if (valid) {
-      console.log("submit!");
-    } else {
-      console.log("error submit!");
-      return false;
-    }
+onBeforeMount(() => {
+  getCarouselsList().then((res) => {
+    //图片加载时间太长了
+    state.carousels_list = res.data.info;
+    // carousel.value.setActiveItem(0); //手动进行切换
   });
-};
-
-const resetForm = (formEl) => {
-  if (!formEl) return;
-  formEl.resetFields();
-};
+});
 </script>
+
+
+
+<style scoped>
+.el-carousel__item h3 {
+  display: flex;
+  justify-content: center;
+  color: #475669;
+  opacity: 0.75;
+  line-height: 300px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
+</style>

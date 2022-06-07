@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-02 22:42:56
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-20 10:46:36
+ * @LastEditTime: 2022-06-07 22:33:57
  * @@param:
  */
 const publicationList = [
@@ -12,7 +12,7 @@ const publicationList = [
     year: 2022,
     "content|1-40": [
       {
-        'id|1-200':1,
+        "id|1-200": 1,
         Title:
           " Asymmetric subgenome selection and cis-regulatory divergence during cotton domestication",
         author: `Maojun Wang,Lili Tu, Min Lin,Zhongxu Lin,Pengcheng Wang,Qingyong
@@ -28,7 +28,7 @@ const publicationList = [
     year: 2021,
     "content|1-30": [
       {
-        'id|1-200':1,
+        "id|1-200": 1,
         Title: "@ctitle(15)",
         author: "@csentence(15)",
         periodical: "Nature Genetics",
@@ -41,7 +41,7 @@ const publicationList = [
     year: 2019,
     "content|1-50": [
       {
-        'id|1-200':1,
+        "id|1-200": 1,
         Title: "@csentence(12)",
         author: "@csentence(12)",
         periodical: "Nature Genetics",
@@ -53,8 +53,8 @@ const publicationList = [
   {
     year: 2018,
     "content|1-40": [
-      { 
-        'id|1-200':1,
+      {
+        "id|1-200": 1,
         Title: "@csentence(12)",
         author: "@csentence(12)",
         periodical: "Nature Genetics",
@@ -67,7 +67,7 @@ const publicationList = [
     year: 2017,
     "content|1-30": [
       {
-        'id|1-200':1,
+        "id|1-200": 1,
         Title: "@csentence(12)",
         author: "@csentence(12)",
         periodical: "Nature Genetics",
@@ -80,7 +80,7 @@ const publicationList = [
     year: "before 2017",
     "content|1-20": [
       {
-        'id|1-200':1,
+        "id|1-200": 1,
         Title: "@csentence(12)",
         author: "@csentence(12)",
         periodical: "Nature Genetics",
@@ -90,9 +90,28 @@ const publicationList = [
     ],
   },
 ];
+
+searchResult = [
+  {
+    year: 2022,
+    content: [
+      {
+        "id|1-200": 1,
+        Title: " 搜索出的文章结果",
+        author: `Maojun Wang,Lili Tu, Min Lin,Zhongxu Lin,Pengcheng Wang,Qingyong
+           Yang,Zhengxiu Ye ,Chao Shen, Jianying Li,Lin Zhang,Xiaolin Zhou,Xinhui Nie,Zhonghua Li,Kai Guo,Yizan Ma,Cong Huang,Shuangxia Jin,Longfu Zhu,Xiyan
+           Yang Ling Min,Daojun Yuan,Qinghua Zhang Keith Lindsey, Xianlong Zhang.`,
+        periodical: "Nature Genetics",
+        date: "2017-05",
+        doi: "https://doi.org/10.1038/ng.3807",
+      },
+    ],
+  },
+];
+
 module.exports = [
   {
-    url: "/publication",
+    url: "/publication/",
     type: "get",
     response: (config) => {
       return {
@@ -110,8 +129,28 @@ module.exports = [
       return {
         code: 0, //成功执行操作
         status: 200,
-        info: {},
+        info: [],
       };
+    },
+  },
+  {
+    url: "/publication/search",
+    type: "post",
+    response: (config) => {
+      const { keyword } = config.body;
+      if (keyword == "王") {
+        return {
+          code: 0, //成功执行操作
+          status: 200,
+          info: searchResult,
+        };
+      } else {
+        return {
+          code: 0, //成功执行操作
+          status: 200,
+          info: [],
+        };
+      }
     },
   },
 ];

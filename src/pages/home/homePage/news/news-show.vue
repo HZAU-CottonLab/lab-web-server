@@ -4,12 +4,12 @@
  * @Author: zpliu
  * @Date: 2022-06-07 09:20:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 09:56:47
+ * @LastEditTime: 2022-06-07 22:19:20
  * @@param: 
 -->
 <template>
   <el-row
-    :gutter="40"
+    :gutter="120"
     justify="start"
     class="news-card"
     v-show="showNews.length != 0"
@@ -23,7 +23,7 @@
       :lg="8"
       :xl="8"
     >
-      <NewsCard :newsItem="newsItem" :id="index"></NewsCard>
+      <NewsCard :newsItem="newsItem" :id="newsItem.id"></NewsCard>
     </el-col>
   </el-row>
 </template>

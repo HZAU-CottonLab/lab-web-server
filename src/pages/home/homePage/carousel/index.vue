@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-07 17:05:29
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 17:25:23
+ * @LastEditTime: 2022-06-07 21:30:37
  * @@param: 
 -->
 <template>
@@ -13,9 +13,9 @@
     arrow="always"
     :height="carouselHeigh"
     @change="handleCarouselChange"
-    ref="carousel"
+    v-if="state.carousels_list.length != 0"
   >
-    <el-carousel-item v-for="item in state.carousels_list" :key="item.url">
+    <el-carousel-item v-for="item in state.carousels_list" :key="item.id">
       <div
         :style="{
           'background-image': 'url(' + item.imageURL + ')',
@@ -31,7 +31,9 @@
                 <span>{{ item.title }}</span>
               </div>
               <div class="carousel-click">
-                <el-button type="info">Learn More</el-button>
+                <el-button type="info" @click="handleClick(item.id)"
+                  >Learn More</el-button
+                >
               </div>
             </div>
           </div>
@@ -44,17 +46,29 @@
 <script setup>
 import { getCarouselsList } from "@/API/research.js";
 import { reactive, onBeforeMount, ref } from "vue";
+import { useRouter } from "vue-router";
 defineProps({
   carouselHeigh: {
     type: String,
     required: true,
   },
 });
-const carousel = ref("");
 const state = reactive({
   carousels_list: [],
   showTitle: false, //延迟出现点击按钮
 });
+const router = useRouter();
+const handleClick = (newsId) => {
+  //进行_klack跳转
+  const routeUrl = router.resolve({
+    name: "news",
+    query: {
+      id: newsId,
+    },
+  });
+  window.open(routeUrl.href, "_blank");
+};
+
 const handleCarouselChange = () => {
   state.showTitle = false;
   setTimeout(() => {
@@ -65,7 +79,10 @@ onBeforeMount(() => {
   getCarouselsList().then((res) => {
     //图片加载时间太长了
     state.carousels_list = res.data.info;
-    carousel.value.setActiveItem(0); //手动进行切换
+
+    setTimeout(() => {
+      state.showTitle = true;
+    }, 1000);
   });
 });
 </script>

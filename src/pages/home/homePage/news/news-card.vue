@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:44
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 10:28:31
+ * @LastEditTime: 2022-06-07 21:33:50
  * @@param: 
 -->
 /* <!--
@@ -40,7 +40,9 @@
         </div>
         <div class="bottom">
           <!-- <time class="time">{{ currentDate }}</time> -->
-          <el-button text class="button">Read More</el-button>
+          <el-button text class="button" @click="handleClick(id)"
+            >Read More</el-button
+          >
         </div>
       </div>
     </el-card>
@@ -51,6 +53,7 @@
 import TextCollapse from "@/components/text-collapse.vue";
 import { Timer } from "@element-plus/icons-vue";
 import { defineProps } from "vue";
+import { useRouter } from "vue-router";
 defineProps({
   id: {
     type: Number,
@@ -61,6 +64,17 @@ defineProps({
     required: true,
   },
 });
+const router = useRouter();
+const handleClick = (newsId) => {
+  //进行_klack跳转
+  const routeUrl = router.resolve({
+    name: "news",
+    query: {
+      id: newsId,
+    },
+  });
+  window.open(routeUrl.href, "_blank");
+};
 </script>
 <style lang='scss' scoped>
 .newCard-wrapper {

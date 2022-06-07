@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 20:05:49
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 09:46:31
+ * @LastEditTime: 2022-06-07 22:55:59
  * @@param:
  */
 const Random = require("mockjs").Random;
@@ -70,6 +70,26 @@ module.exports = [
         status: 200,
         info: latestNewsList,
       };
+    },
+  },
+  {
+    url: "/news/search",
+    type: "post",
+    response: (config) => {
+      const { keyword } = config.body;
+      if (keyword == "test") {
+        return {
+          code: 1,
+          status: 200,
+          info: latestNewsList,
+        };
+      } else {
+        return {
+          code: 1,
+          status: 200,
+          info: { content: [] },
+        };
+      }
     },
   },
 ];

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:35
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 14:48:37
+ * @LastEditTime: 2022-06-07 23:00:04
  * @@param: 
 -->
 <template>
@@ -13,10 +13,12 @@
       <div class="search">
         <div class="search-input">
           <el-input
-            v-model="input"
+            v-model="state.input"
             class="w-50 m-2"
             placeholder="Type something"
             :suffix-icon="Search"
+            @blur="handleSearch"
+            @keyup.enter="handleSearch"
           />
         </div>
       </div>
@@ -51,6 +53,14 @@
       </div>
     </el-col>
     <backup></backup>
+    <el-drawer
+      v-model="state.drawer"
+      title="搜索结果"
+      direction="ltr"
+      size="60%"
+    >
+      <ShowNews :showNews="state.searchResult"></ShowNews>
+    </el-drawer>
   </el-row>
 </template>
 
@@ -61,11 +71,14 @@ import backup from "@/components/backup";
 import ShowNews from "./news-show.vue";
 import { ref, onBeforeMount, reactive, computed } from "vue";
 import { useActions, useState } from "@/utils/storehook.js";
-const input = ref("");
+import { searchNews } from "@/API/news.js";
 const state = reactive({
   showloading: true,
   page: 1, //默认第一页
   pageSize: 9,
+  drawer: false,
+  searchResult: [],
+  input: "",
 });
 const { newsList } = useState("news", ["newsList"]);
 const { get_all_newsData } = useActions("news", ["get_all_newsData"]);
@@ -76,10 +89,6 @@ const showNews = computed(() => {
     return Array.from(
       new Array(Math.ceil(newsList.value.length / state.pageSize) + 1).keys()
     ).slice(1);
-    // return newsList.value.slice(
-    //   (state.page - 1) * state.pageSize,
-    //   state.page * state.pageSize
-    // );
   }
   return [];
 });
@@ -91,6 +100,17 @@ const handleCurrentChange = (val) => {
   //修改当前所属页数
   state.page = val;
 };
+const handleSearch = () => {
+  //页面进行搜索，打开抽屉显示
+  if (state.input != "") {
+    searchNews({ keyword: state.input }).then((res) => {
+      state.searchResult = res.data.info["content"];
+      state.drawer = true;
+      state.input = "";
+    });
+  }
+};
+
 onBeforeMount(() => {
   get_all_newsData().then((res) => {
     state.showloading = !res; //请求完成并且获得对应的数据
