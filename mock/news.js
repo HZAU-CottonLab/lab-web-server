@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 20:05:49
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 22:55:59
+ * @LastEditTime: 2022-06-08 22:45:24
  * @@param:
  */
 const Random = require("mockjs").Random;
@@ -24,7 +24,7 @@ const latestNewsList = {
   content: [
     {
       "id|1-200": 1, //新闻所属的Id
-      title: "@ctitle(20)", //新闻的标题
+      title: "@ctitle(30)", //新闻的标题
       imageURL:
         "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
       description: "@ctitle(200)",

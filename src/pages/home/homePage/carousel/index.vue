@@ -4,16 +4,16 @@
  * @Author: zpliu
  * @Date: 2022-06-07 17:05:29
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 21:30:37
+ * @LastEditTime: 2022-06-08 22:41:27
  * @@param: 
 -->
 <template>
   <el-carousel
-    :interval="5000"
+    :interval="6000"
     arrow="always"
     :height="carouselHeigh"
-    @change="handleCarouselChange"
     v-if="state.carousels_list.length != 0"
+    ref="carouselRef"
   >
     <el-carousel-item v-for="item in state.carousels_list" :key="item.id">
       <div
@@ -24,20 +24,30 @@
         }"
         class="carousel-item-bg"
       >
-        <transition enter-active-class="animate__animated animate__slideInUp">
-          <div class="carousel-wraper" v-show="state.showTitle">
-            <div class="carousel-title">
-              <div class="carousel-content">
-                <span>{{ item.title }}</span>
-              </div>
-              <div class="carousel-click">
-                <el-button type="info" @click="handleClick(item.id)"
-                  >Learn More</el-button
-                >
-              </div>
+        <div class="carousel-wraper">
+          <div class="carousel-title">
+            <div class="carousel-content">
+              <h3 class="ml6">
+                <span class="text-wrapper">
+                  <span class="letters">
+                    <span
+                      v-for="(text, index) in item.title"
+                      :key="index"
+                      class="letter"
+                    >
+                      {{ text }}
+                    </span>
+                  </span>
+                </span>
+              </h3>
+            </div>
+            <div class="carousel-click">
+              <el-button type="info" @click="handleClick(item.id)"
+                >Learn More</el-button
+              >
             </div>
           </div>
-        </transition>
+        </div>
       </div>
     </el-carousel-item>
   </el-carousel>
@@ -45,8 +55,9 @@
 
 <script setup>
 import { getCarouselsList } from "@/API/research.js";
-import { reactive, onBeforeMount, ref } from "vue";
+import { reactive, onBeforeMount, defineProps, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import anime from "animejs";
 defineProps({
   carouselHeigh: {
     type: String,
@@ -55,8 +66,9 @@ defineProps({
 });
 const state = reactive({
   carousels_list: [],
-  showTitle: false, //延迟出现点击按钮
 });
+
+const carouselRef = ref(null);
 const router = useRouter();
 const handleClick = (newsId) => {
   //进行_klack跳转
@@ -69,21 +81,33 @@ const handleClick = (newsId) => {
   window.open(routeUrl.href, "_blank");
 };
 
-const handleCarouselChange = () => {
-  state.showTitle = false;
-  setTimeout(() => {
-    state.showTitle = true;
-  }, 1000);
-};
 onBeforeMount(() => {
   getCarouselsList().then((res) => {
-    //图片加载时间太长了
+    //图片加载时间太长了,将会导致title不会显示
     state.carousels_list = res.data.info;
-
-    setTimeout(() => {
-      state.showTitle = true;
-    }, 1000);
   });
+});
+onMounted(() => {
+  //虽然挂载到dom,但是需要显示的dom元素不一定会出现
+  // 将字体格式化为对应的元素
+  setTimeout(() => {
+    anime
+      .timeline({ loop: true })
+      .add({
+        targets: ".ml6 .letter",
+        translateY: ["1.3em", 0],
+        translateZ: 0,
+        duration: 750,
+        delay: (el, i) => 50 * i,
+      })
+      .add({
+        targets: ".ml6",
+        opacity: 0,
+        duration: 1000,
+        easing: "easeOutExpo",
+        delay: 1000,
+      });
+  }, 1000);
 });
 </script>
 <style lang='scss' scoped>
@@ -100,18 +124,30 @@ onBeforeMount(() => {
     justify-content: center;
     align-items: center;
     height: 100%;
+    position: relative;
     .carousel-content {
       border-radius: 8px;
-      padding: 10px;
+      padding: 20px;
       max-width: 60%;
       // box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
       background-color: rgba(45, 45, 45, 0.5);
+      .ml6 {
+        position: relative;
+        display: inline-block;
+        padding-top: 0.2em;
+        padding-right: 0.05em;
+        padding-bottom: 0.1em;
+        overflow: hidden;
+      }
       span {
-        line-height: 1.5;
         color: white;
-        font-size: 24px;
         height: 100%;
         word-wrap: break-word;
+        display: inline-block;
+      }
+      .letter {
+        display: inline-block;
+        line-height: 0.6em;
       }
     }
   }

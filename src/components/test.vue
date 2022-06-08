@@ -4,64 +4,68 @@
  * @Author: zpliu
  * @Date: 2022-06-07 17:30:19
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 21:26:03
+ * @LastEditTime: 2022-06-08 21:38:15
  * @@param: 
 -->
 <template>
   <div>
-    <el-carousel
-      :initial-index="0"
-      :arrow="'always'"
-      v-if="state.carousels_list.length != 0"
-    >
-      <el-carousel-item v-for="item in state.carousels_list" :key="item.id">
-        <img :src="item.imageURL" alt="" />
-      </el-carousel-item>
-    </el-carousel>
+    <h1 class="ml6" ref="ml">
+      <span class="text-wrapper">
+        <span class="letters" ref="letters">Beautiful Questions</span>
+      </span>
+    </h1>
   </div>
 </template>
 
 <script setup>
-import { getCarouselsList } from "@/API/research.js";
-import { reactive, onBeforeMount, ref } from "vue";
-
-const state = reactive({
-  carousels_list: [],
-  showTitle: false, //延迟出现点击按钮
-  loadingCount: 0,
-});
-const handleCarouselChange = () => {
-  state.showTitle = false;
-  setTimeout(() => {
-    state.showTitle = true;
-  }, 1000);
-};
-onBeforeMount(() => {
-  getCarouselsList().then((res) => {
-    //图片加载时间太长了
-    state.carousels_list = res.data.info;
-    // carousel.value.setActiveItem(0); //手动进行切换
-  });
+import anime from "animejs";
+import { onMounted, ref } from "vue";
+const ml = ref(null);
+const letters = ref(null);
+onMounted(() => {
+  var textWrapper = document.querySelector(".ml6 .letters");
+  textWrapper.innerHTML = textWrapper.textContent.replace(
+    /\S/g,
+    "<span class='letter' style='display: inline-block; line-height: 1em;'>$&</span>"
+  );
+  anime
+    .timeline({ loop: true })
+    .add({
+      targets: ".ml6 .letter",
+      translateY: ["1.1em", 0],
+      translateZ: 0,
+      duration: 750,
+      delay: (el, i) => {
+        return 50 * i;
+      },
+    })
+    .add({
+      targets: ".ml6",
+      opacity: 0,
+      duration: 1000,
+      easing: "easeOutExpo",
+      delay: 1000,
+    });
 });
 </script>
 
-
-
-<style scoped>
-.el-carousel__item h3 {
-  display: flex;
-  justify-content: center;
-  color: #475669;
-  opacity: 0.75;
-  line-height: 300px;
-  margin: 0;
+<style lang="scss" scoped>
+.ml6 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
 }
 
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
+.ml6 .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+  .letter {
+    display: inline-block;
+    line-height: 1em;
+  }
 }
 </style>
