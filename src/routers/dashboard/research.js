@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 16:55:20
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-20 14:14:02
+ * @LastEditTime: 2022-06-09 10:58:18
  * @@param:
  */
 const researchRoute = [
@@ -33,7 +33,8 @@ const researchRoute = [
       },
       {
         path: "add",
-        component: () => import("@/pages/dashboard/research/index.vue"),
+        component: () =>
+          import("@/pages/dashboard/research/research-editor.vue"),
         name: "dashboard-research-add",
         meta: {
           title: "研究添加",

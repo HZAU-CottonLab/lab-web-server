@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 22:30:06
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 16:33:36
+ * @LastEditTime: 2022-06-09 10:43:49
  * @@param: 
 -->
 <template>
@@ -12,7 +12,7 @@
     <input :id="id" class="exp" type="checkbox" />
     <div class="text">
       <label class="btn" :for="id"></label>
-      {{ content }}
+      <p v-html="content"></p>
     </div>
   </div>
 </template>

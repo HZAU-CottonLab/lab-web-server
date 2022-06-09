@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:35
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 09:42:17
+ * @LastEditTime: 2022-06-09 11:33:22
  * @@param: 
 -->
 <template>
@@ -67,7 +67,7 @@
 <script setup>
 import { Search } from "@element-plus/icons-vue";
 import backup from "@/components/backup";
-import ShowNews from "./news-show.vue";
+import ShowNews from "../show-person.vue";
 import { ref, onBeforeMount, reactive, computed } from "vue";
 import { useActions, useState } from "@/utils/storehook.js";
 import { searchNews } from "@/API/news.js";

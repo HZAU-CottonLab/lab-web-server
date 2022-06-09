@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-07 21:55:21
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 22:16:06
+ * @LastEditTime: 2022-06-09 10:29:51
  * @@param: 
 -->
 <template>
@@ -101,7 +101,7 @@ import { defineProps, ref } from "vue";
 defineProps({
   publicationList: {
     type: Array,
-    default: [],
+    default: () => [],
   },
 });
 const activateIndex = ref("0");

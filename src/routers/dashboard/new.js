@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 16:55:20
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-20 14:40:29
+ * @LastEditTime: 2022-06-09 10:26:43
  * @@param:
  */
 const newsRoute = [
@@ -38,6 +38,16 @@ const newsRoute = [
         meta: {
           title: "新闻添加",
           roles: ["admin"], // 或者在子导航中设置角色
+        },
+      },
+      {
+        path: "editor",
+        component: () => import("@/pages/dashboard/news/news-editor.vue"),
+        name: "dashboard-news-editor",
+        meta: {
+          title: "新闻编辑",
+          roles: ["admin"], // 或者在子导航中设置角色
+          hidden:true,
         },
       },
     ],

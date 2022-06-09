@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:35
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 09:42:17
+ * @LastEditTime: 2022-06-09 11:57:47
  * @@param: 
 -->
 <template>
@@ -27,7 +27,7 @@
           leave-active-class="animate__animated animate__backOutLeft"
           name="news-animal"
         >
-          <ShowNews
+          <ShowPeople
             :showNews="
               newsList.slice(
                 (pageIndex - 1) * state.pageSize,
@@ -35,7 +35,7 @@
               )
             "
             v-show="pageIndex == state.page"
-          ></ShowNews>
+          ></ShowPeople>
         </transition>
       </div>
       <!-- 分页页面 -->
@@ -59,15 +59,14 @@
       direction="ltr"
       size="60%"
     >
-      <ShowNews :showNews="state.searchResult"></ShowNews>
+      <ShowPeople :showNews="state.searchResult"></ShowPeople>
     </el-drawer>
   </el-row>
 </template>
-
 <script setup>
 import { Search } from "@element-plus/icons-vue";
 import backup from "@/components/backup";
-import ShowNews from "./news-show.vue";
+import ShowPeople from "../show-person.vue";
 import { ref, onBeforeMount, reactive, computed } from "vue";
 import { useActions, useState } from "@/utils/storehook.js";
 import { searchNews } from "@/API/news.js";

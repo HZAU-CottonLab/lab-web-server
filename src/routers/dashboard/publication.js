@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 16:55:20
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-22 16:41:48
+ * @LastEditTime: 2022-06-09 17:21:32
  * @@param:
  */
 const publicationRoute = [
@@ -33,23 +33,22 @@ const publicationRoute = [
         },
       },
       {
-        path: "editor",
-        component: () =>
-          import("@/pages/dashboard/publication/publication-editor.vue"),
-        name: "article-editro",
-        meta: {
-          title: "文章修改",
-          roles: ["admin"], // 或者在子导航中设置角色
-          hidden: true,
-        },
-      },
-      {
         path: "add",
         component: () =>
-          import("@/pages/dashboard/publication/publication-editor.vue"),
+          import("@/pages/dashboard/publication/publication-add.vue"),
         name: "dashboard-article-add",
         meta: {
           title: "文章添加",
+          roles: ["admin"], // 或者在子导航中设置角色
+        },
+      },
+      {
+        path: "editor",
+        component: () =>
+          import("@/pages/dashboard/publication/publication-add.vue"),
+        name: "dashboard-article-editor",
+        meta: {
+          title: "文章编辑",
           roles: ["admin"], // 或者在子导航中设置角色
           hidden: true,
         },

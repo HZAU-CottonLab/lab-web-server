@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-23 09:29:11
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-31 21:36:43
+ * @LastEditTime: 2022-06-09 11:42:15
  * @@param: 
 -->
 <template>
@@ -34,9 +34,13 @@ import basicInfo from "./info-editor/basicInfo.vue";
 import { ElMessage } from "element-plus";
 import { useMutations, useState, useActions } from "@/utils/storehook.js";
 import { ref, computed, onBeforeMount } from "vue";
+import { useRoute } from "vue-router";
 import Infoshow from "./info-show/index.vue";
 const { personInfo } = useState("user", ["personInfo"]);
-const { set_basicInfo } = useMutations("user", ["set_basicInfo"]);
+const { set_basicInfo, clearPersonInfo } = useMutations("user", [
+  "set_basicInfo",
+  "clearPersonInfo",
+]);
 const { set_personInfo } = useActions("user", ["set_personInfo"]);
 const { device } = useState("app", ["device"]);
 const sonRef = ref("");
@@ -67,14 +71,27 @@ const submit = (sonInstance) => {
 const handleInfoShow = () => {
   dialogTableVisible.value = !dialogTableVisible.value;
 };
-
+const route = useRoute();
 onBeforeMount(() => {
   //向后端发起数据请求
-  set_personInfo().then((res) => {
-    if (res == 0) {
-      loading.value = true;
-    }
-  });
+  /**
+   * todo 根据用户ID，向后端请求对应的数据
+   */
+  const newsId = route.query.id;
+  if (newsId == null) {
+    console.log("添加新的人员数据");
+    //
+    clearPersonInfo(); //清空store中已有的数据
+    loading.value = true;
+  } else {
+    console.log("请求后端数据，并编辑人员数据");
+    //向后端发起数据请求
+    set_personInfo().then((res) => {
+      if (res == 0) {
+        loading.value = true;
+      }
+    });
+  }
 });
 </script>
 <style lang='scss' scoped>
