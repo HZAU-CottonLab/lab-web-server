@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 21:47:08
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 17:11:31
+ * @LastEditTime: 2022-06-09 19:47:27
  * @@param: 
 -->
 <template>
@@ -35,7 +35,7 @@
         </template>
         <template #default="scope">
           <div>
-            <el-button size="small" @click="handlePublicationEdit(scope.row.id)"
+            <el-button size="small" @click="handlePublicationEdit(scope.row)"
               >Edit</el-button
             >
             <el-popconfirm
@@ -55,7 +55,6 @@
         </template>
       </el-table-column>
     </el-table>
-
     <el-pagination
       background
       layout="prev, pager, next"
@@ -66,6 +65,7 @@
       :page-size="pageSize"
       class="publication-pagination"
     />
+    <!-- //文章编辑对话框 -->
     <el-dialog
       v-model="state.editorDialogVisible"
       title="文章编辑"
@@ -74,18 +74,17 @@
       center
       @close="handleEditorDialogClick"
     >
-      <h2>Editor</h2>
-      <div>
-        <strong>Extra content (Not rendered)</strong>
-      </div>
-      <template #footer>
+      <publicationEditor
+        :publicationItem="state.EditorObject"
+      ></publicationEditor>
+      <!-- <template #footer>
         <span class="dialog-footer">
           <el-button @click="handleEditorDialogClick">Cancel</el-button>
           <el-button type="primary" @click="handleEditorDialogClick"
             >Confirm</el-button
           >
         </span>
-      </template>
+      </template> -->
     </el-dialog>
   </div>
 </template>
@@ -94,9 +93,9 @@ export default { name: "dashboard-article-show" };
 </script>
 
 <script setup>
-import { get_publication } from "@/API/publication";
-import { computed, reactive, ref, watch } from "vue";
+import { computed, reactive, ref, watch,defineProps } from "vue";
 import { Timer, InfoFilled } from "@element-plus/icons-vue";
+import publicationEditor from "./publication-add.vue";
 import { useRouter } from "vue-router";
 const props = defineProps({
   PublicationData: {
@@ -107,6 +106,7 @@ const props = defineProps({
     type: Boolean, //判断其是否作为搜索结果的子组件
     default: () => false,
   },
+  EditorObject: null,
 });
 
 const state = reactive({
@@ -167,13 +167,13 @@ const handleEditorDialogClick = () => {
 /**
  *
  */
-const handlePublicationEdit = (publicationId) => {
+const handlePublicationEdit = (publicationObject) => {
   if (props.searchCom == true) {
     //作为搜索组件，将进行路由跳转
     const routeUrl = router.resolve({
       name: "dashboard-article-editor",
       query: {
-        id: publicationId,
+        id: publicationObject.id,
       },
     });
     router.push(routeUrl).catch((error) => {
@@ -181,8 +181,9 @@ const handlePublicationEdit = (publicationId) => {
     });
     return;
   }
-  //显示界面直接显示对话框
+  //非搜索组件直接显示对话框，并获得正在编辑的对象
   state.editorDialogVisible = true;
+  state.EditorObject = publicationObject;
 };
 const handlePublicationdelete = (id) => {
   // state.deleteDialogVisible = true;

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:44
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 10:54:57
+ * @LastEditTime: 2022-06-09 22:37:01
  * @@param: 
 -->
 /* <!--
@@ -31,14 +31,14 @@
           </span>
         </div>
         <div class="card-abstract">
-          <!-- //描述性文字的收缩 -->
+          <!-- //描述性文字的收缩 ,必须要有一个唯一性的ID作为标识符-->
           <TextCollapse
-            :id="'news' + newsItem.id"
+            :id="newsItem.id == null ? 'research0' : 'research' + newsItem.id"
             :width="'98%'"
             :content="newsItem.description"
           ></TextCollapse>
         </div>
-        <div class="bottom">
+        <div class="bottom" v-if="!demoCom">
           <!-- <time class="time">{{ currentDate }}</time> -->
           <el-row justify="start" align="middle">
             <el-col :span="8">
@@ -90,6 +90,10 @@ defineProps({
     type: Object,
     required: true,
   },
+  demoCom: {
+    type: Boolean,
+    default: false,
+  },
 });
 const check = ref(false);
 const router = useRouter();
@@ -113,7 +117,7 @@ const handleCheckChange = (newsId) => {
 };
 const handleEditor = (newId) => {
   const routeUrl = router.resolve({
-    name: "dashboard-research-add",
+    name: "dashboard-research-editor",
     query: {
       id: newId,
     },

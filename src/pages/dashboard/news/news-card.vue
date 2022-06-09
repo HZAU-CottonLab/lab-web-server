@@ -4,16 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:44
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 10:24:24
- * @@param: 
--->
-/* <!--
- * @Descripttion: 
- * @version: 
- * @Author: zpliu
- * @Date: 2022-06-06 17:06:44
- * @LastEditors: zpliu
- * @LastEditTime: 2022-06-06 20:03:11
+ * @LastEditTime: 2022-06-09 22:34:36
  * @@param: 
 -->
 <template>
@@ -33,7 +24,7 @@
         <div class="card-abstract">
           <!-- //描述性文字的收缩 -->
           <TextCollapse
-            :id="'news' + newsItem.id"
+            :id="newsItem.id == null ? 'news-1' : 'news' + newsItem.id"
             :width="'98%'"
             :content="newsItem.description"
           ></TextCollapse>

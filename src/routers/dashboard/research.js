@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 16:55:20
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 10:58:18
+ * @LastEditTime: 2022-06-09 22:36:33
  * @@param:
  */
 const researchRoute = [
@@ -39,6 +39,17 @@ const researchRoute = [
         meta: {
           title: "研究添加",
           roles: ["admin"], // 或者在子导航中设置角色
+        },
+      },
+      {
+        path: "editor",
+        component: () =>
+          import("@/pages/dashboard/research/research-editor.vue"),
+        name: "dashboard-research-editor",
+        meta: {
+          title: "研究内容编辑",
+          roles: ["admin"], // 或者在子导航中设置角色
+          hidden: true,
         },
       },
     ],

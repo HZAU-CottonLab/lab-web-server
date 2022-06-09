@@ -4,13 +4,13 @@
  * @Author: zpliu
  * @Date: 2022-05-20 11:47:46
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-31 14:25:09
+ * @LastEditTime: 2022-06-09 21:05:11
  * @@param: 
 -->
 <template>
   <div>
     <el-row justify="center">
-      <el-col :md="6" :lg="3" :xl="4" :sm="6">
+      <el-col :md="6" :lg="3" :xl="4">
         <NavbarMenu
           @click="handleTagClick"
           :closable="true"
@@ -21,7 +21,6 @@
         :md="16"
         :lg="20"
         :xl="18"
-        :sm="16"
         class="editor-item"
         v-if="personInfo.infoDetail.length != 0"
       >

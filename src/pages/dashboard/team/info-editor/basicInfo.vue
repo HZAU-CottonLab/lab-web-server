@@ -4,105 +4,107 @@
  * @Author: zpliu
  * @Date: 2022-05-27 15:38:32
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-31 20:17:47
+ * @LastEditTime: 2022-06-09 21:36:41
  * @@param: 
 -->
 <template>
   <div class="info">
-    <el-row justify="center" align="top" style="height: 400px">
-      <el-col :md="6" :lg="3" :xl="4" :sm="6" class="avatar">
+    <el-row justify="center" align="top">
+      <el-col :md="12" :lg="3" :xl="4" class="avatar">
         <Avatar v-model:imagURL="formInline.imgURL"></Avatar>
       </el-col>
-      <el-col :md="16" :lg="20" :xl="18" :sm="16">
-        <div class="title-wrap">
-          <div class="title">
-            <span>基本信息</span>
+      <el-col :md="12" :lg="20" :xl="18">
+        <div style="width: 90%">
+          <div class="title-wrap">
+            <div class="title">
+              <span>基本信息</span>
+            </div>
           </div>
-        </div>
-        <el-form
-          :model="formInline"
-          class="info-form"
-          ref="ruleFormRef"
-          :rules="rules"
-        >
-          <el-form-item label="姓名" prop="name">
-            <el-input
-              v-model="formInline.name"
-              placeholder=""
-              class="input-form"
-            />
-          </el-form-item>
-          <el-form-item label="性别" prop="sex">
-            <el-select v-model="formInline.sex">
-              <el-option label="男" value="0" />
-              <el-option label="女" value="1" />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="身份" prop="peopleType">
-            <el-select v-model="formInline.peopleType">
-              <el-option label="教师" value="0" />
-              <el-option label="博后" value="1" />
-              <el-option label="博士" value="2" />
-              <el-option label="硕士" value="3" />
-              <el-option label="访问学者" value="4" />
-            </el-select>
-          </el-form-item>
-          <div v-if="teacher_form">
-            <el-form-item label="职称" prop="jobTitle">
+          <el-form
+            :model="formInline"
+            class="info-form"
+            ref="ruleFormRef"
+            :rules="rules"
+          >
+            <el-form-item label="姓名" prop="name">
               <el-input
-                v-model="formInline.jobTitle"
+                v-model="formInline.name"
                 placeholder=""
                 class="input-form"
               />
             </el-form-item>
-            <el-form-item label="招生资格" prop="recruit">
-              <el-input
-                v-model="formInline.recruit"
-                placeholder=""
-                class="input-form"
-              />
-            </el-form-item>
-            <el-form-item label="办公地点" prop="officeSite">
-              <el-input
-                v-model="formInline.officeSite"
-                placeholder=""
-                class="input-form"
-              />
-            </el-form-item>
-            <el-form-item label="联系方式" prop="contact">
-              <el-input
-                v-model="formInline.contact"
-                placeholder=""
-                class="input-form"
-              />
-            </el-form-item>
-          </div>
-          <!-- /**学生身份才显示这些 */ -->
-          <div v-if="formInline.peopleType.length != 0 && !teacher_form">
-            <el-form-item label="导师">
-              <el-select
-                v-model="formInline.teacher"
-                loading-text="Loading"
-                :loading="teacherSelectShow"
-              >
-                <el-option
-                  v-for="teacherInfor in state.teacherArray"
-                  :label="teacherInfor.name"
-                  :key="teacherInfor.id"
-                  :value="teacherInfor.id"
-                />
+            <el-form-item label="性别" prop="sex">
+              <el-select v-model="formInline.sex">
+                <el-option label="男" value="0" />
+                <el-option label="女" value="1" />
               </el-select>
             </el-form-item>
-            <el-form-item label="联系方式" prop="contact">
-              <el-input
-                v-model="formInline.contact"
-                placeholder=""
-                class="input-form"
-              />
+            <el-form-item label="身份" prop="peopleType">
+              <el-select v-model="formInline.peopleType">
+                <el-option label="教师" value="0" />
+                <el-option label="博后" value="1" />
+                <el-option label="博士" value="2" />
+                <el-option label="硕士" value="3" />
+                <el-option label="访问学者" value="4" />
+              </el-select>
             </el-form-item>
-          </div>
-          <!-- <el-button @click="submit(ruleFormRef)">111</el-button> -->
-        </el-form>
+            <div v-if="teacher_form">
+              <el-form-item label="职称" prop="jobTitle">
+                <el-input
+                  v-model="formInline.jobTitle"
+                  placeholder=""
+                  class="input-form"
+                />
+              </el-form-item>
+              <el-form-item label="招生资格" prop="recruit">
+                <el-input
+                  v-model="formInline.recruit"
+                  placeholder=""
+                  class="input-form"
+                />
+              </el-form-item>
+              <el-form-item label="办公地点" prop="officeSite">
+                <el-input
+                  v-model="formInline.officeSite"
+                  placeholder=""
+                  class="input-form"
+                />
+              </el-form-item>
+              <el-form-item label="联系方式" prop="contact">
+                <el-input
+                  v-model="formInline.contact"
+                  placeholder=""
+                  class="input-form"
+                />
+              </el-form-item>
+            </div>
+            <!-- /**学生身份才显示这些 */ -->
+            <div v-if="formInline.peopleType.length != 0 && !teacher_form">
+              <el-form-item label="导师">
+                <el-select
+                  v-model="formInline.teacher"
+                  loading-text="Loading"
+                  :loading="teacherSelectShow"
+                >
+                  <el-option
+                    v-for="teacherInfor in state.teacherArray"
+                    :label="teacherInfor.name"
+                    :key="teacherInfor.id"
+                    :value="teacherInfor.id"
+                  />
+                </el-select>
+              </el-form-item>
+              <el-form-item label="联系方式" prop="contact">
+                <el-input
+                  v-model="formInline.contact"
+                  placeholder=""
+                  class="input-form"
+                />
+              </el-form-item>
+            </div>
+            <!-- <el-button @click="submit(ruleFormRef)">111</el-button> -->
+          </el-form>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -118,7 +120,7 @@ const ruleFormRef = ref();
 const formInline = ref(personInfo.value.basic);
 defineExpose({
   ruleFormRef,
-  formInline
+  formInline,
 });
 const state = reactive({
   teacherArray: [],
@@ -187,6 +189,7 @@ onBeforeMount(() => {
   .avatar {
     display: inherit;
     justify-content: center;
+    margin: 20px 5px;
   }
 }
 .input-form {
@@ -201,6 +204,7 @@ onBeforeMount(() => {
   font-weight: bold;
   border-radius: 0px 10px 10px 20px;
   background: #007e43;
+  margin: 20px 10px;
   .title {
     border-radius: 0px 10px 10px 20px;
     background: white;

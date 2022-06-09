@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-02 22:42:56
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 22:33:57
+ * @LastEditTime: 2022-06-09 19:37:52
  * @@param:
  */
 const publicationList = [
@@ -19,7 +19,7 @@ const publicationList = [
            Yang,Zhengxiu Ye ,Chao Shen, Jianying Li,Lin Zhang,Xiaolin Zhou,Xinhui Nie,Zhonghua Li,Kai Guo,Yizan Ma,Cong Huang,Shuangxia Jin,Longfu Zhu,Xiyan
            Yang Ling Min,Daojun Yuan,Qinghua Zhang Keith Lindsey, Xianlong Zhang.`,
         periodical: "Nature Genetics",
-        date: "2017-05",
+        date: "2017-05-07",
         doi: "https://doi.org/10.1038/ng.3807",
       },
     ],
@@ -32,7 +32,7 @@ const publicationList = [
         Title: "@ctitle(15)",
         author: "@csentence(15)",
         periodical: "Nature Genetics",
-        date: "2017-05",
+        date: "2017-05-07",
         doi: "https://doi.org/10.1038/ng.3807",
       },
     ],
@@ -45,7 +45,7 @@ const publicationList = [
         Title: "@csentence(12)",
         author: "@csentence(12)",
         periodical: "Nature Genetics",
-        date: "2017-05",
+        date: "2017-05-07",
         doi: "https://doi.org/10.1038/ng.3807",
       },
     ],
@@ -58,7 +58,7 @@ const publicationList = [
         Title: "@csentence(12)",
         author: "@csentence(12)",
         periodical: "Nature Genetics",
-        date: "2017-05",
+        date: "2017-05-07",
         doi: "https://doi.org/10.1038/ng.3807",
       },
     ],
@@ -71,7 +71,7 @@ const publicationList = [
         Title: "@csentence(12)",
         author: "@csentence(12)",
         periodical: "Nature Genetics",
-        date: "2017-05",
+        date: "2017-05-07",
         doi: "https://doi.org/10.1038/ng.3807",
       },
     ],
@@ -84,7 +84,7 @@ const publicationList = [
         Title: "@csentence(12)",
         author: "@csentence(12)",
         periodical: "Nature Genetics",
-        date: "2017-05",
+        date: "2017-05-07",
         doi: "https://doi.org/10.1038/ng.3807",
       },
     ],
@@ -102,7 +102,7 @@ searchResult = [
            Yang,Zhengxiu Ye ,Chao Shen, Jianying Li,Lin Zhang,Xiaolin Zhou,Xinhui Nie,Zhonghua Li,Kai Guo,Yizan Ma,Cong Huang,Shuangxia Jin,Longfu Zhu,Xiyan
            Yang Ling Min,Daojun Yuan,Qinghua Zhang Keith Lindsey, Xianlong Zhang.`,
         periodical: "Nature Genetics",
-        date: "2017-05",
+        date: "2017-05-07",
         doi: "https://doi.org/10.1038/ng.3807",
       },
     ],

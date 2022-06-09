@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 21:47:08
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 17:20:26
+ * @LastEditTime: 2022-06-09 18:55:20
  * @@param: 
 -->
 <template>
@@ -48,6 +48,7 @@ export default { name: "dashboard-article-show" };
 import { get_publication, search_publication } from "@/API/publication";
 import { computed, onBeforeMount, reactive, ref } from "vue";
 import PublicationShow from "./publication-show.vue";
+import { Search } from "@element-plus/icons-vue";
 const state = reactive({
   PublicationData: [],
   input: [],
