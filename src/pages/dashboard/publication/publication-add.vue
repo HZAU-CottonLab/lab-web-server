@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-09 15:48:33
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 21:14:18
+ * @LastEditTime: 2022-06-25 20:41:04
  * @@param: 
 -->
 <template>
@@ -16,7 +16,7 @@
     >
       <el-form-item label="文章标题">
         <el-input
-          v-model="state.FormData.Title"
+          v-model="state.FormData.title"
           :autosize="{ minRows: 2, maxRows: 4 }"
           type="textarea"
         />
@@ -40,10 +40,20 @@
           type="date"
           placeholder="选择日期"
           size="large"
+          format="YYYY/MM/DD"
+          value-format="YYYY-MM-DD"
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="success" @click="handleSaveClick">保存</el-button>
+        <el-button
+          type="success"
+          @click="handleSaveClick"
+          v-if="state.FormData.id == null"
+          >保存</el-button
+        >
+        <el-button type="success" @click="handleUpdateClick" v-else
+          >更新</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
@@ -53,7 +63,13 @@
 import { DeviceType } from "@/store/modules/app.js";
 import useResize from "@/pages/dashboard/layout/useResize.js";
 import { reactive, computed, onBeforeMount, defineProps } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
+import {
+  add_publication,
+  get_publication_byId,
+  update_publication,
+} from "@/API/publication.js";
+import { ElMessage } from "element-plus";
 const { device } = useResize();
 const isMobile = computed(() => {
   //device属于计算属性，需要使用value获取其值
@@ -68,28 +84,45 @@ const props = defineProps({
     type: Object,
   },
 });
-const router = useRouter();
+const route = useRoute();
 const state = reactive({
   FormData: {
-    id: "", //用于更新已经存在的内容
-    Title: "",
+    id: null, //用于更新已经存在的内容
+    title: "",
     author: "",
     periodical: "",
     date: "",
     doi: "",
   },
 });
-
+const publicationId = route.query.id;
 onBeforeMount(() => {
-  if (props.publicationItem !== undefined) {
-    //修改state中form中的初始数据
-    state.FormData = props.publicationItem;
+  if (publicationId != null) {
+    //todo 如果携带ID参数,则是更新
+    get_publication_byId({ id: publicationId }).then((res) => {
+      state.FormData = res.data.data;
+    });
+  } else {
+    if (props.publicationItem !== undefined) {
+      //修改state中form中的初始数据
+      //浅拷贝，同步变化；将会消耗很大的性能
+      state.FormData = props.publicationItem;
+    }
   }
-  //todo 如果携带ID参数的修改，则需要向后台发起一次请求
 });
 const handleSaveClick = () => {
-  //首次保存的内容
-  //更新的内容
+  add_publication(state.FormData).then((res) => {
+    if (res.data.errno == 0) {
+      ElMessage.success(res.data.message);
+    }
+  });
+};
+const handleUpdateClick = () => {
+  update_publication(state.FormData).then((res) => {
+    if (res.data.errno == 0) {
+      ElMessage.success(res.data.message);
+    }
+  });
 };
 </script>
 <style lang='scss' scoped>

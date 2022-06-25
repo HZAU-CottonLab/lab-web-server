@@ -2,70 +2,137 @@
  * @Descripttion: 
  * @version: 
  * @Author: zpliu
- * @Date: 2022-06-07 17:30:19
+ * @Date: 2022-05-20 15:06:57
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-08 21:38:15
+ * @LastEditTime: 2022-06-21 22:34:18
  * @@param: 
 -->
 <template>
-  <div>
-    <h1 class="ml6" ref="ml">
-      <span class="text-wrapper">
-        <span class="letters" ref="letters">Beautiful Questions</span>
-      </span>
-    </h1>
+  <div class="editor">
+    <div class="tag-info" :style="{ background: theam_color }">
+      <div class="tag-title" :style="{ color: theam_color }">
+        <span>新闻稿</span>
+      </div>
+    </div>
+    <Toolbar
+      style="border-bottom: 1px solid #ccc"
+      :editor="editorRef"
+      :defaultConfig="toolbarConfig"
+      :mode="mode"
+    />
+    <Editor
+      style="height: 600px"
+      v-model="valueHtml"
+      :defaultConfig="editorConfig"
+      :mode="mode"
+      @onCreated="handleCreated"
+      @onBlur="upDateHtmlValue"
+    />
   </div>
 </template>
 
-<script setup>
-import anime from "animejs";
-import { onMounted, ref } from "vue";
-const ml = ref(null);
-const letters = ref(null);
-onMounted(() => {
-  var textWrapper = document.querySelector(".ml6 .letters");
-  textWrapper.innerHTML = textWrapper.textContent.replace(
-    /\S/g,
-    "<span class='letter' style='display: inline-block; line-height: 1em;'>$&</span>"
-  );
-  anime
-    .timeline({ loop: true })
-    .add({
-      targets: ".ml6 .letter",
-      translateY: ["1.1em", 0],
-      translateZ: 0,
-      duration: 750,
-      delay: (el, i) => {
-        return 50 * i;
-      },
-    })
-    .add({
-      targets: ".ml6",
-      opacity: 0,
-      duration: 1000,
-      easing: "easeOutExpo",
-      delay: 1000,
-    });
-});
-</script>
 
-<style lang="scss" scoped>
-.ml6 {
-  position: relative;
-  font-weight: 900;
-  font-size: 3.3em;
+<script setup>
+import "@wangeditor/editor/dist/css/style.css"; // 引入 css
+import {
+  onBeforeUnmount,
+  ref,
+  shallowRef,
+  defineEmits,
+  onBeforeMount,
+} from "vue";
+import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
+import { defineProps } from "vue";
+const props = defineProps({
+  theam_color: {
+    type: String,
+    default: "#007e43",
+  },
+  htmlValue: {
+    type: String,
+    required: true,
+    default: "<p>11</p>",
+  },
+});
+
+// 编辑器实例，必须用 shallowRef
+const editorRef = shallowRef();
+// 内容 HTML
+const valueHtml = ref(props.htmlValue);
+const mode = "default";
+//双向绑定更新内容
+const emits = defineEmits(["update:htmlValue"]);
+const upDateHtmlValue = () => {
+  // 失去焦点，更新内容
+  console.log(valueHtml.value)
+  emits("update:htmlValue", valueHtml.value, props.index);
+};
+// 模拟 ajax 异步获取内容
+// onMounted(() => {
+//   setTimeout(() => {
+//     valueHtml.value = '<p>模拟 Ajax 异步设置内容</p>';
+//   }, 1500);
+// });
+
+const toolbarConfig = {};
+const editorConfig = { placeholder: "请输入内容...", MENU_CONF: {} };
+editorConfig.MENU_CONF["uploadImage"] = {
+  server: "/api/user/icon/upload/",
+  fieldName: "image",
+  meta: {
+    id: 1,
+  },
+};
+
+
+
+//图片插入的回调函数
+//TODO: 已上传但未使用图片的删除
+//https://www.wangeditor.com/v5/menu-config.html#%E8%8E%B7%E5%8F%96%E5%B7%B2%E5%88%A0%E9%99%A4%E7%9A%84%E5%9B%BE%E7%89%87
+editorConfig.MENU_CONF['insertImage']={
+      onInsertedImage(imageNode){
+        if(imageNode==null) return
+        const { src, alt, url, href } = imageNode
+        console.log('inserted image', src, alt, url, href)
+      }
 }
 
-.ml6 .text-wrapper {
-  position: relative;
-  display: inline-block;
-  padding-top: 0.2em;
-  padding-right: 0.05em;
-  padding-bottom: 0.1em;
-  overflow: hidden;
-  .letter {
-    display: inline-block;
-    line-height: 1em;
+// 组件销毁时，也及时销毁编辑器
+onBeforeUnmount(() => {
+  const editor = editorRef.value;
+  if (editor == null) return;
+  editor.destroy();
+});
+
+const handleCreated = (editor) => {
+  editorRef.value = editor; // 记录 editor 实例，重要！
+};
+
+onBeforeMount(() => {
+  // console.log(editorConfig);
+});
+</script>
+<style lang="scss" scoped>
+.tag-info {
+  width: 100%;
+  display: flex;
+  padding: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 0px 10px 10px 20px;
+}
+.tag-title {
+  border-radius: 0px 10px 10px 20px;
+  background: white;
+  width: 150px;
+  display: inherit;
+  span {
+    margin-left: 20px;
   }
+}
+.tag-name {
+  display: inherit;
+  margin-left: 10px;
+  color: white;
 }
 </style>

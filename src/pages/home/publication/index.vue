@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 10:07:54
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 22:59:22
+ * @LastEditTime: 2022-06-25 20:57:40
  * @@param: 
 -->
 <template>
@@ -41,7 +41,7 @@
 
 <script setup>
 import backup from "@/components/backup";
-import { get_publication, search_publication } from "@/API/publication";
+import { get_publication_all, search_publication } from "@/API/publication.js";
 import PublicationShow from "./publication-show.vue";
 import { onBeforeMount, reactive } from "vue-demi";
 import { Search } from "@element-plus/icons-vue";
@@ -63,8 +63,8 @@ const handleSearch = () => {
   //否则啥也不干
 };
 onBeforeMount(() => {
-  get_publication().then((res) => {
-    state.publicationList = res.data.info;
+  get_publication_all().then((res) => {
+    state.publicationList = res.data.data;
   });
 });
 </script>

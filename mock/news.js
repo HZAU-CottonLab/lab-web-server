@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 20:05:49
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 20:20:37
+ * @LastEditTime: 2022-06-24 14:18:21
  * @@param:
  */
 const Random = require("mockjs").Random;
@@ -59,7 +59,7 @@ const latestNewsList = {
 
 module.exports = [
   {
-    url: "/news/all",
+    url: "/news/all/",
     type: "get",
     response: (config) => {
       return {
@@ -98,6 +98,15 @@ module.exports = [
           info: { content: [] },
         };
       }
+    },
+  },
+  {
+    url: "/news/add/",
+    type: "post",
+    response: (config) => {
+      return {
+        errno: 0,
+      };
     },
   },
 ];

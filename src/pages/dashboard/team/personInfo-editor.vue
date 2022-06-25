@@ -4,12 +4,12 @@
  * @Author: zpliu
  * @Date: 2022-05-23 09:29:11
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 11:42:15
+ * @LastEditTime: 2022-06-23 22:54:27
  * @@param: 
 -->
 <template>
   <div class="person-info" v-if="loading">
-    <div class="basic-info" :style="{ height: isMobile ? '800px' : '400px' }">
+    <div class="basic-info" :style="{ height: isMobile ? '800px' : '600px' }">
       <basicInfo ref="sonRef"></basicInfo>
     </div>
     <infoItem class="detail-info" v-if="!isMobile"></infoItem>
@@ -41,7 +41,10 @@ const { set_basicInfo, clearPersonInfo } = useMutations("user", [
   "set_basicInfo",
   "clearPersonInfo",
 ]);
-const { set_personInfo } = useActions("user", ["set_personInfo"]);
+const { set_personInfo, userInfoUpdate } = useActions("user", [
+  "set_personInfo",
+  "userInfoUpdate",
+]);
 const { device } = useState("app", ["device"]);
 const sonRef = ref("");
 const dialogTableVisible = ref(false);
@@ -59,11 +62,14 @@ const submit = (sonInstance) => {
   sonInstance.ruleFormRef.validate((valid) => {
     if (valid) {
       //验证通过后，将修改Store内数据；并向后端发起请求
-      set_basicInfo(sonInstance.formInline); //太吃性能了
-      ElMessage.success("数据正在保存!");
+      set_basicInfo(sonInstance.formInline);
+      userInfoUpdate().then((res) => {
+        if (res.errno == 0) {
+          ElMessage.success("数据保存成功!");
+        }
+      });
     } else {
       ElMessage.error("请完善信息后再提交!");
-      return false;
     }
   });
 };
@@ -77,17 +83,16 @@ onBeforeMount(() => {
   /**
    * todo 根据用户ID，向后端请求对应的数据
    */
-  const newsId = route.query.id;
-  if (newsId == null) {
-    console.log("添加新的人员数据");
-    //
+  const userId = route.query.id;
+  if (userId == null) {
+    // 添加新的人员数据
     clearPersonInfo(); //清空store中已有的数据
     loading.value = true;
   } else {
-    console.log("请求后端数据，并编辑人员数据");
     //向后端发起数据请求
-    set_personInfo().then((res) => {
+    set_personInfo({ id: userId }).then((res) => {
       if (res == 0) {
+        //请求完成，返回Promise
         loading.value = true;
       }
     });

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:35
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 09:42:17
+ * @LastEditTime: 2022-06-24 14:28:56
  * @@param: 
 -->
 <template>
@@ -22,34 +22,39 @@
           />
         </div>
       </div>
-      <div v-for="pageIndex in showNews" :key="pageIndex">
-        <transition
-          leave-active-class="animate__animated animate__backOutLeft"
-          name="news-animal"
-        >
-          <ShowNews
-            :showNews="
-              newsList.slice(
-                (pageIndex - 1) * state.pageSize,
-                pageIndex * state.pageSize
-              )
-            "
-            v-show="pageIndex == state.page"
-          ></ShowNews>
-        </transition>
+      <div v-if="newsList.length != 0">
+        <div v-for="pageIndex in showNews" :key="pageIndex">
+          <transition
+            leave-active-class="animate__animated animate__backOutLeft"
+            name="news-animal"
+          >
+            <ShowNews
+              :showNews="
+                newsList.slice(
+                  (pageIndex - 1) * state.pageSize,
+                  pageIndex * state.pageSize
+                )
+              "
+              v-show="pageIndex == state.page"
+            ></ShowNews>
+          </transition>
+        </div>
+        <!-- 分页页面 -->
+        <div class="pagination">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="newsList.length"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="state.page"
+            :page-size="state.pageSize"
+            class="publication-pagination"
+          />
+        </div>
       </div>
-      <!-- 分页页面 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="newsList.length"
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="state.page"
-          :page-size="state.pageSize"
-          class="publication-pagination"
-        />
+      <div v-else>
+        <span> 空空如也 </span>
       </div>
     </el-col>
     <backup></backup>

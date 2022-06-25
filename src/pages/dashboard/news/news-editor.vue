@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-08 22:52:17
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 22:52:39
+ * @LastEditTime: 2022-06-25 11:38:58
  * @@param: 
 -->
 <template>
@@ -44,11 +44,13 @@
             type="date"
             placeholder="选择日期"
             size="large"
+            format="YYYY/MM/DD"
+            value-format="YYYY-MM-DD"
           />
         </el-form-item>
-        <el-form-item label="置顶" prop="lastest">
+        <el-form-item label="置顶" prop="latest">
           <el-switch
-            v-model="state.researchItemData.lastest"
+            v-model="state.researchItemData.latest"
             inline-prompt
             active-text="yes"
             inactive-text="no"
@@ -64,11 +66,22 @@
       </el-form>
     </el-col>
     <el-col :md="22" :lg="13" :xl="16" class="info-editor">
-      <EditorInfo :htmlValue="''"></EditorInfo>
+      <EditorInfo
+        v-model:htmlValue="state.researchItemData.vhtml"
+        ref="ediforRef"
+      ></EditorInfo>
     </el-col>
     <el-col :span="24" class="operation-button">
       <div>
-        <el-button type="success">保存</el-button>
+        <el-button
+          type="success"
+          @click="handle_save_News"
+          v-if="newsId == null"
+          >保存</el-button
+        >
+        <el-button type="success" @click="handle_update_News" v-else
+          >更新</el-button
+        >
         <el-button type="info" @click="handlePreView">预览</el-button>
       </div>
     </el-col>
@@ -86,10 +99,12 @@
 <script setup>
 import { DeviceType } from "@/store/modules/app.js";
 import UploadAvatar from "../team/info-editor/upload-avatar.vue";
-import { onBeforeMount, reactive, computed } from "vue";
+import { onBeforeMount, reactive, computed, ref } from "vue";
 import useResize from "@/pages/dashboard/layout/useResize.js";
 import { useRoute } from "vue-router";
 import EditorInfo from "./editor/wangEditor.vue";
+import { addNews, getNews_byId, updateNews } from "@/API/news.js";
+import { ElMessage } from "element-plus";
 const { device } = useResize();
 const isMobile = computed(() => {
   //device属于计算属性，需要使用value获取其值
@@ -99,6 +114,7 @@ const isMobile = computed(() => {
   //移动端
   return true;
 });
+const ediforRef = ref(null);
 const state = reactive({
   researchItemData: {
     imageURL: null,
@@ -107,7 +123,8 @@ const state = reactive({
     description: "",
     id: null,
     vhtml: "",
-    lastest: false, //是否属于置顶新闻
+    latest: false, //是否属于置顶新闻
+    check: false,
   },
   drawer: false,
 });
@@ -115,19 +132,41 @@ const state = reactive({
 const handlePreView = () => {
   state.drawer = !state.drawer;
 };
+const handle_save_News = () => {
+  //TODO 手动触发editor中的事件
+  ediforRef.value.upDateHtmlValue();
+  addNews(state.researchItemData).then((res) => {
+    //保存数据
+    console.log(res);
+  });
+};
+
+const handle_update_News = () => {
+  //点击保存后，图片才会和news进行关联
+  //未保存前的图片，需要进一步清理
+  ediforRef.value.upDateHtmlValue();
+  updateNews(state.researchItemData).then((res) => {
+    if (res.data.errno == 0) {
+      ElMessage.success("数据保存成功!");
+    }
+  });
+};
 
 const route = useRoute();
+const newsId = route.query.id;
 onBeforeMount(() => {
   //向后端发起数据请求
   /**
    * todo 根据新闻ID，向后端请求对应的数据
    */
-  const newsId = route.query.id;
-  console.log(newsId);
   if (newsId == null) {
-    console.log("填充空白数据");
+    //添加新的新闻,API
+    console.log("新闻添加");
   } else {
-    console.log("请求后端数据");
+    getNews_byId({ id: newsId }).then((res) => {
+      //* 获取后台数据
+      state.researchItemData = res.data.data;
+    });
   }
 });
 </script>

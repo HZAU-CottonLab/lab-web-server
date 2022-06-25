@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-09 10:56:18
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 22:32:43
+ * @LastEditTime: 2022-06-25 22:34:00
  * @@param: 
 -->
 <template>
@@ -44,10 +44,20 @@
             type="date"
             placeholder="选择日期"
             size="large"
+            format="YYYY/MM/DD"
+            value-format="YYYY-MM-DD"
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="success">保存</el-button>
+          <el-button
+            type="success"
+            v-if="state.researchItemData.id == null"
+            @click="handleSaveResearch"
+            >保存</el-button
+          >
+          <el-button type="success" v-else @click="handleUpdateResearch"
+            >更新</el-button
+          >
           <el-button type="info" @click="handlePreView">预览</el-button>
         </el-form-item>
       </el-form>
@@ -75,6 +85,12 @@ import { onBeforeMount, reactive, computed } from "vue";
 import useResize from "@/pages/dashboard/layout/useResize.js";
 import { useRoute } from "vue-router";
 import ResearchCard from "./researchCard.vue";
+import {
+  research_add,
+  queryResearchById,
+  updateResearchItem,
+} from "@/API/research.js";
+import { ElMessage } from "element-plus";
 const { device } = useResize();
 const isMobile = computed(() => {
   //device属于计算属性，需要使用value获取其值
@@ -99,12 +115,33 @@ const handlePreView = () => {
   state.drawer = !state.drawer;
 };
 
+const handleSaveResearch = () => {
+  research_add(state.researchItemData).then((res) => {
+    if (res.data.errno == 0) {
+      ElMessage.success(res.data.message);
+    }
+  });
+};
+const handleUpdateResearch = () => {
+  updateResearchItem(state.researchItemData).then((res) => {
+    if (res.data.errno == 0) {
+      ElMessage.success(res.data.message);
+    }
+  });
+};
+
 const route = useRoute();
+const researchId = route.query.id;
 onBeforeMount(() => {
   //如果是带参数的路由则发起后端请求后，对数据进行修改
-  const researchId = route.query.id;
-  //请求后端数据
-  console.log("开始请求后端数据");
+  if (researchId != null) {
+    //请求后端数据
+    queryResearchById({
+      id: researchId,
+    }).then((res) => {
+      state.researchItemData = res.data.data;
+    });
+  }
 });
 </script>
 <style lang='scss' scoped>

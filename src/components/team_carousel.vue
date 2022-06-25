@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-04 11:22:09
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 16:16:47
+ * @LastEditTime: 2022-06-10 19:29:19
  * @@param: 
 -->
 <template>
@@ -31,7 +31,7 @@
             @click.prevent="handleClick(slide.id)"
           >
             <el-icon :size="20"><search /></el-icon>
-            <div>{{ slide.title }}</div>
+            <div>{{ slide.name }}</div>
           </el-link>
         </div>
       </div>

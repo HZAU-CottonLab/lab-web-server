@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-20 15:06:57
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 22:42:34
+ * @LastEditTime: 2022-06-25 11:35:11
  * @@param: 
 -->
 <template>
@@ -34,9 +34,9 @@
 
 <script setup>
 import "@wangeditor/editor/dist/css/style.css"; // 引入 css
-import { onBeforeUnmount, ref, shallowRef, defineEmits } from "vue";
+import { onBeforeUnmount, ref, shallowRef, defineEmits, watch } from "vue";
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
-import { defineProps } from "vue";
+import { defineProps, defineExpose } from "vue";
 const props = defineProps({
   theam_color: {
     type: String,
@@ -59,6 +59,13 @@ const upDateHtmlValue = () => {
   // 失去焦点，更新内容
   emits("update:htmlValue", valueHtml.value, props.index);
 };
+watch(
+  () => props.htmlValue, //监听props属性变化
+  (newValue) => {
+    valueHtml.value = newValue;
+  }
+);
+
 // 模拟 ajax 异步获取内容
 // onMounted(() => {
 //   setTimeout(() => {
@@ -79,6 +86,11 @@ onBeforeUnmount(() => {
 const handleCreated = (editor) => {
   editorRef.value = editor; // 记录 editor 实例，重要！
 };
+
+//需要在函数定义之后，暴露
+defineExpose({
+  upDateHtmlValue,
+});
 </script>
 <style lang="scss" scoped>
 .tag-info {

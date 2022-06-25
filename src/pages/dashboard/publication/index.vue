@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 21:47:08
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 18:55:20
+ * @LastEditTime: 2022-06-25 20:53:01
  * @@param: 
 -->
 <template>
@@ -45,8 +45,8 @@
 export default { name: "dashboard-article-show" };
 </script>
 <script setup>
-import { get_publication, search_publication } from "@/API/publication";
-import { computed, onBeforeMount, reactive, ref } from "vue";
+import { get_publication_all, search_publication } from "@/API/publication";
+import {onBeforeMount, reactive } from "vue";
 import PublicationShow from "./publication-show.vue";
 import { Search } from "@element-plus/icons-vue";
 const state = reactive({
@@ -56,7 +56,7 @@ const state = reactive({
   drawer: false,
 });
 const handleSearch = () => {
-  //向后端发生搜索
+  //TODO向后端发送搜索
   if (state.input != "") {
     search_publication({ keyword: state.input }).then((res) => {
       state.searchList = res.data.info;
@@ -67,8 +67,8 @@ const handleSearch = () => {
   //否则啥也不干
 };
 onBeforeMount(() => {
-  get_publication().then((res) => {
-    state.PublicationData = res.data.info;
+  get_publication_all().then((res) => {
+    state.PublicationData = res.data.data;
   });
 });
 </script>

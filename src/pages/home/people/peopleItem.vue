@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 10:59:43
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-31 22:36:50
+ * @LastEditTime: 2022-06-10 19:16:17
  * @@param: 
 -->
 <template>
@@ -45,7 +45,7 @@
             <span>{{ User.name }}</span>
           </div>
           <div class="people-position">
-            <span>{{ User.position }}</span>
+            <span>{{ User.jobTitle }}</span>
           </div>
           <div class="people-contact">
             <a :href="'mailto:' + User.email" target="_blank"

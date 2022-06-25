@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 21:47:08
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 19:47:27
+ * @LastEditTime: 2022-06-25 20:51:15
  * @@param: 
 -->
 <template>
@@ -16,7 +16,7 @@
           <span>{{ scope.row.date }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Title" prop="Title" />
+      <el-table-column label="title" prop="title" />
       <el-table-column align="right">
         <template #header>
           <el-select
@@ -97,6 +97,8 @@ import { computed, reactive, ref, watch,defineProps } from "vue";
 import { Timer, InfoFilled } from "@element-plus/icons-vue";
 import publicationEditor from "./publication-add.vue";
 import { useRouter } from "vue-router";
+import {delete_publication} from '@/API/publication.js'
+import { ElMessage } from "element-plus";
 const props = defineProps({
   PublicationData: {
     type: Array,
@@ -188,7 +190,11 @@ const handlePublicationEdit = (publicationObject) => {
 const handlePublicationdelete = (id) => {
   // state.deleteDialogVisible = true;
   //判断有没有成功删除；如果删除成功则修改table数据
-  console.log(id);
+  delete_publication({id:id}).then(res=>{
+    if(res.data.error==0){
+       ElMessage.success(res.data.message);
+    }
+  })
 };
 watch(
   () => props.PublicationData,

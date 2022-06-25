@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-02 22:42:56
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 19:37:52
+ * @LastEditTime: 2022-06-25 20:10:57
  * @@param:
  */
 const publicationList = [
@@ -13,7 +13,7 @@ const publicationList = [
     "content|1-40": [
       {
         "id|1-200": 1,
-        Title:
+        title:
           " Asymmetric subgenome selection and cis-regulatory divergence during cotton domestication",
         author: `Maojun Wang,Lili Tu, Min Lin,Zhongxu Lin,Pengcheng Wang,Qingyong
            Yang,Zhengxiu Ye ,Chao Shen, Jianying Li,Lin Zhang,Xiaolin Zhou,Xinhui Nie,Zhonghua Li,Kai Guo,Yizan Ma,Cong Huang,Shuangxia Jin,Longfu Zhu,Xiyan
@@ -29,7 +29,7 @@ const publicationList = [
     "content|1-30": [
       {
         "id|1-200": 1,
-        Title: "@ctitle(15)",
+        title: "@ctitle(15)",
         author: "@csentence(15)",
         periodical: "Nature Genetics",
         date: "2017-05-07",
@@ -42,7 +42,7 @@ const publicationList = [
     "content|1-50": [
       {
         "id|1-200": 1,
-        Title: "@csentence(12)",
+        title: "@csentence(12)",
         author: "@csentence(12)",
         periodical: "Nature Genetics",
         date: "2017-05-07",
@@ -55,7 +55,7 @@ const publicationList = [
     "content|1-40": [
       {
         "id|1-200": 1,
-        Title: "@csentence(12)",
+        title: "@csentence(12)",
         author: "@csentence(12)",
         periodical: "Nature Genetics",
         date: "2017-05-07",
@@ -68,7 +68,7 @@ const publicationList = [
     "content|1-30": [
       {
         "id|1-200": 1,
-        Title: "@csentence(12)",
+        title: "@csentence(12)",
         author: "@csentence(12)",
         periodical: "Nature Genetics",
         date: "2017-05-07",
@@ -81,7 +81,7 @@ const publicationList = [
     "content|1-20": [
       {
         "id|1-200": 1,
-        Title: "@csentence(12)",
+        title: "@csentence(12)",
         author: "@csentence(12)",
         periodical: "Nature Genetics",
         date: "2017-05-07",
@@ -97,7 +97,7 @@ searchResult = [
     content: [
       {
         "id|1-200": 1,
-        Title: " 搜索出的文章结果",
+        title: " 搜索出的文章结果",
         author: `Maojun Wang,Lili Tu, Min Lin,Zhongxu Lin,Pengcheng Wang,Qingyong
            Yang,Zhengxiu Ye ,Chao Shen, Jianying Li,Lin Zhang,Xiaolin Zhou,Xinhui Nie,Zhonghua Li,Kai Guo,Yizan Ma,Cong Huang,Shuangxia Jin,Longfu Zhu,Xiyan
            Yang Ling Min,Daojun Yuan,Qinghua Zhang Keith Lindsey, Xianlong Zhang.`,
@@ -111,7 +111,7 @@ searchResult = [
 
 module.exports = [
   {
-    url: "/publication/",
+    url: "/publication/all",
     type: "get",
     response: (config) => {
       return {

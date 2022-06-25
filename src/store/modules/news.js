@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-01-12 12:43:22
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 10:29:01
+ * @LastEditTime: 2022-06-24 14:24:29
  * @@param:
  */
 import { getNewsList, getLatestNewsList } from "@/API/news.js";
@@ -18,8 +18,8 @@ export default {
       return new Promise((resolve) => {
         getNewsList().then((res) => {
           //console.log(res);
-          if (res.data.code == 0) {
-            context.state.newsList = res.data.info.content;
+          if (res.data.errno == 0) {
+            context.state.newsList = res.data.data;
             resolve(true); //显示数据，并修改state中内容
           } else {
             resolve(false);

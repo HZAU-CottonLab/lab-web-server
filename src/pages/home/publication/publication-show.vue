@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-07 21:55:21
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 10:29:51
+ * @LastEditTime: 2022-06-25 20:58:28
  * @@param: 
 -->
 <template>
@@ -58,7 +58,7 @@
             <template #header>
               <div class="card-header">
                 <el-icon><Document /></el-icon>
-                <span>{{ publication.Title }}</span>
+                <span>{{ publication.title }}</span>
               </div>
             </template>
             <!-- //文章作者信息 -->

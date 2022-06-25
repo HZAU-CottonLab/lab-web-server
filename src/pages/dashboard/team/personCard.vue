@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:44
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 11:54:32
+ * @LastEditTime: 2022-06-23 21:22:26
  * @@param: 
 -->
 /* <!--
@@ -23,7 +23,7 @@
       <Avatar :imgURL="newsItem.imageURL" class="image-card" />
       <div style="padding: 14px" class="card-content">
         <div class="card-title">
-          <h3>{{ newsItem.title }}</h3>
+          <h3>{{ newsItem.name }}</h3>
         </div>
         <div class="bottom">
           <!-- <time class="time">{{ currentDate }}</time> -->
@@ -67,8 +67,8 @@
 </template>
 
 <script setup>
-import TextCollapse from "@/components/text-collapse.vue";
-import { Timer } from "@element-plus/icons-vue";
+// import TextCollapse from "@/components/text-collapse.vue";
+// import { Timer } from "@element-plus/icons-vue";
 import Avatar from "./info-show/avatar.vue";
 import { defineProps, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -81,16 +81,7 @@ defineProps({
 });
 const check = ref(false);
 const router = useRouter();
-const handleClick = (newsId) => {
-  //进行_klack跳转
-  const routeUrl = router.resolve({
-    name: "news",
-    query: {
-      id: newsId,
-    },
-  });
-  window.open(routeUrl.href, "_blank");
-};
+
 
 const handleDelete = (newsId) => {
   //新闻是否删除
@@ -101,6 +92,7 @@ const handleCheckChange = (newsId) => {
 };
 const handleEditor = (newId) => {
   const routeUrl = router.resolve({
+    //编辑个人信息
     name: "dashboard-team-editor",
     query: {
       id: newId,

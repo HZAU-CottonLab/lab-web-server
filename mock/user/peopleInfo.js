@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-31 18:59:49
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-31 22:30:00
+ * @LastEditTime: 2022-06-10 19:28:37
  * @@param:
  */
 const Random = require("mockjs").Random;
@@ -53,7 +53,7 @@ const people_brif_info = [
     peopleInfos: [
       {
         email: "xlzhang@mail.hzau.edu.cn",
-        position: "profesor",
+        jobTitle: "profesor",
         name: "Prof. Xianlong Zhang",
         imageURL:
           "https://cpst.hzau.edu.cn/__local/5/14/B7/F383BB8FB5C1B1B2ED0A4CEA002_DD80DD44_B3FC.png?e=.png",
@@ -77,7 +77,7 @@ const people_brif_info = [
     peopleInfos: [
       {
         email: "xlzhang@mail.hzau.edu.cn",
-        position: "profesor",
+        jobTitle: "profesor",
         name: "Longfu zhu",
         imageURL:
           "https://cpst.hzau.edu.cn/__local/9/B3/3F/B87268DF3891C57A4BE3F24DCE5_CB874EA3_1279C.jpg",
@@ -86,7 +86,7 @@ const people_brif_info = [
       },
       {
         email: "xlzhang@mail.hzau.edu.cn",
-        position: "profesor",
+        jobTitle: "profesor",
         name: "Xiaoping Guo",
         imageURL:
           "https://cpst.hzau.edu.cn/__local/C/78/F7/9B70666725E506FB1378A2C8D67_0BB9C212_3C6B6.png?e=.png",
@@ -95,7 +95,7 @@ const people_brif_info = [
       },
       {
         email: "linzhongxu@mail.hzau.edu.cn",
-        position: "profesor",
+        jobTitle: "profesor",
         name: "Zhongxu Lin",
         imageURL:
           "https://cpst.hzau.edu.cn/__local/3/9B/C2/019E945FB2696495BD025D4F377_2FECE83B_2C045.jpg?e=.jpg",
@@ -104,7 +104,7 @@ const people_brif_info = [
       },
       {
         email: "jsx@mail.hzau.edu.cn",
-        position: "profesor",
+        jobTitle: "profesor",
         name: "Shuangxia Jin",
         imageURL:
           "http://cotton.hzau.edu.cn/uploads/image/20170606/1496727069.jpg",
@@ -113,7 +113,7 @@ const people_brif_info = [
       },
       {
         email: "xlzhang@mail.hzau.edu.cn",
-        position: "profesor",
+        jobTitle: "profesor",
         name: "Lili Tu",
         imageURL:
           "https://cpst.hzau.edu.cn/__local/0/24/8A/9C7A78F77BB6DE8E0D2BCC9A3A3_EEB908CA_3B1D0.png?e=.png",
@@ -122,7 +122,7 @@ const people_brif_info = [
       },
       {
         email: "xlzhang@mail.hzau.edu.cn",
-        position: "profesor",
+        jobTitle: "profesor",
         name: "Xiyan Yang",
         imageURL:
           "https://cpst.hzau.edu.cn/__local/8/BC/95/34D791E397669DAA21AA37ACB6F_C6D53602_13BE6.jpg",
@@ -131,7 +131,7 @@ const people_brif_info = [
       },
       {
         email: "mjwang@mail.hzau.edu.cn",
-        position: "profesor",
+        jobTitle: "profesor",
         name: "Maojun Wang",
         imageURL:
           "https://cpst.hzau.edu.cn/__local/5/E1/A7/0D52DBC2DBF8F490A190C67ED00_49AD8F79_62BA.jpg",
@@ -140,7 +140,7 @@ const people_brif_info = [
       },
       {
         email: "ydj at mail.hzau.edu.cn",
-        position: "associate  profesor",
+        jobTitle: "associate  profesor",
         name: "Daojun Yuan",
         imageURL:
           "https://cpst.hzau.edu.cn/__local/3/A9/C5/967069CEABFA36283C2DAB0D2FA_1406F651_5DB4.jpg",
@@ -149,7 +149,7 @@ const people_brif_info = [
       },
       {
         email: "Lingmin@mail.hzau.edu.cn",
-        position: "associate  profesor",
+        jobTitle: "associate  profesor",
         name: "lin Min",
         imageURL:
           "https://cpst.hzau.edu.cn/__local/C/A5/3B/3E357D51E773897D3CAC9D7F817_74B71DFF_3BA06.png?e=.png",
@@ -164,7 +164,7 @@ const people_brif_info = [
     peopleInfos: [
       {
         email: "Test",
-        position: "Postdoctoral Fellow",
+        jobTitle: "Postdoctoral Fellow",
         name: "Test",
         imageURL: Random.image("400x400"),
         description: ``,
@@ -172,7 +172,7 @@ const people_brif_info = [
       },
       {
         email: "Test",
-        position: "Postdoctoral Fellow",
+        jobTitle: "Postdoctoral Fellow",
         name: "Test",
         imageURL: Random.image("400x400"),
         description: ``,
@@ -180,7 +180,7 @@ const people_brif_info = [
       },
       {
         email: "Test",
-        position: "Postdoctoral Fellow",
+        jobTitle: "Postdoctoral Fellow",
         name: "Test",
         imageURL: Random.image("400x400"),
         description: ``,
@@ -194,7 +194,7 @@ const people_brif_info = [
     "peopleInfos|1-5": [
       {
         email: "Test",
-        position: "PhD Student",
+        jobTitle: "PhD Student",
         name: "Test",
         imageURL: Random.image("400x400"),
         description: ``,
@@ -208,7 +208,7 @@ const people_brif_info = [
     "peopleInfos|1-2": [
       {
         email: "Test",
-        position: "Graduate Student",
+        jobTitle: "Graduate Student",
         name: "Test",
         imageURL: Random.image("400x400"),
         description: ``,
@@ -222,7 +222,7 @@ const people_brif_info = [
     "peopleInfos|1-4": [
       {
         email: "Test",
-        position: "Graduate Student",
+        jobTitle: "Graduate Student",
         name: "Test",
         imageURL: Random.image("400x400"),
         description: ``,
@@ -236,60 +236,60 @@ const team_teacher_info = [
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/5/14/B7/F383BB8FB5C1B1B2ED0A4CEA002_DD80DD44_B3FC.png?e=.png",
-    title: "xian long Zhang",
+    name: "xian long Zhang",
     id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/9/B3/3F/B87268DF3891C57A4BE3F24DCE5_CB874EA3_1279C.jpg",
-    title: "long fu Zhu",
+    name: "long fu Zhu",
     id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/C/78/F7/9B70666725E506FB1378A2C8D67_0BB9C212_3C6B6.png?e=.png",
-    title: "xiao ping Guo",
+    name: "xiao ping Guo",
     id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/3/9B/C2/019E945FB2696495BD025D4F377_2FECE83B_2C045.jpg?e=.jpg",
-    title: "xuzhong Lin",
+    name: "xuzhong Lin",
     id: 0,
   },
   {
     imageURL: "http://cotton.hzau.edu.cn/uploads/image/20170606/1496727069.jpg",
-    title: "shuanxia Jin",
+    name: "shuanxia Jin",
     id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/0/24/8A/9C7A78F77BB6DE8E0D2BCC9A3A3_EEB908CA_3B1D0.png?e=.png",
-    title: "lili Tu",
+    name: "lili Tu",
     id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/8/BC/95/34D791E397669DAA21AA37ACB6F_C6D53602_13BE6.jpg",
-    title: "xiyan Yang",
+    name: "xiyan Yang",
     id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/5/E1/A7/0D52DBC2DBF8F490A190C67ED00_49AD8F79_62BA.jpg",
-    title: "maojun Wang",
+    name: "maojun Wang",
     id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/3/A9/C5/967069CEABFA36283C2DAB0D2FA_1406F651_5DB4.jpg",
-    title: "daojun Yuan",
+    name: "daojun Yuan",
     id: 0,
   },
   {
     imageURL:
       "https://cpst.hzau.edu.cn/__local/C/A5/3B/3E357D51E773897D3CAC9D7F817_74B71DFF_3BA06.png?e=.png",
-    title: "lin Min",
+    name: "lin Min",
     id: 0,
   },
 ];

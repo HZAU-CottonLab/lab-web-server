@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-31 09:20:25
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-31 11:59:07
+ * @LastEditTime: 2022-06-24 15:59:21
  * @@param: 
 -->
 <template>
@@ -14,15 +14,17 @@
     <el-upload
       class="avatar-uploader"
       list-type="picture"
-      action="/dev-api/login"
+      :action="baseURL + '/img/upload/'"
       :show-file-list="false"
       :on-success="handleAvatarSuccess"
       :before-upload="beforeAvatarUpload"
+      name="image"
+      :data="{ alt: 'avatar' }"
     >
       <img
         class="avatar-img"
-        v-if="imageUrl"
-        :src="imageUrl"
+        v-if="imagURL"
+        :src="imagURL"
         fit="cover"
         @mouseover="() => (state.imageOperation = true)"
         @mouseout="() => (state.imageOperation = false)"
@@ -43,7 +45,7 @@
       </div>
     </el-upload>
     <el-dialog v-model="state.dialogVisible">
-      <img :src="imageUrl" alt="Preview Image" style="width: 100%" />
+      <img :src="imagURL" alt="Preview Image" style="width: 100%" />
     </el-dialog>
   </div>
 </template>
@@ -52,7 +54,7 @@
 import { reactive, ref, defineProps, defineEmits, watch } from "vue";
 import { ElMessage } from "element-plus";
 import { Plus, ZoomIn, Delete } from "@element-plus/icons-vue";
-
+const baseURL = process.env.VUE_APP_BASE_API;
 const props = defineProps({
   imagURL: {
     type: String,
@@ -74,8 +76,9 @@ watch(imageUrl, (newValue) => {
 /**
  * 头像上传
  */
-const handleAvatarSuccess = (response, uploadFile) => {
-  imageUrl.value = URL.createObjectURL(uploadFile.raw);
+const handleAvatarSuccess = (response) => {
+  // imageUrl.value = URL.createObjectURL(uploadFile.raw);
+  imageUrl.value = response.data.url;
   //阻止原有的点击事件
 };
 const beforeAvatarUpload = (rawFile) => {

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-12 10:13:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-23 09:21:42
+ * @LastEditTime: 2022-06-21 17:40:10
  * @@param:
  */
 // 前端路由权限验证
@@ -47,7 +47,7 @@ router.beforeEach((to, from, next) => {
            * commit('user/logout','')
            * dispatch('user/getInfo') 获取用户信息
            */
-          store.dispatch("user/getInfo").then((res) => {
+          store.dispatch("user/getUserRoles").then((res) => {
             const roles = res.roles;
             //根据用户身份，设置当前可以访问的路由
             store.commit("permission/setRouter", roles);

@@ -4,21 +4,25 @@
  * @Author: zpliu
  * @Date: 2022-03-29 16:20:12
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 11:41:45
+ * @LastEditTime: 2022-06-23 22:52:35
  * @@param:
  */
 import {
   login,
   register,
-  userInfoRequest,
+  userRoles,
   get_personInfo,
+  logoutBackend,
+  personInfo_update,
 } from "@/API/User.js";
+
 import { getToken, removeToken, setToken } from "@/utils/cookies";
 
 export default {
   namespaced: true,
   state: {
     username: "",
+    userId: "",
     account: "",
     password: "",
     loginStatus: false, //用于判断用户是否处于登录状态
@@ -42,6 +46,8 @@ export default {
       removeToken();
       state.token = "";
       state.roles = [];
+      //清除session信息，异步操作无需等待
+      logoutBackend();
     },
     del_infoTag(state, index) {
       //删除对应的标签
@@ -54,12 +60,13 @@ export default {
       });
     },
     set_vhtml(state, vData) {
+      //编辑器失去焦点时，将会完成
       const { vhtml, index } = vData;
       state.personInfo.infoDetail[index]["vHtml"] = vhtml;
     },
     set_basicInfo(state, info) {
+      //将数据进行保存
       state.personInfo.basic = info;
-      console.log(state.personInfo);
     },
     clearPersonInfo(state) {
       state.personInfo = {
@@ -94,10 +101,12 @@ export default {
           // context为state拷贝
           (res) => {
             //修改state中的内容
+            console.log(res.data);
             context.state.username = res.data.info.username;
             context.state.loginStatus = res.data.info.loginStatus;
             /* 登录请求完成后设置token*/
             context.state.token = res.data.accessToken;
+            context.state.userId = res.data.info.id;
             // context.state.roles = res.data.roles;
             setToken(res.data.accessToken);
             //异步完成请求后，返回登录状态
@@ -116,26 +125,39 @@ export default {
         });
       });
     },
-    getInfo(context) {
+    getUserRoles(context) {
       /**
-       * 使用当前token获取用户的身份信息
+       * 使用token获取当前登录用户的身份信息
        */
       const parament = {
         token: context.state.token,
       };
       return new Promise((resolve) => {
-        userInfoRequest(parament).then((res) => {
+        userRoles(parament).then((res) => {
           context.state.roles = res.data.roles;
           resolve(res.data);
         });
       });
     },
-    set_personInfo(context) {
+    set_personInfo(context, payload) {
       //向后端请求个人信息的数据
       return new Promise((resolve) => {
-        get_personInfo().then((res) => {
+        get_personInfo(payload).then((res) => {
           context.state.personInfo = res.data.info;
           resolve(0);
+        });
+      });
+    },
+    userInfoUpdate(context) {
+      // console.log(state.personInfo)
+      const payload = {
+        infoDetail: JSON.stringify(context.state.personInfo.infoDetail),
+      };
+      //合并对象
+      Object.assign(payload, context.state.personInfo.basic);
+      return new Promise((resolve) => {
+        personInfo_update(payload).then((res) => {
+          resolve(res.data);
         });
       });
     },

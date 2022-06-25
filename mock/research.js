@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-07 10:00:39
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 10:45:09
+ * @LastEditTime: 2022-06-25 22:37:18
  * @@param:
  */
 const Random = require("mockjs").Random;
@@ -64,7 +64,7 @@ const carousels_list = [
 ];
 module.exports = [
   {
-    url: "/research/",
+    url: "/research/all/",
     type: "get",
     response: (config) => {
       return {
@@ -75,7 +75,7 @@ module.exports = [
     },
   },
   {
-    url: "/carousel/",
+    url: "/latest/all",
     type: "get",
     response: (config) => {
       return {

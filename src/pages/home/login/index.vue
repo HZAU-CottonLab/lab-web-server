@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-22 14:25:15
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 10:46:45
+ * @LastEditTime: 2022-06-21 17:50:23
  * @@param: 
 -->
 <template>
@@ -35,8 +35,8 @@
                     :rules="login_rule"
                     ref="loginForm"
                   >
-                    <el-form-item label="Account" prop="account">
-                      <el-input v-model="loginForm.account" />
+                    <el-form-item label="Email" prop="email">
+                      <el-input v-model="loginForm.email" />
                     </el-form-item>
                     <el-form-item label="Password" prop="password">
                       <el-input v-model="loginForm.password" />
@@ -58,11 +58,11 @@
                     :rules="siginup_rule"
                     ref="singupForm"
                   >
-                    <el-form-item label="name" prop="username">
-                      <el-input v-model="singupForm.username" />
-                    </el-form-item>
-                    <el-form-item label="email" prop="email">
+                    <el-form-item label="name" prop="email">
                       <el-input v-model="singupForm.email" />
+                    </el-form-item>
+                    <el-form-item label="email" prop="name">
+                      <el-input v-model="singupForm.name" />
                     </el-form-item>
                     <el-form-item label="Password" prop="password">
                       <el-input v-model="singupForm.password" />
@@ -147,12 +147,11 @@ export default {
     };
     return {
       loginForm: {
-        account: "",
+        email: "",
         password: "",
       },
       singupForm: {
-        username: "",
-        account: "",
+        name: "",
         password: "",
         email: "",
         repeatPassword: "",

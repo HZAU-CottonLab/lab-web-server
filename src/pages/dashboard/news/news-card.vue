@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:44
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 22:34:36
+ * @LastEditTime: 2022-06-25 16:37:29
  * @@param: 
 -->
 <template>
@@ -76,31 +76,36 @@ import { Timer } from "@element-plus/icons-vue";
 import { defineProps, ref } from "vue";
 import { useRouter } from "vue-router";
 import { Delete, Edit, InfoFilled } from "@element-plus/icons-vue";
-defineProps({
+import { checkNews, deleteNews } from "@/API/news.js";
+import { ElMessage } from "element-plus";
+const props = defineProps({
   newsItem: {
     type: Object,
     required: true,
   },
 });
-const check = ref(false);
+const check = ref(props.newsItem.check);
 const router = useRouter();
-const handleClick = (newsId) => {
-  //进行_klack跳转
-  const routeUrl = router.resolve({
-    name: "news",
-    query: {
-      id: newsId,
-    },
-  });
-  window.open(routeUrl.href, "_blank");
-};
-
 const handleDelete = (newsId) => {
-  //新闻是否删除
-  console.log("删除新闻", newsId);
+  //新闻删除
+  //TODO 删除后的组件刷新
+  deleteNews({
+    id: newsId,
+  }).then((res) => {
+    if (res.data.errno == 0) {
+      ElMessage.success(res.data.message);
+    }
+  });
 };
 const handleCheckChange = (newsId) => {
-  console.log("修改新闻状态", newsId);
+  checkNews({
+    id: newsId,
+    check: check.value,
+  }).then((res) => {
+    if (res.data.errno == 0) {
+      ElMessage.success(res.data.message);
+    }
+  });
 };
 const handleEditor = (newId) => {
   const routeUrl = router.resolve({
