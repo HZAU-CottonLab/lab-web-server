@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 16:55:20
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 11:35:15
+ * @LastEditTime: 2022-06-28 19:11:55
  * @@param:
  */
 const teamRoute = [
@@ -67,15 +67,15 @@ const teamRoute = [
           roles: ["admin", "editor"], // 或者在子导航中设置角色
         },
       },
-      {
-        path: "add",
-        component: () => import("@/pages/dashboard/team/personInfo-editor"),
-        name: "dashboard-team-add",
-        meta: {
-          title: "人员添加",
-          roles: ["admin", "editor"], // 或者在子导航中设置角色
-        },
-      },
+      // {
+      //   path: "add",
+      //   component: () => import("@/pages/dashboard/team/personInfo-editor"),
+      //   name: "dashboard-team-add",
+      //   meta: {
+      //     title: "人员添加",
+      //     roles: ["admin", "editor"], // 或者在子导航中设置角色
+      //   },
+      // },
       {
         path: "editor",
         component: () => import("@/pages/dashboard/team/personInfo-editor"),

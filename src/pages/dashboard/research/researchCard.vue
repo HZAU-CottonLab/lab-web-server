@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:44
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 22:37:01
+ * @LastEditTime: 2022-06-28 16:52:11
  * @@param: 
 -->
 /* <!--
@@ -85,7 +85,9 @@ import { Timer } from "@element-plus/icons-vue";
 import { defineProps, ref } from "vue";
 import { useRouter } from "vue-router";
 import { Delete, Edit, InfoFilled } from "@element-plus/icons-vue";
-defineProps({
+import { deleteResearchItem, checkResearchItem } from "@/API/research.js";
+import { ElMessage } from "element-plus";
+const props = defineProps({
   newsItem: {
     type: Object,
     required: true,
@@ -95,25 +97,24 @@ defineProps({
     default: false,
   },
 });
-const check = ref(false);
+//从items复制数据
+const check = ref(props.newsItem.check);
 const router = useRouter();
-const handleClick = (newsId) => {
-  //进行_klack跳转
-  const routeUrl = router.resolve({
-    name: "news",
-    query: {
-      id: newsId,
-    },
-  });
-  window.open(routeUrl.href, "_blank");
-};
-
-const handleDelete = (newsId) => {
+const handleDelete = (researchId) => {
   //新闻是否删除
-  console.log("删除研究", newsId);
+  deleteResearchItem({ id: researchId }).then((res) => {
+    if (res.data.errno == 0) {
+      ElMessage.success(res.data.message);
+    }
+  });
 };
-const handleCheckChange = (newsId) => {
-  console.log("修改研究领域状态", newsId);
+const handleCheckChange = (researchId) => {
+  //改变新闻状态
+  checkResearchItem({ id: researchId, check: check.value }).then((res) => {
+    if (res.data.errno == 0) {
+      ElMessage.success(res.data.message);
+    }
+  });
 };
 const handleEditor = (newId) => {
   const routeUrl = router.resolve({

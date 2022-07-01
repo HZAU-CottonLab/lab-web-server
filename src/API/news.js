@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-01-02 15:01:51
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-25 16:30:19
+ * @LastEditTime: 2022-06-28 19:45:46
  * @@param:
  */
 import request from "@/utils/axios";
@@ -75,5 +75,17 @@ export function addNews(param) {
     url: "/news/add/",
     method: "POST",
     data: param,
+  });
+}
+
+/*
+ * 置顶栏的新闻栏目
+ */
+export function getCarouselsList(param) {
+  //获取置顶的所有新闻信息
+  return request({
+    url: "/news/carousel/",
+    method: "get",
+    param,
   });
 }

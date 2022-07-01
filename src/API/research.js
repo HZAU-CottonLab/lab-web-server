@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-07 10:02:30
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-25 22:37:08
+ * @LastEditTime: 2022-06-28 19:26:43
  * @@param:
  */
 import request from "@/utils/axios";
@@ -46,7 +46,7 @@ export function updateResearchItem(param) {
 export function deleteResearchItem(param) {
   //根据关键字删除用户信息
   return request({
-    url: "/research/delete",
+    url: "/research/delete/",
     method: "post",
     data: param,
   });
@@ -55,36 +55,34 @@ export function deleteResearchItem(param) {
 export function checkResearchItem(param) {
   //修改单篇research的check状态
   return request({
-    url: "/research/check",
+    url: "/research/check/",
     method: "post",
     data: param,
   });
 }
-/*
- * 置顶栏的API
- */
+
 //TODO
-export function getCarouselsList(param) {
-  //获取置顶的所有新闻信息
-  return request({
-    url: "/latest/all",
-    method: "get",
-    param,
-  });
-}
-export function cancleCheckNews(param) {
-  //取消对应新闻的置顶
-  return request({
-    url: "/latest/delete",
-    method: "post",
-    param,
-  });
-}
-export function addLatestNews(param) {
-  //将新闻置顶
-  return request({
-    url: "/news/check",
-    method: "post",
-    data: param,
-  });
-}
+// export function getCarouselsList(param) {
+//   //获取置顶的所有新闻信息
+//   return request({
+//     url: "/latest/all",
+//     method: "get",
+//     param,
+//   });
+// }
+// export function cancleCheckNews(param) {
+//   //取消对应新闻的置顶
+//   return request({
+//     url: "/latest/delete",
+//     method: "post",
+//     param,
+//   });
+// }
+// export function addLatestNews(param) {
+//   //将新闻置顶
+//   return request({
+//     url: "/news/check",
+//     method: "post",
+//     data: param,
+//   });
+// }

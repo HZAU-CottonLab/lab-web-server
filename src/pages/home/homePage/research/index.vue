@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:28
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 10:14:48
+ * @LastEditTime: 2022-06-28 19:17:54
  * @@param: 
 -->
 <template>
@@ -26,9 +26,7 @@ const state = shallowReactive({
 });
 onBeforeMount(() => {
   getResearchList().then((res) => {
-    if (res.data.code == 0) {
-      state.ResearchList = res.data.info.content;
-    }
+    state.ResearchList = res.data.content;
   });
 });
 </script>

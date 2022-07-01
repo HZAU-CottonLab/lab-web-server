@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-12 19:35:30
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 17:11:59
+ * @LastEditTime: 2022-06-28 21:15:45
  * @@param: 
 -->
 <template>
@@ -71,7 +71,7 @@ const carouselHeigh = computed(() => {
 onBeforeMount(() => {
   TeamItem().then((res) => {
     //获取列表信息
-    state.teamList = res.data["info"];
+    state.teamList = res.data.data;
   });
 });
 </script>

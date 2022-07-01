@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-01-12 12:43:22
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-24 14:24:29
+ * @LastEditTime: 2022-06-28 20:00:56
  * @@param:
  */
 import { getNewsList, getLatestNewsList } from "@/API/news.js";
@@ -31,7 +31,7 @@ export default {
     get_lastest_news() {
       return new Promise((resolve) => {
         getLatestNewsList().then((res) => {
-          resolve(res.data);
+          resolve(res);
         });
       });
     },

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-07 17:05:29
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-08 22:41:27
+ * @LastEditTime: 2022-06-28 19:46:25
  * @@param: 
 -->
 <template>
@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { getCarouselsList } from "@/API/research.js";
+import { getCarouselsList } from "@/API/news.js";
 import { reactive, onBeforeMount, defineProps, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import anime from "animejs";
@@ -84,7 +84,7 @@ const handleClick = (newsId) => {
 onBeforeMount(() => {
   getCarouselsList().then((res) => {
     //图片加载时间太长了,将会导致title不会显示
-    state.carousels_list = res.data.info;
+    state.carousels_list = res.data.data;
   });
 });
 onMounted(() => {

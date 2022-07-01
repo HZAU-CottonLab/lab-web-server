@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-09 10:56:18
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-25 22:34:00
+ * @LastEditTime: 2022-06-28 16:54:07
  * @@param: 
 -->
 <template>
@@ -64,7 +64,7 @@
     </el-col>
     <el-drawer
       v-model="state.drawer"
-      title="搜索结果"
+      title="预览"
       direction="ltr"
       size="60%"
     >
@@ -88,7 +88,7 @@ import ResearchCard from "./researchCard.vue";
 import {
   research_add,
   queryResearchById,
-  updateResearchItem,
+  updateResearchItem
 } from "@/API/research.js";
 import { ElMessage } from "element-plus";
 const { device } = useResize();

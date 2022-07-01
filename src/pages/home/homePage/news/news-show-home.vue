@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-07 09:26:22
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 09:58:45
+ * @LastEditTime: 2022-06-28 20:01:15
  * @@param: 
 -->
 <!--
@@ -43,7 +43,7 @@ const state = reactive({
 const { get_lastest_news } = useActions("news", ["get_lastest_news"]);
 onBeforeMount(() => {
   get_lastest_news().then((res) => {
-    state.newsList = res.info.content;
+    state.newsList = res.data.data;
   });
 });
 </script>
