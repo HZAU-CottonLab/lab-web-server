@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-20 15:06:57
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-25 11:35:11
+ * @LastEditTime: 2022-07-06 20:34:24
  * @@param: 
 -->
 <template>
@@ -37,6 +37,7 @@ import "@wangeditor/editor/dist/css/style.css"; // 引入 css
 import { onBeforeUnmount, ref, shallowRef, defineEmits, watch } from "vue";
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
 import { defineProps, defineExpose } from "vue";
+const path=require('path')
 const props = defineProps({
   theam_color: {
     type: String,
@@ -74,8 +75,27 @@ watch(
 // });
 
 const toolbarConfig = {};
-const editorConfig = { placeholder: "请输入内容..." };
+const editorConfig = { 
+  placeholder: "请输入内容...",
+  MENU_CONF:{} };
+editorConfig.MENU_CONF['uploadImage']={
+      server: path.join(process.env.VUE_APP_BASE_API,'img/upload/'),
+      fieldName: "image",
+      meta: {
+        id: 1,
+      },
+}
 
+//图片插入的回调函数
+//TODO: 已上传但未使用图片的删除
+//https://www.wangeditor.com/v5/menu-config.html#%E8%8E%B7%E5%8F%96%E5%B7%B2%E5%88%A0%E9%99%A4%E7%9A%84%E5%9B%BE%E7%89%87
+editorConfig.MENU_CONF["insertImage"] = {
+  onInsertedImage(imageNode) {
+    if (imageNode == null) return;
+    const { src, alt, url, href } = imageNode;
+    console.log("inserted image", src, alt, url, href);
+  },
+};
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
   const editor = editorRef.value;

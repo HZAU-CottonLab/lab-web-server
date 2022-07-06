@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 16:55:20
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 17:21:32
+ * @LastEditTime: 2022-07-06 17:22:43
  * @@param:
  */
 const publicationRoute = [
@@ -16,7 +16,7 @@ const publicationRoute = [
     meta: {
       title: "文章",
       icon: "article",
-      roles: ["admin", "editor"], // 可以在根路由中设置角色
+      roles: ["admin","editor"], // 可以在根路由中设置角色
       alwaysShow: true, // 将始终显示根菜单
       isLogin: true,
       keepAlive: true,
@@ -29,7 +29,7 @@ const publicationRoute = [
         name: "dashboard-article-show",
         meta: {
           title: "文章管理",
-          roles: ["admin", "editor"], // 或者在子导航中设置角色
+          roles: ["admin","editor"], // 或者在子导航中设置角色
         },
       },
       {

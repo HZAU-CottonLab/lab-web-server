@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 17:33:05
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-07 16:23:02
+ * @LastEditTime: 2022-07-06 19:50:50
  * @@param:
  */
 const newsRoute = [
@@ -33,7 +33,7 @@ const newsRoute = [
       {
         path: "id", //显示单个新闻页面
         name: "news",
-        component: () => import("@/components/404.vue"),
+        component: () => import("@/pages/home/homePage/news/newsInfo.vue"),
         meta: {
           title: "News&event",
           hidden: true, //控制是否显示该link

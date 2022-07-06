@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-07 17:05:29
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-28 19:46:25
+ * @LastEditTime: 2022-07-06 21:38:18
  * @@param: 
 -->
 <template>
@@ -158,6 +158,8 @@ onMounted(() => {
     .el-button {
       cursor: pointer;
       font-size: 24px;
+      background-color: rgb(68, 55, 58,0.4);
+      color: aliceblue;
     }
   }
 }

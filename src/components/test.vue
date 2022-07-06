@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-20 15:06:57
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-21 22:34:18
+ * @LastEditTime: 2022-07-06 20:28:05
  * @@param: 
 -->
 <template>
@@ -43,6 +43,7 @@ import {
 } from "vue";
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
 import { defineProps } from "vue";
+const path=require('path')
 const props = defineProps({
   theam_color: {
     type: String,
@@ -64,7 +65,7 @@ const mode = "default";
 const emits = defineEmits(["update:htmlValue"]);
 const upDateHtmlValue = () => {
   // 失去焦点，更新内容
-  console.log(valueHtml.value)
+  console.log(valueHtml.value);
   emits("update:htmlValue", valueHtml.value, props.index);
 };
 // 模拟 ajax 异步获取内容
@@ -77,25 +78,23 @@ const upDateHtmlValue = () => {
 const toolbarConfig = {};
 const editorConfig = { placeholder: "请输入内容...", MENU_CONF: {} };
 editorConfig.MENU_CONF["uploadImage"] = {
-  server: "/api/user/icon/upload/",
+  server: path.join(process.env.VUE_APP_BASE_API,'img/upload/'),
   fieldName: "image",
   meta: {
     id: 1,
   },
 };
 
-
-
 //图片插入的回调函数
 //TODO: 已上传但未使用图片的删除
 //https://www.wangeditor.com/v5/menu-config.html#%E8%8E%B7%E5%8F%96%E5%B7%B2%E5%88%A0%E9%99%A4%E7%9A%84%E5%9B%BE%E7%89%87
-editorConfig.MENU_CONF['insertImage']={
-      onInsertedImage(imageNode){
-        if(imageNode==null) return
-        const { src, alt, url, href } = imageNode
-        console.log('inserted image', src, alt, url, href)
-      }
-}
+editorConfig.MENU_CONF["insertImage"] = {
+  onInsertedImage(imageNode) {
+    if (imageNode == null) return;
+    const { src, alt, url, href } = imageNode;
+    console.log("inserted image", src, alt, url, href);
+  },
+};
 
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
@@ -110,6 +109,7 @@ const handleCreated = (editor) => {
 
 onBeforeMount(() => {
   // console.log(editorConfig);
+  console.log(path.join(process.env.VUE_APP_BASE_API,'img/upload/'));
 });
 </script>
 <style lang="scss" scoped>

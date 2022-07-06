@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-31 21:42:31
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-31 22:24:07
+ * @LastEditTime: 2022-07-06 16:17:32
  * @@param: 
 -->
 <template>
@@ -35,7 +35,7 @@ onBeforeMount(() => {
    */
   const persionId = route.query.id;
   console.log(persionId);
-  set_personInfo().then((res) => {
+  set_personInfo({id:persionId}).then((res) => {
     if (res == 0) {
       loading.value = true;
     }

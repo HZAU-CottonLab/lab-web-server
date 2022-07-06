@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-27 15:38:32
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-23 22:33:51
+ * @LastEditTime: 2022-07-06 16:05:58
  * @@param: 
 -->
 <template>
@@ -41,11 +41,11 @@
             </el-form-item>
             <el-form-item label="身份" prop="peopleType">
               <el-select v-model="formInline.peopleType">
-                <el-option label="教师" value="0" />
-                <el-option label="博后" value="1" />
-                <el-option label="博士" value="2" />
-                <el-option label="硕士" value="3" />
-                <el-option label="访问学者" value="4" />
+                <el-option label="Teacher" value="0" />
+                <el-option label="Post doctor" value="1" />
+                <el-option label="PhD student" value="2" />
+                <el-option label="Master Student" value="3" />
+                <el-option label="Visiting Scholar" value="4" />
               </el-select>
             </el-form-item>
             <div v-if="teacher_form">
@@ -79,7 +79,7 @@
               </el-form-item>
             </div>
             <!-- /**学生身份才显示这些 */ -->
-            <div v-if="formInline.peopleType.length != 0 && !teacher_form">
+            <div v-if="!teacher_form">
               <el-form-item label="导师">
                 <el-select
                   v-model="formInline.teacher"
@@ -114,6 +114,7 @@
 import { reactive, computed, onBeforeMount, ref, defineExpose } from "vue";
 import { useState } from "@/utils/storehook.js";
 import Avatar from "./upload-avatar.vue";
+import {TeamItem} from '@/API/User.js'
 const { personInfo } = useState("user", ["personInfo"]);
 const ruleFormRef = ref();
 //属性暴露给父组件
@@ -150,10 +151,13 @@ const teacherSelectShow = computed(() => {
 
 const teacher_form = computed(() => {
   //只有选择的是老师的身份才进行展示
-  if (formInline.value.peopleType != "0") {
-    return false;
+  if (
+    formInline.value.peopleType == "Teacher" ||
+    formInline.value.peopleType == 0
+  ) {
+    return true;
   }
-  return true;
+  return false;
 });
 // 表单验证交给父组件
 // const submit = (formInstance) => {
@@ -168,19 +172,22 @@ const teacher_form = computed(() => {
 //   });
 // };
 onBeforeMount(() => {
-  setTimeout(() => {
-    state.teacherArray = [
-      { id: 0, name: "张献龙" },
-      { id: 0, name: "朱龙付" },
-      { id: 0, name: "林忠旭" },
-      { id: 0, name: "涂礼莉" },
-      { id: 0, name: "杨细燕" },
-      { id: 0, name: "金双侠" },
-      { id: 0, name: "王茂军" },
-      { id: 0, name: "袁道军" },
-      { id: 0, name: "闵林" },
-    ];
-  }, 5000);
+  TeamItem().then((res)=>{
+      state.teacherArray = res.data.data
+  })
+  // setTimeout(() => {
+  //   state.teacherArray = [
+  //     { id: 0, name: "张献龙" },
+  //     { id: 1, name: "朱龙付" },
+  //     { id: 2, name: "林忠旭" },
+  //     { id: 3, name: "涂礼莉" },
+  //     { id: 4, name: "杨细燕" },
+  //     { id: 5, name: "金双侠" },
+  //     { id: 6, name: "王茂军" },
+  //     { id: 7, name: "袁道军" },
+  //     { id: 8, name: "闵林" },
+  //   ];
+  // }, 5000);
 });
 </script>
 <style lang='scss' scoped>

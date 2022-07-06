@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-23 09:29:11
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-23 22:54:27
+ * @LastEditTime: 2022-07-06 10:33:25
  * @@param: 
 -->
 <template>
@@ -68,8 +68,6 @@ const submit = (sonInstance) => {
           ElMessage.success("数据保存成功!");
         }
       });
-    } else {
-      ElMessage.error("请完善信息后再提交!");
     }
   });
 };

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-04-30 10:55:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-14 16:53:41
+ * @LastEditTime: 2022-07-06 17:09:00
  * @@param: 
 -->
 <template>
@@ -27,7 +27,9 @@
             <router-link to="/" target="_blank" class="menu-link"
               ><el-dropdown-item>网站首页</el-dropdown-item></router-link
             >
-            <router-link to="#" target="_blank" class="menu-link"
+            <router-link
+              :to="{path:'/dashboard/team/editor',query:{id:userId}}"
+              class="menu-link"
               ><el-dropdown-item>个人信息</el-dropdown-item></router-link
             >
             <router-link to="#" target="_blank" class="menu-link"
@@ -53,6 +55,7 @@ import { useRouter } from "vue-router";
 const sidebar = useState("app", ["sidebar"]);
 const { toggleSidebar } = useActions("app", ["toggleSidebar"]);
 const { logout } = useMutations("user", ["logout"]);
+const { userId } = useState("user", ["userId"]);
 const showScreenfull = ref(true);
 const router = useRouter();
 const state = reactive({

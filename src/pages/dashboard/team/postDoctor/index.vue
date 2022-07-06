@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:35
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 11:33:22
+ * @LastEditTime: 2022-07-06 17:28:26
  * @@param: 
 -->
 <template>
@@ -68,7 +68,7 @@
 import { Search } from "@element-plus/icons-vue";
 import backup from "@/components/backup";
 import ShowNews from "../show-person.vue";
-import { ref, onBeforeMount, reactive, computed } from "vue";
+import {onBeforeMount, reactive, computed } from "vue";
 import { useActions, useState } from "@/utils/storehook.js";
 import { searchNews } from "@/API/news.js";
 const state = reactive({
@@ -119,6 +119,7 @@ onBeforeMount(() => {
 <style lang='scss' scoped>
 .news-contain {
   position: inherit;
+  margin: 20px 0px;
 }
 .search {
   position: relative;

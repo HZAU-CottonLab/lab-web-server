@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 09:41:50
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-31 22:20:53
+ * @LastEditTime: 2022-07-06 16:02:50
  * @@param:
  */
 const peopleRoute = [
@@ -40,7 +40,7 @@ const peopleRoute = [
           title: "Teacher",
           hidden: false, //控制是否显示该link
           header: true, //是否是导航链接
-          anchro: 1, //路由跳转携带的锚点
+          anchro: 0, //路由跳转携带的锚点
         },
       },
       {
@@ -51,7 +51,7 @@ const peopleRoute = [
           title: "Postdoctoral",
           hidden: false, //控制是否显示该link
           header: true, //是否是导航链接
-          anchro: 2, //路由跳转携带的锚点
+          anchro: 1, //路由跳转携带的锚点
         },
       },
       {
@@ -62,7 +62,7 @@ const peopleRoute = [
           title: "PhD Student",
           hidden: false, //控制是否显示该link
           header: true, //是否是导航链接
-          anchro: 3, //路由跳转携带的锚点
+          anchro: 2, //路由跳转携带的锚点
         },
       },
       {
@@ -70,10 +70,21 @@ const peopleRoute = [
         name: "master",
         component: () => import("@/pages/home/people/index.vue"),
         meta: {
-          title: "Graduate Student",
+          title: "Master Student",
           hidden: false, //控制是否显示该link
           header: true, //是否是导航链接
           anchro: 3, //路由跳转携带的锚点
+        },
+      },
+      {
+        path: "Visiting",
+        name: "Visiting",
+        component: () => import("@/pages/home/people/index.vue"),
+        meta: {
+          title: "Visiting Scholar",
+          hidden: false, //控制是否显示该link
+          header: true, //是否是导航链接
+          anchro: 4, //路由跳转携带的锚点
         },
       },
       {

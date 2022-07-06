@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-31 20:18:06
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-31 20:48:58
+ * @LastEditTime: 2022-07-06 16:25:31
  * @@param: 
 -->
 <template>
@@ -12,7 +12,7 @@
     <div class="avatar-img">
       <img
         :src="imgURL"
-        fit="cover"
+        fit="contain "
         @mouseover="() => (state.imageOperation = true)"
         @mouseout="() => (state.imageOperation = false)"
       />
@@ -27,7 +27,7 @@
       </div>
     </div>
     <el-dialog v-model="state.dialogVisible">
-      <img :src="imgURL" alt="Preview Image" style="width: 100%" />
+      <img :src="imgURL" alt="Preview Image" style="width: 80%; height: 80%" />
     </el-dialog>
   </div>
 </template>

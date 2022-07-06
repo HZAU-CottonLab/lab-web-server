@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:35
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-23 21:33:24
+ * @LastEditTime: 2022-07-06 17:11:29
  * @@param: 
 -->
 <template>
@@ -122,6 +122,7 @@ onBeforeMount(() => {
 <style lang='scss' scoped>
 .news-contain {
   position: inherit;
+  margin: 20px 0px;
 }
 .search {
   position: relative;

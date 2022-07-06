@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 10:59:43
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-10 19:16:17
+ * @LastEditTime: 2022-07-06 11:56:19
  * @@param: 
 -->
 <template>
@@ -24,7 +24,11 @@
       >
         <div style="position: relative" class="people-info">
           <el-image
-            :src="User.imageURL"
+            :src="
+              User.imageURL == ''
+                ? 'https://dummyimage.com/400x400'
+                : User.imageURL
+            "
             fit="cover"
             :lazy="true"
             class="avatar-img"

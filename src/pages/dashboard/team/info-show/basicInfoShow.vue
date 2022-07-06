@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-31 20:13:31
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-31 21:31:04
+ * @LastEditTime: 2022-07-06 16:44:25
  * @@param: 
 -->
 <template>
@@ -30,7 +30,16 @@
           </li>
           <li v-if="basicInfo.peopleType != 0">
             <span class="infoDetail-title">导师</span
-            ><span class="infoDetail-text">{{ basicInfo.teacher }}</span>
+            ><span class="infoDetail-text">
+              <router-link
+                target="_blank"
+                :to="{
+                  path: '/people/person',
+                  query: { id: basicInfo.teacher },
+                }"
+                >{{ basicInfo.teacher_nickname }}</router-link
+              ></span
+            >
           </li>
           <li v-if="basicInfo.peopleType == 0">
             <span class="infoDetail-title">职称</span
@@ -52,7 +61,8 @@
 
 <script setup>
 import Avatar from "./avatar.vue";
-const props = defineProps({
+import {defineProps} from 'vue'
+defineProps({
   basicInfo: {
     type: Object,
     require: true,

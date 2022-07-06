@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 21:47:08
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-25 20:51:15
+ * @LastEditTime: 2022-07-06 17:28:10
  * @@param: 
 -->
 <template>
@@ -33,7 +33,10 @@
             />
           </el-select>
         </template>
-        <template #default="scope">
+        <template
+          #default="scope"
+          v-if="roles.includes('admin') ? true : false"
+        >
           <div>
             <el-button size="small" @click="handlePublicationEdit(scope.row)"
               >Edit</el-button
@@ -93,12 +96,13 @@ export default { name: "dashboard-article-show" };
 </script>
 
 <script setup>
-import { computed, reactive, ref, watch,defineProps } from "vue";
+import { computed, reactive, ref, watch, defineProps } from "vue";
 import { Timer, InfoFilled } from "@element-plus/icons-vue";
 import publicationEditor from "./publication-add.vue";
 import { useRouter } from "vue-router";
-import {delete_publication} from '@/API/publication.js'
+import { delete_publication } from "@/API/publication.js";
 import { ElMessage } from "element-plus";
+import { useState } from "@/utils/storehook.js";
 const props = defineProps({
   PublicationData: {
     type: Array,
@@ -111,6 +115,7 @@ const props = defineProps({
   EditorObject: null,
 });
 
+const { roles } = useState("user", ["roles"]);
 const state = reactive({
   PublicationData: [],
   selectOptions: [],
@@ -190,11 +195,11 @@ const handlePublicationEdit = (publicationObject) => {
 const handlePublicationdelete = (id) => {
   // state.deleteDialogVisible = true;
   //判断有没有成功删除；如果删除成功则修改table数据
-  delete_publication({id:id}).then(res=>{
-    if(res.data.error==0){
-       ElMessage.success(res.data.message);
+  delete_publication({ id: id }).then((res) => {
+    if (res.data.error == 0) {
+      ElMessage.success(res.data.message);
     }
-  })
+  });
 };
 watch(
   () => props.PublicationData,

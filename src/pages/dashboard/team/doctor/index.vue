@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:35
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 11:09:23
+ * @LastEditTime: 2022-07-06 17:13:14
  * @@param: 
 -->
 <template>
@@ -27,15 +27,15 @@
           leave-active-class="animate__animated animate__backOutLeft"
           name="news-animal"
         >
-          <ShowNews
+          <ShowPeople
             :showNews="
-              newsList.slice(
+              state.teacherList.slice(
                 (pageIndex - 1) * state.pageSize,
                 pageIndex * state.pageSize
               )
             "
             v-show="pageIndex == state.page"
-          ></ShowNews>
+          ></ShowPeople>
         </transition>
       </div>
       <!-- 分页页面 -->
@@ -43,7 +43,7 @@
         <el-pagination
           background
           layout="prev, pager, next"
-          :total="newsList.length"
+          :total="state.teacherList.length"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="state.page"
@@ -59,17 +59,17 @@
       direction="ltr"
       size="60%"
     >
-      <ShowNews :showNews="state.searchResult"></ShowNews>
+      <ShowPeople :showNews="state.searchResult"></ShowPeople>
     </el-drawer>
   </el-row>
 </template>
-
 <script setup>
 import { Search } from "@element-plus/icons-vue";
 import backup from "@/components/backup";
-import ShowNews from "../show-person.vue";
-import { ref, onBeforeMount, reactive, computed } from "vue";
-import { useActions, useState } from "@/utils/storehook.js";
+import ShowPeople from "../show-person.vue";
+import {onBeforeMount, reactive, computed } from "vue";
+// import { useActions, useState } from "@/utils/storehook.js";
+import {TeamItem} from '@/API/User.js'
 import { searchNews } from "@/API/news.js";
 const state = reactive({
   showloading: true,
@@ -78,15 +78,16 @@ const state = reactive({
   drawer: false,
   searchResult: [],
   input: "",
+  teacherList:[]
 });
-const { newsList } = useState("news", ["newsList"]);
-const { get_all_newsData } = useActions("news", ["get_all_newsData"]);
+// const { newsList } = useState("news", ["newsList"]);
+// const { get_all_newsData } = useActions("news", ["get_all_newsData"]);
 const showNews = computed(() => {
   //分页器筛选出的数据,生成一系列的数据
-  if (newsList.value.length > 0) {
+  if (state.teacherList.length > 0) {
     //批量生成组件
     return Array.from(
-      new Array(Math.ceil(newsList.value.length / state.pageSize) + 1).keys()
+      new Array(Math.ceil(state.teacherList.length / state.pageSize) + 1).keys()
     ).slice(1);
   }
   return [];
@@ -100,6 +101,7 @@ const handleCurrentChange = (val) => {
   state.page = val;
 };
 const handleSearch = () => {
+  //TODO
   //页面进行搜索，打开抽屉显示
   if (state.input != "") {
     searchNews({ keyword: state.input }).then((res) => {
@@ -111,7 +113,8 @@ const handleSearch = () => {
 };
 
 onBeforeMount(() => {
-  get_all_newsData().then((res) => {
+  TeamItem().then((res) => {
+    state.teacherList=res.data.data
     state.showloading = !res; //请求完成并且获得对应的数据
   });
 });
@@ -119,6 +122,7 @@ onBeforeMount(() => {
 <style lang='scss' scoped>
 .news-contain {
   position: inherit;
+    margin: 20px 0px;
 }
 .search {
   position: relative;

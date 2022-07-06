@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 14:37:52
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-23 21:58:50
+ * @LastEditTime: 2022-07-06 16:16:33
  * @@param:
  */
 import request from "@/utils/axios";
@@ -20,22 +20,22 @@ export function login(param) {
 
 export function logoutBackend(param) {
   return request({
-    url: "user/logout/",
+    url: "/user/logout/",
     method: "get",
     data: param,
   });
 }
 
-export function userInfoRequest(param) {
-  /**
-   * 使用当前自带的token信息请求后端
-   */
-  return request({
-    url: "/user/info",
-    method: "post",
-    data: param,
-  });
-}
+// export function userInfoRequest(param) {
+//   /**
+//    * 使用当前自带的token信息请求后端
+//    */
+//   return request({
+//     url: "/user/info",
+//     method: "post",
+//     data: param,
+//   });
+// }
 export function userRoles(param) {
   /**
    * 使用当前自带的token信息请求后端
@@ -49,7 +49,7 @@ export function userRoles(param) {
 export function PeopleItem() {
   //返回所有用户的信息
   return request({
-    url: "/people-show",
+    url: "/user/team/",
     method: "get",
   });
 }
@@ -75,7 +75,7 @@ export function register(param) {
   // console.log(param);
   //注册并添加新的用户信息
   return request({
-    url: "/register",
+    url: "/user/register/",
     method: "post",
     data: param,
   });
@@ -84,7 +84,7 @@ export function register(param) {
 export function person_delete(param) {
   //删除用户信息
   return request({
-    url: "/person/delete",
+    url: "/person/delete/",
     method: "post",
     data: param,
   });

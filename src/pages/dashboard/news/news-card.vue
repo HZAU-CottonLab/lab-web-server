@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:44
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-25 16:37:29
+ * @LastEditTime: 2022-07-06 17:24:21
  * @@param: 
 -->
 <template>
@@ -29,7 +29,7 @@
             :content="newsItem.description"
           ></TextCollapse>
         </div>
-        <div class="bottom">
+        <div class="bottom operation" v-if="roles.includes('admin') ? true: false">
           <!-- <time class="time">{{ currentDate }}</time> -->
           <el-row justify="start" align="middle">
             <el-col :span="8">
@@ -78,6 +78,7 @@ import { useRouter } from "vue-router";
 import { Delete, Edit, InfoFilled } from "@element-plus/icons-vue";
 import { checkNews, deleteNews } from "@/API/news.js";
 import { ElMessage } from "element-plus";
+import {useState} from '@/utils/storehook.js'
 const props = defineProps({
   newsItem: {
     type: Object,
@@ -86,6 +87,7 @@ const props = defineProps({
 });
 const check = ref(props.newsItem.check);
 const router = useRouter();
+const {roles}=useState('user',['roles'])
 const handleDelete = (newsId) => {
   //新闻删除
   //TODO 删除后的组件刷新

@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:44
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-23 21:22:26
+ * @LastEditTime: 2022-07-06 17:20:49
  * @@param: 
 -->
 /* <!--
@@ -25,7 +25,7 @@
         <div class="card-title">
           <h3>{{ newsItem.name }}</h3>
         </div>
-        <div class="bottom">
+        <div class="bottom operation" v-if="roles.includes('admin') ? true: false">
           <!-- <time class="time">{{ currentDate }}</time> -->
           <el-row justify="start" align="middle">
             <el-col :span="8">
@@ -73,6 +73,7 @@ import Avatar from "./info-show/avatar.vue";
 import { defineProps, ref } from "vue";
 import { useRouter } from "vue-router";
 import { Delete, Edit, InfoFilled } from "@element-plus/icons-vue";
+import {useState} from '@/utils/storehook.js'
 defineProps({
   newsItem: {
     type: Object,
@@ -81,7 +82,7 @@ defineProps({
 });
 const check = ref(false);
 const router = useRouter();
-
+const {roles}=useState('user',['roles'])
 
 const handleDelete = (newsId) => {
   //新闻是否删除

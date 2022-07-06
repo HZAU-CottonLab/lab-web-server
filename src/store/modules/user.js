@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 16:20:12
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-23 22:52:35
+ * @LastEditTime: 2022-07-06 16:15:28
  * @@param:
  */
 import {
@@ -93,15 +93,11 @@ export default {
   },
   actions: {
     authenticate(context, payload) {
-      //payload 为form表单参数
-      // console.log(getToken(),'111')
-      // console.log(payload)
       return new Promise((resolve) => {
         login(payload).then(
           // context为state拷贝
           (res) => {
             //修改state中的内容
-            console.log(res.data);
             context.state.username = res.data.info.username;
             context.state.loginStatus = res.data.info.loginStatus;
             /* 登录请求完成后设置token*/
@@ -110,10 +106,12 @@ export default {
             // context.state.roles = res.data.roles;
             setToken(res.data.accessToken);
             //异步完成请求后，返回登录状态
-            resolve(res.data.info.loginStatus);
+            console.log(context.state)
+            resolve(res);
           }
         );
       });
+
     },
     siginup(context, payload) {
       /**
@@ -121,13 +119,14 @@ export default {
        */
       return new Promise((resolve) => {
         register(payload).then((res) => {
-          resolve(res.data);
+          resolve(res);
         });
       });
     },
     getUserRoles(context) {
       /**
        * 使用token获取当前登录用户的身份信息
+       * 后端使用session，所以token随便取
        */
       const parament = {
         token: context.state.token,
@@ -135,6 +134,8 @@ export default {
       return new Promise((resolve) => {
         userRoles(parament).then((res) => {
           context.state.roles = res.data.roles;
+          context.state.userId = res.data.id;
+          context.state.username = res.data.name;
           resolve(res.data);
         });
       });

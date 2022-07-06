@@ -4,12 +4,12 @@
  * @Author: zpliu
  * @Date: 2022-05-12 19:35:30
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-28 21:15:45
+ * @LastEditTime: 2022-07-06 21:41:23
  * @@param: 
 -->
 <template>
   <div class="home-wrapper">
-    <el-main style="padding: 0px" class="main">
+    <el-main style="padding: 0px 2px" class="main">
       <!--//todo: 点击按钮还需要完善 -->
       <Carousel :carouselHeigh="carouselHeigh"></Carousel>
       <el-row justify="center" class="container-region">
@@ -66,7 +66,7 @@ const carouselHeigh = computed(() => {
   if (isMobile.value) {
     return "200px";
   }
-  return "400px";
+  return "500px";
 });
 onBeforeMount(() => {
   TeamItem().then((res) => {

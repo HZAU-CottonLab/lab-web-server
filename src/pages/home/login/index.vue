@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2021-09-22 14:25:15
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-21 17:50:23
+ * @LastEditTime: 2022-07-06 09:39:57
  * @@param: 
 -->
 <template>
@@ -58,10 +58,10 @@
                     :rules="siginup_rule"
                     ref="singupForm"
                   >
-                    <el-form-item label="name" prop="email">
+                    <el-form-item label="email" prop="email">
                       <el-input v-model="singupForm.email" />
                     </el-form-item>
-                    <el-form-item label="email" prop="name">
+                    <el-form-item label="name" prop="name">
                       <el-input v-model="singupForm.name" />
                     </el-form-item>
                     <el-form-item label="Password" prop="password">
@@ -135,7 +135,7 @@ export default {
       }
     };
     const siginup_rule = {
-      username: [{ validator: checkValue, trigger: "blur" }],
+      name: [{ validator: checkValue, trigger: "blur" }],
       account: [{ validator: checkValue, trigger: "blur" }],
       password: [{ validator: validatePass_singup, trigger: "blur" }],
       email: [{ validator: checkValue, trigger: "blur" }],
@@ -180,19 +180,19 @@ export default {
           // 返回结果为promise对象，并携带请求结果
           //* API接口在store.user.action中
           this.login(this.loginForm).then((res) => {
-            if (res) {
-              console.log(res);
+            if (res.data.errno == 0) {
               /**
                * 登录成功后，进行路由重定向
                */
               this.$router.push({ path: "/dashboard/" });
-            } else {
-              ElMessage.error({
-                message: "账号或密码错误",
-              });
-              //  重置表单项
-              this.$refs[formname].resetFields();
             }
+            // else {
+            //   ElMessage.error({
+            //     message: "账号或密码错误",
+            //   });
+            //   //  重置表单项
+            //   this.$refs[formname].resetFields();
+            // }
           });
         } else {
           //检测表单
@@ -205,13 +205,19 @@ export default {
         if (valid) {
           //发起注册请求
           this.register(this.singupForm).then((res) => {
-            ElMessage.info({
-              message: res.info.message,
-            });
+            if (res.data.errno == 0) {
+              //发起登录请求
+              ElMessage.success(res.data.message);
+              this.login(this.singupForm).then((res) => {
+                if (res.data.errno == 0) {
+                  /**
+                   * 注册成功后自动进行登录
+                   */
+                  this.$router.push({ path: "/dashboard/" });
+                }
+              });
+            }
           });
-          return;
-        } else {
-          //检测表单
           return;
         }
       });

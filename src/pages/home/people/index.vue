@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-13 10:40:04
  * @LastEditors: zpliu
- * @LastEditTime: 2022-05-13 20:53:28
+ * @LastEditTime: 2022-07-06 09:14:38
  * @@param: 
 -->
 <template>
@@ -17,13 +17,13 @@
         ></peopleNavigation>
       </el-col>
       <el-col class="people-item" :md="16" :sm="18" :xs="24">
-        <peopleLead
+        <!-- <peopleLead
           v-show="leader_info.showLead"
           :leader_info="leader_info"
-        ></peopleLead>
+        ></peopleLead> -->
         <!-- //遍历多种类型 -->
         <peopleItem
-          v-for="(item, index) in state.people_Cat_infs.slice(1)"
+          v-for="(item, index) in state.people_Cat_infs"
           :key="index"
           :id="item.id"
           :CategoryTitle="item.title"
@@ -37,7 +37,7 @@
 
 <script setup>
 import peopleNavigation from "./PeopleNavigation.vue";
-import peopleLead from "./lead.vue";
+// import peopleLead from "./lead.vue";
 import peopleItem from "./peopleItem.vue";
 import backup from "@/components/backup";
 import { DeviceType } from "@/store/modules/app.js";
@@ -64,25 +64,25 @@ const isMobile = computed(() => {
   }
   return true;
 });
-const leader_info = computed(() => {
-  //lead 信息特别展示
-  if (state.people_Cat_infs.length > 1) {
-    const tmpData = state.people_Cat_infs[0];
-    return {
-      id: 0,
-      title: tmpData.title,
-      email: tmpData.peopleInfos[0].email,
-      imageURL: tmpData.peopleInfos[0].imageURL,
-      name: tmpData.peopleInfos[0].name,
-      description: tmpData.peopleInfos[0].description,
-      showLead: true,
-    };
-  } else {
-    return {
-      showLead: false,
-    };
-  }
-});
+// const leader_info = computed(() => {
+//   //lead 信息特别展示
+//   if (state.people_Cat_infs.length > 1) {
+//     const tmpData = state.people_Cat_infs[0];
+//     return {
+//       id: 0,
+//       title: tmpData.title,
+//       email: tmpData.peopleInfos[0].email,
+//       imageURL: tmpData.peopleInfos[0].imageURL,
+//       name: tmpData.peopleInfos[0].name,
+//       description: tmpData.peopleInfos[0].description,
+//       showLead: true,
+//     };
+//   } else {
+//     return {
+//       showLead: false,
+//     };
+//   }
+// });
 //*监听scroll事件，改变state中people_Cat_infs的值
 const scroolActivities = computed(() => {
   //计算距离top最近的组件，改变属性

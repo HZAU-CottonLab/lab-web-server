@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-31 09:20:25
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-24 15:59:21
+ * @LastEditTime: 2022-07-06 10:36:10
  * @@param: 
 -->
 <template>
@@ -82,11 +82,12 @@ const handleAvatarSuccess = (response) => {
   //阻止原有的点击事件
 };
 const beforeAvatarUpload = (rawFile) => {
-  if (rawFile.type !== "image/jpeg") {
-    ElMessage.error("Avatar picture must be JPG format!");
-    return false;
-  } else if (rawFile.size / 1024 / 1024 > 2) {
-    ElMessage.error("Avatar picture size can not exceed 2MB!");
+  // if (rawFile.type !== "image/jpeg") {
+  //   ElMessage.error("Avatar picture must be JPG format!");
+  //   return false;
+  // } else 
+  if (rawFile.size / 1024 / 1024 > 4) {
+    ElMessage.error("Avatar picture size can not exceed 4MB!");
     return false;
   }
   return true;

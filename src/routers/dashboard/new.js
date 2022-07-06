@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-05-14 16:55:20
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-09 22:54:12
+ * @LastEditTime: 2022-07-06 17:22:55
  * @@param:
  */
 const newsRoute = [
@@ -16,7 +16,7 @@ const newsRoute = [
     meta: {
       title: "News&Event",
       icon: "news",
-      roles: ["admin", "editor"], // 可以在根路由中设置角色
+      roles: ["admin","editor"], // 可以在根路由中设置角色
       alwaysShow: true, // 将始终显示根菜单
       isLogin: true,
     },
@@ -28,7 +28,7 @@ const newsRoute = [
         name: "dashboard-news-show",
         meta: {
           title: "新闻管理",
-          roles: ["admin", "editor"], // 或者在子导航中设置角色
+          roles: ["admin","editor"], // 或者在子导航中设置角色
         },
       },
       {

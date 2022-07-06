@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-03-29 16:22:49
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-23 21:40:50
+ * @LastEditTime: 2022-07-06 09:13:41
  * @@param:
  */
 
@@ -51,7 +51,7 @@ module.exports = [
     },
   },
   {
-    url: "/register",
+    url: "/user/register/",
     type: "post",
     response: (config) => {
       const { account, password, loginStatus } = config.body;
@@ -125,7 +125,7 @@ module.exports = [
 
 
   {
-    url: "/people-show",
+    url: "/user/team/",
     type: "get",
     response: (config) => {
       return {

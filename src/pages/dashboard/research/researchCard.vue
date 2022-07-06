@@ -4,7 +4,7 @@
  * @Author: zpliu
  * @Date: 2022-06-06 17:06:44
  * @LastEditors: zpliu
- * @LastEditTime: 2022-06-28 16:52:11
+ * @LastEditTime: 2022-07-06 17:26:33
  * @@param: 
 -->
 /* <!--
@@ -38,41 +38,43 @@
             :content="newsItem.description"
           ></TextCollapse>
         </div>
-        <div class="bottom" v-if="!demoCom">
-          <!-- <time class="time">{{ currentDate }}</time> -->
-          <el-row justify="start" align="middle">
-            <el-col :span="8">
-              <el-icon :size="24" @click="handleEditor(newsItem.id)">
-                <Edit /> </el-icon
-            ></el-col>
-            <el-col :span="8">
-              <el-popconfirm
-                confirm-button-text="Yes"
-                cancel-button-text="No"
-                :icon="InfoFilled"
-                icon-color="#626AEF"
-                title="Are you sure to delete this?"
-                @confirm="handleDelete(newsItem.id)"
-              >
-                <template #reference>
-                  <el-icon :size="24">
-                    <Delete />
-                  </el-icon>
-                </template> </el-popconfirm
-            ></el-col>
-            <el-col :span="8">
-              <el-switch
-                v-model="check"
-                inline-prompt
-                active-text="已审"
-                inactive-text="未审"
-                active-color="#13ce66"
-                inactive-color="#ff4949"
-                size="large"
-                @change="handleCheckChange(newsItem.id)"
-              />
-            </el-col>
-          </el-row>
+        <div v-if="roles.includes('admin') ? true : false">
+          <div class="bottom" v-if="!demoCom">
+            <!-- <time class="time">{{ currentDate }}</time> -->
+            <el-row justify="start" align="middle">
+              <el-col :span="8">
+                <el-icon :size="24" @click="handleEditor(newsItem.id)">
+                  <Edit /> </el-icon
+              ></el-col>
+              <el-col :span="8">
+                <el-popconfirm
+                  confirm-button-text="Yes"
+                  cancel-button-text="No"
+                  :icon="InfoFilled"
+                  icon-color="#626AEF"
+                  title="Are you sure to delete this?"
+                  @confirm="handleDelete(newsItem.id)"
+                >
+                  <template #reference>
+                    <el-icon :size="24">
+                      <Delete />
+                    </el-icon>
+                  </template> </el-popconfirm
+              ></el-col>
+              <el-col :span="8">
+                <el-switch
+                  v-model="check"
+                  inline-prompt
+                  active-text="已审"
+                  inactive-text="未审"
+                  active-color="#13ce66"
+                  inactive-color="#ff4949"
+                  size="large"
+                  @change="handleCheckChange(newsItem.id)"
+                />
+              </el-col>
+            </el-row>
+          </div>
         </div>
       </div>
     </el-card>
@@ -87,6 +89,7 @@ import { useRouter } from "vue-router";
 import { Delete, Edit, InfoFilled } from "@element-plus/icons-vue";
 import { deleteResearchItem, checkResearchItem } from "@/API/research.js";
 import { ElMessage } from "element-plus";
+import { useState } from "@/utils/storehook.js";
 const props = defineProps({
   newsItem: {
     type: Object,
@@ -97,6 +100,7 @@ const props = defineProps({
     default: false,
   },
 });
+const { roles } = useState("user", ["roles"]);
 //从items复制数据
 const check = ref(props.newsItem.check);
 const router = useRouter();
